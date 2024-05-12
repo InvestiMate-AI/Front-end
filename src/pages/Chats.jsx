@@ -14,6 +14,11 @@ function Chats() {
     console.log(isOpen);
   };
 
+  const handleSendMessage = () => {
+    // 메시지 보내는 로직을 추가해주세요.
+    console.log("메시지 전송");
+  };
+
   return (
     <>
       <DefaultLayout>
@@ -24,7 +29,10 @@ function Chats() {
           <C.ToggleButton onClick={toggleSidebar}>
             {isOpen ? <IoChevronBackOutline /> : <IoChevronForwardOutline />}
           </C.ToggleButton>
-          <C.ChatContainer></C.ChatContainer>
+          <C.ChatBox>
+            hello
+            <C.MessageInput onSendMessage={handleSendMessage}></C.MessageInput>
+          </C.ChatBox>
         </C.ChatLayout>
       </DefaultLayout>
     </>

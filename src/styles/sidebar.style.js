@@ -8,7 +8,7 @@ export const SidebarLayout = styled.div`
   flex-direction: column;
   align-items: center;
   width: 16rem;
-  height: 100vh;
+  height: 90vh;
 
   .chat-items-container {
     display: flex;

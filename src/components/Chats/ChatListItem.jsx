@@ -1,5 +1,5 @@
 import React from "react";
-import * as C from "../../styles/chatItem.style";
+import * as C from "../../styles/chat-list-item.style";
 
 export default function ChatItem({ chat }) {
   return (

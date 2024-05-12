@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as S from "../../styles/sidebar.style";
-import ChatItem from "./ChatItem";
+import ChatListItem from "./ChatListItem";
 
 export default function Sidebar() {
   const chatList = [
@@ -28,7 +28,7 @@ export default function Sidebar() {
         <S.CreateNewChat />
         <div className="chat-items-container">
           {chatList.map((chat, index) => (
-            <ChatItem key={index} chat={chat} />
+            <ChatListItem key={index} chat={chat} />
           ))}
         </div>
         <S.Settings />
