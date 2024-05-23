@@ -7,6 +7,16 @@ import googleIcon from "../assets/google-icon.svg";
 import DefaultLayout from "../components/DefaultLayout";
 
 function Auth() {
+  const handleNaverLogin = () => {
+    window.location.href =
+      "http://54.180.196.124:80/oauth2/authorization/naver";
+  };
+
+  const handleGoogleLogin = () => {
+    window.location.href =
+      "http://54.180.196.124:80/oauth2/authorization/google";
+  };
+
   return (
     <>
       <A.Header>
@@ -18,6 +28,7 @@ function Auth() {
           <li>
             <button
               className="auth-button"
+              onClick={handleNaverLogin}
               style={{ backgroundColor: "#03C75A" }}
             >
               <img
