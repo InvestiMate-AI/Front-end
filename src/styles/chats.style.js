@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { IoSend } from "react-icons/io5";
+import { clear } from "@testing-library/user-event/dist/clear";
 
 export const ChatLayout = styled.div`
   display: flex;
@@ -77,6 +78,7 @@ export const MessageInput = ({ onSendMessage }) => {
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       onSendMessage();
+      clear();
     }
   };
 

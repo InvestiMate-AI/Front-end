@@ -4,6 +4,8 @@ import * as C from "../styles/chats.style";
 
 import DefaultLayout from "../components/DefaultLayout";
 import Sidebar from "../components/Chats/Sidebar";
+import MessageInput from "../components/Chats/MessageInput";
+import CorpSearch from "../components/Chats/CorpSearch";
 import { IoChevronForwardOutline, IoChevronBackOutline } from "react-icons/io5";
 
 function Chats() {
@@ -29,10 +31,12 @@ function Chats() {
           <C.ToggleButton onClick={toggleSidebar}>
             {isOpen ? <IoChevronBackOutline /> : <IoChevronForwardOutline />}
           </C.ToggleButton>
-          <C.ChatBox>
+          <CorpSearch />
+          <MessageInput />
+          {/* <C.ChatBox>
             hello
             <C.MessageInput onSendMessage={handleSendMessage}></C.MessageInput>
-          </C.ChatBox>
+          </C.ChatBox> */}
         </C.ChatLayout>
       </DefaultLayout>
     </>
