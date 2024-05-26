@@ -36,12 +36,18 @@ function Chats() {
 
         // Format the thread data to match chatList structure
         const formattedData = threadData.map((thread) => ({
+          corp_code: thread.corp_code,
+          bsns_year: thread.bsns_year,
+          reprt_code: thread.reprt_code,
+          assistant_id: thread.assistant_id,
+          thread_id: thread.thread_id,
           reportType: `${thread.corp_code} ${thread.bsns_year}년 ${reportTypes[thread.reprt_code]}`,
           lastChatDate: new Date().toISOString().split("T")[0], // Set to today's date
           title: `Thread ID: ${thread.thread_id}`,
         }));
 
         setChatList(formattedData);
+        console.log(formattedData);
       } catch (error) {
         console.error("Error fetching chat list:", error);
       }
@@ -61,7 +67,10 @@ function Chats() {
             {isOpen ? <IoChevronBackOutline /> : <IoChevronForwardOutline />}
           </C.ToggleButton>
           {selectedChat ? (
-            <MessageInput />
+            <MessageInput
+              thread_id={selectedChat.thread_id}
+              assistant_id={selectedChat.assistant_id}
+            />
           ) : (
             <CorpSearch addChatToChatList={addChatToChatList} />
           )}

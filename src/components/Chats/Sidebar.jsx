@@ -9,6 +9,8 @@ const Sidebar = ({ chatList, setSelectedChat }) => {
 
   const handleChatListItemClick = (chat) => {
     setSelectedChat(chat);
+    console.log(`선택된 chat 정보`);
+    console.log(chat);
   };
 
   return (
