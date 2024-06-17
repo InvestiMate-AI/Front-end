@@ -4,46 +4,9 @@ import kospiData from "../../assets/corps/KOSPI_list.json";
 import { hangulIncludes } from "es-hangul";
 import axios from "axios";
 import { MdBorderAll } from "react-icons/md";
+import * as R from "../../styles/report-selection.style";
 
-const DropdownContainer = styled.div`
-  position: relative;
-  width: 300px;
-  margin-bottom: 20px;
-`;
-
-const StyledInput = styled.input`
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 10px;
-`;
-
-const DropdownList = styled.ul`
-  position: absolute;
-  width: 100%;
-  border: 1px solid #ccc;
-  border-top: none;
-  max-height: 200px;
-  overflow-y: auto;
-  background-color: white;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  z-index: 1;
-`;
-
-const DropdownListItem = styled.li`
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #f0f0f0;
-  }
-`;
-
-const CorpSearch = ({ addChatToChatList }) => {
+const ReportSelection = ({ addChatToChatList }) => {
   const [inputValue, setInputValue] = useState("");
   const [reportType, setReportType] = useState("");
   const [year, setYear] = useState("");
@@ -129,30 +92,30 @@ const CorpSearch = ({ addChatToChatList }) => {
   };
 
   return (
-    <div>
-      <DropdownContainer>
-        <StyledInput
+    <R.CreateChatLayout>
+      <R.DropdownContainer>
+        <R.StyledInput
           value={inputValue}
           onChange={handleChange}
-          placeholder="회사명 또는 종목코드를 입력하세요"
+          placeholder="회사명/종목코드"
         />
         {filteredCorps.length > 0 && (
-          <DropdownList>
+          <R.DropdownList>
             {filteredCorps.map((corp) => (
-              <DropdownListItem
+              <R.DropdownListItem
                 key={corp.종목코드}
                 onClick={() => handleItemClick(corp)}
               >
                 {corp.회사명} ({corp.종목코드})
-              </DropdownListItem>
+              </R.DropdownListItem>
             ))}
-          </DropdownList>
+          </R.DropdownList>
         )}
-      </DropdownContainer>
-      <DropdownContainer>
+      </R.DropdownContainer>
+      <R.DropdownContainer>
         <select value={reportType} onChange={handleReportTypeChange}>
           <option value="" disabled>
-            보고서 형식을 선택하세요
+            보고서 종류
           </option>
           {Object.entries(reportTypes).map(([code, type]) => (
             <option key={code} value={code}>
@@ -160,11 +123,11 @@ const CorpSearch = ({ addChatToChatList }) => {
             </option>
           ))}
         </select>
-      </DropdownContainer>
-      <DropdownContainer>
+      </R.DropdownContainer>
+      <R.DropdownContainer>
         <select value={year} onChange={handleYearChange}>
           <option value="" disabled>
-            연도를 선택하세요
+            사업 연도
           </option>
           {years.map((y) => (
             <option key={y} value={y}>
@@ -172,7 +135,7 @@ const CorpSearch = ({ addChatToChatList }) => {
             </option>
           ))}
         </select>
-      </DropdownContainer>
+      </R.DropdownContainer>
       <button
         onClick={handleClick}
         style={{
@@ -186,8 +149,8 @@ const CorpSearch = ({ addChatToChatList }) => {
       >
         생성!
       </button>
-    </div>
+    </R.CreateChatLayout>
   );
 };
 
-export default CorpSearch;
+export default ReportSelection;

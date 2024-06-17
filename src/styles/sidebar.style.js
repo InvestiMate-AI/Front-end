@@ -8,18 +8,20 @@ export const SidebarLayout = styled.div`
   flex-direction: column;
   align-items: center;
   width: 16rem;
-  height: 90vh;
-
-  .chat-items-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
+  // height: 100%;
 `;
 
-const CreateNewChatButton = styled.div`
+export const ChatItemsContainer = styled.div`
   display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const CreateNewChatButton = styled.button`
+  display: flex;
+  flex: 0 0 auto;
   align-items: center;
   margin: 1rem;
   padding: 1rem 3rem;
@@ -28,8 +30,9 @@ const CreateNewChatButton = styled.div`
   cursor: pointer;
 `;
 
-const SettingsButton = styled.div`
+const SettingsButton = styled.button`
   display: flex;
+  flex: 0 0 auto;
   align-items: center;
   margin: 1rem;
   padding: 1rem 3rem;

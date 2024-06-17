@@ -4,7 +4,7 @@ import { clear } from "@testing-library/user-event/dist/clear";
 
 export const ChatLayout = styled.div`
   display: flex;
-  flex-direction: row;
+  flex: row;
   align-items: center;
   width: 100%;
 `;
@@ -13,7 +13,7 @@ export const ChatBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-grow: 1;
+  flex: 1;
   height: 100%;
 `;
 

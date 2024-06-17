@@ -17,7 +17,7 @@ const Sidebar = ({ chatList, setSelectedChat }) => {
     <>
       <S.SidebarLayout>
         <S.CreateNewChat onClick={handleCreateNewChat} />
-        <div className="chat-items-container">
+        <S.ChatItemsContainer>
           {chatList.map((chat, index) => (
             <ChatListItem
               key={index}
@@ -25,7 +25,7 @@ const Sidebar = ({ chatList, setSelectedChat }) => {
               onClick={() => handleChatListItemClick(chat)}
             />
           ))}
-        </div>
+        </S.ChatItemsContainer>
         <S.Settings />
       </S.SidebarLayout>
     </>
