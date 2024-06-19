@@ -53,7 +53,7 @@ const Message = styled.div`
   border-radius: 4px;
 `;
 
-export default function MessageInput({ thread_id, assistant_id }) {
+export default function MessageInput({ threadId, assistantId }) {
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState([]);
   const [currentAssistantMessage, setCurrentAssistantMessage] = useState("");
@@ -88,8 +88,8 @@ export default function MessageInput({ thread_id, assistant_id }) {
 
       try {
         const stream = openai.beta.threads.runs
-          .stream(thread_id, {
-            assistant_id: assistant_id,
+          .stream(threadId, {
+            assistant_id: assistantId,
             instructions: `반드시 주어진 기업 정기 보고서 파일에서 정보를 찾아서 아래 질문에 대해 한국어로 답변해줘. ${inputValue}`,
             tools: [{ type: "file_search" }, { type: "code_interpreter" }],
             temperature: 0.1,

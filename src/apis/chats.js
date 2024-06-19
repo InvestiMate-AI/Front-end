@@ -55,7 +55,6 @@ export const getThreads = async () => {
       },
     };
     const res = await Get("/api/v1/chats", config);
-    console.log(res.data);
     return res.data.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
