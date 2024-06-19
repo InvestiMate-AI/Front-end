@@ -3,7 +3,7 @@ import * as C from "../styles/chats.style";
 import DefaultLayout from "../components/DefaultLayout";
 import Sidebar from "../components/Chats/Sidebar";
 import MessageInput from "../components/Chats/MessageInput";
-import ReportSelection from "../components/Chats/ReportSelection";
+import ReportSelection from "../components/Chats/CreateChat";
 import { IoChevronForwardOutline, IoChevronBackOutline } from "react-icons/io5";
 import { getThreads } from "../apis/chats";
 

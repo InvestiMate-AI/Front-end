@@ -6,7 +6,9 @@ import axios from "axios";
 import { MdBorderAll } from "react-icons/md";
 import * as R from "../../styles/report-selection.style";
 
-const ReportSelection = ({ addChatToChatList }) => {
+import { createThreads } from "../../apis/chats";
+
+const CreateChat = ({ addChatToChatList }) => {
   const [inputValue, setInputValue] = useState("");
   const [reportType, setReportType] = useState("");
   const [year, setYear] = useState("");
@@ -65,30 +67,12 @@ const ReportSelection = ({ addChatToChatList }) => {
       return;
     }
 
-    const data = {
-      corp_code: selectedCorp.종목코드,
-      corp_name: selectedCorp.회사명,
-      bsns_year: year,
-      reprt_code: reportType,
-      uid: 1, // uid 값을 필요에 따라 변경하세요.
-    };
-
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/process_report",
-        data
-      );
-      alert("생성 완료!");
-      const newChat = {
-        reportType: `${data.corp_code} ${data.bsns_year}년 ${reportTypes[data.reprt_code]}`,
-        lastChatDate: new Date().toISOString().split("T")[0],
-        title: `Thread ID: ${response.data.thread_id}`,
-      };
-      addChatToChatList(newChat);
-    } catch (error) {
-      console.error("Error creating report:", error);
-      alert("생성 실패");
-    }
+    const res = await createThreads(
+      year,
+      selectedCorp.회사명,
+      reportTypes[reportType]
+    );
+    console.log(res);
   };
 
   return (
@@ -153,4 +137,4 @@ const ReportSelection = ({ addChatToChatList }) => {
   );
 };
 
-export default ReportSelection;
+export default CreateChat;

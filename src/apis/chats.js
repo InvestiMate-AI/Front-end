@@ -18,15 +18,44 @@ import { Get, Post, Delete, Patch, Put } from ".";
 //   };
 
 // getThreads 함수에서 Authorization 헤더 설정
+export const createThreads = async (reportYear, companyName, reportType) => {
+  try {
+    const token = process.env.REACT_APP_ACCESSTOKEN;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const res = await Post(
+      "/api/v1/chats/thread",
+      {
+        year: reportYear,
+        companyName: companyName,
+        reportType: reportType,
+      },
+      config
+    );
+    return res.data.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      const errorCode = error.response.data.errorCode;
+      const message = error.response.data.message;
+      console.log(`${errorCode}: ${message}`); // log
+    }
+  }
+};
+
+// getThreads 함수에서 Authorization 헤더 설정
 export const getThreads = async () => {
   try {
-    const token = process.env.REACT_APP_REFRESHTOKEN;
+    const token = process.env.REACT_APP_ACCESSTOKEN;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
     const res = await Get("/api/v1/chats", config);
+    console.log(res.data);
     return res.data.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {

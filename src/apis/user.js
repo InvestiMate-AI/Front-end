@@ -31,7 +31,7 @@ const onLogInSuccess = (accessToken, refreshToken) => {
   document.cookie = `refreshToken=${refreshToken}; path=/; `;
 };
 
-export const requestRefreshToken = async () => {
+export const issueAccessToken = async () => {
   // TODO: 로그인 완성 시 쿠키에 저장된 토큰을 사용.
   // const cookies = new Cookies();
   // const refreshToken = cookies.get('refreshToken');
