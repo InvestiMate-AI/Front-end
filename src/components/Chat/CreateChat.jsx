@@ -6,7 +6,7 @@ import axios from "axios";
 import { MdBorderAll } from "react-icons/md";
 import * as R from "../../styles/report-selection.style";
 
-import { createThreads } from "../../apis/chats";
+import { createThreads } from "../../apis/chat";
 
 const CreateChat = ({ addChatToChatList }) => {
   const [inputValue, setInputValue] = useState("");

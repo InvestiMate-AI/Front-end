@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import OpenAI from "openai";
+import { saveMessages, getMessages } from "../../apis/chat";
 
 const ChatContainer = styled.div`
   display: flex;
@@ -53,14 +54,14 @@ const Message = styled.div`
   border-radius: 4px;
 `;
 
-export default function MessageInput({ threadId, assistantId }) {
+export default function MessageInput({ threadId, assistantId, chatRoomId }) {
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState([]);
   const [currentAssistantMessage, setCurrentAssistantMessage] = useState("");
 
   const openai = new OpenAI({
-    organization: process.env.REACT_APP_ORGANIZATION_ID,
-    project: process.env.REACT_APP_PROJECT_ID,
+    // organization: process.env.REACT_APP_ORGANIZATION_ID,
+    // project: process.env.REACT_APP_PROJECT_ID,
     apiKey: process.env.REACT_APP_OPENAI_KEY,
     dangerouslyAllowBrowser: true,
   });
@@ -122,6 +123,22 @@ export default function MessageInput({ threadId, assistantId }) {
       } catch (error) {
         console.error("Error starting chat:", error);
       }
+
+      const response = saveMessages(
+        inputValue,
+        currentAssistantMessage,
+        chatRoomId
+      );
+      console.log(response);
+
+      // let res = async () => {
+      //   const response = await saveMessages(
+      //     inputValue,
+      //     currentAssistantMessage,
+      //     chatRoomId
+      //   );
+      //   console.log(response);
+      // };
     }
   };
 

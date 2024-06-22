@@ -1,6 +1,7 @@
 import React from "react";
 import * as S from "../../styles/sidebar.style";
 import ChatListItem from "./ChatListItem";
+import { getMessages } from "../../apis/chat";
 
 const Sidebar = ({ chatList, setSelectedChat }) => {
   const handleCreateNewChat = () => {
@@ -9,8 +10,10 @@ const Sidebar = ({ chatList, setSelectedChat }) => {
 
   const handleChatListItemClick = (chat) => {
     setSelectedChat(chat);
-    console.log(`선택된 chat 정보`);
-    console.log(chat);
+    console.log(`선택된 chat 정보 \n${JSON.stringify(chat)}`);
+    const response = getMessages(chat.chatRoomId);
+    console.log(response);
+    let res = async () => {};
   };
 
   return (

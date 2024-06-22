@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 import themes from "./styles/theme";
 
 import Home from "./pages/Home";
-import Chats from "./pages/Chats";
+import Chat from "./pages/Chat";
 import Auth from "./pages/Auth";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/chats" element={<Chats />} />
+            <Route path="/chat" element={<Chat />} />
             <Route path="/auth" element={<Auth />} />
           </Routes>
         </BrowserRouter>

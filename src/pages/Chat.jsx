@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import * as C from "../styles/chats.style";
+import * as C from "../styles/chat.style";
 import DefaultLayout from "../components/DefaultLayout";
-import Sidebar from "../components/Chats/Sidebar";
-import MessageInput from "../components/Chats/MessageInput";
-import ReportSelection from "../components/Chats/CreateChat";
+import Sidebar from "../components/Chat/Sidebar";
+import MessageInput from "../components/Chat/MessageInput";
+import ReportSelection from "../components/Chat/CreateChat";
 import { IoChevronForwardOutline, IoChevronBackOutline } from "react-icons/io5";
-import { getThreads } from "../apis/chats";
+import { getThreads } from "../apis/chat";
 
 function Chats() {
   const [isOpen, setIsOpen] = useState(true);
@@ -39,7 +39,7 @@ function Chats() {
         reportType: thread.reportType,
         reportYear: thread.reportYear,
         threadId: thread.threadId,
-        // assistantId: thread.assistantId,
+        assistantId: thread.assistantId,
       }));
 
       setChatList(formattedData);
@@ -62,6 +62,7 @@ function Chats() {
             <MessageInput
               threadId={selectedChat.threadId}
               assistantId={selectedChat.assistantId}
+              chatRoomId={selectedChat.chatRoomId}
             />
           ) : (
             <ReportSelection addChatToChatList={addChatToChatList} />
