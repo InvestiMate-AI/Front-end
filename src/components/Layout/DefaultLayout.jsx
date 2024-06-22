@@ -1,12 +1,14 @@
 import React from "react";
 import Header from "./Header";
-import * as D from "../styles/default-layout.style";
+import Footer from "./Footer";
+import * as D from "../../styles/default-layout.style";
 
 export default function DefaultLayout({ children }) {
   return (
     <D.Layout>
-      <D.Header />
+      <Header />
       <D.Main>{children}</D.Main>
+      <Footer />
     </D.Layout>
   );
 }

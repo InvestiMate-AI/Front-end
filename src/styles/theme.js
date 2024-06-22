@@ -11,8 +11,8 @@ const createFontStyle = (
   `;
 
 const theme = {
-  primaryColor: "palevioletred",
-  secondaryColor: "lightgray",
+  primaryColor: "#003366",
+  secondaryColor: "#444444",
   fontFamily: "Spoqa Han Sans Neo",
   spacing: "10px",
 };

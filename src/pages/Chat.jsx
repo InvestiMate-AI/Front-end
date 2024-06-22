@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import * as C from "../styles/chat.style";
-import DefaultLayout from "../components/DefaultLayout";
+import DefaultLayout from "../components/Layout/DefaultLayout";
 import Sidebar from "../components/Chat/Sidebar";
 import MessageInput from "../components/Chat/MessageInput";
 import ReportSelection from "../components/Chat/CreateChat";
 import { IoChevronForwardOutline, IoChevronBackOutline } from "react-icons/io5";
 import { getThreads } from "../apis/chat";
 
-function Chats() {
+function Chat() {
   const [isOpen, setIsOpen] = useState(true);
   const [selectedChat, setSelectedChat] = useState(null);
   const [chatList, setChatList] = useState([]);
@@ -73,4 +73,4 @@ function Chats() {
   );
 }
 
-export default Chats;
+export default Chat;

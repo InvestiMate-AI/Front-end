@@ -4,7 +4,7 @@ import * as A from "../styles/auth.style";
 import naverIcon from "../assets/naver-icon.svg";
 import googleIcon from "../assets/google-icon.svg";
 
-import DefaultLayout from "../components/DefaultLayout";
+import DefaultLayout from "../components/Layout/DefaultLayout";
 
 function Auth() {
   const handleNaverLogin = () => {
