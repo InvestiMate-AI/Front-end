@@ -1,9 +1,9 @@
 const names = {
   SERVICE_NAME_UPPER: "INVESTIMATE",
   SERVICE_NAME_NORMAL: "InvestiMate",
-  CHAT_SERVICE_NAME: "챗봇",
+  CHAT_SERVICE_NAME: "채팅",
   FEEDBACK_SERVICE_NAME: "투자 피드백",
-  MANAGE_SERVICE_NAME: "내 투자 관리",
+  MANAGE_SERVICE_NAME: "투자 관리",
 };
 
 const constants = {

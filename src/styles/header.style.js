@@ -13,11 +13,11 @@ export const HeaderLayout = styled.div`
 export const HomeButton = styled.button`
   background: none;
   color: ${themes.theme.primaryColor}; /* 텍스트 색상 */
-  font-size: 18px; /* 텍스트 크기 */
-  font-weight: bold;
+  font-family: "${themes.theme.fontFamily}";
+  font-weight: 900;
+  font-size: 1.25rem;
   width: auto;
-  height: 50px;
-  border: none;
+  height: auto;
   cursor: pointer;
   padding: 0 15px; /* 텍스트 주변 패딩 */
 `;
@@ -25,20 +25,25 @@ export const HomeButton = styled.button`
 export const NavContainer = styled.div`
   display: flex;
   flex: 1;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
-
-  @media (max-width: 600px) {
-    overflow-x: auto; /* 너비가 줄어들 때 스크롤 가능하게 */
-  }
 `;
 
 export const NavButton = styled.button`
   margin: 0 10px;
   padding: 5px 10px;
+  font-family: "${themes.theme.fontFamily}";
+  font-weight: 700;
+  text-align: center;
+  min-width: 50px;
+  white-space: nowrap;
   background: none;
-  border: none;
   cursor: pointer;
+  color: black;
+  text-decoration: none;
+  &:hover {
+    color: red;
+  }
 `;
 
 export const UserContainer = styled.div`
@@ -47,11 +52,16 @@ export const UserContainer = styled.div`
 `;
 
 export const LoginButton = styled.button`
-  margin-left: 10px;
+  margin: 10px;
   padding: 5px 10px;
+  font-family: "${themes.theme.fontFamily}";
+  font-weight: 500;
+  // font-size: 1.25rem;
+  color: black;
+  text-decoration: none;
   background: none;
-  border: 1px solid #000;
   cursor: pointer;
+  white-space: nowrap;
 `;
 
 export const UserName = styled.span`
