@@ -6,13 +6,13 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     max-width: 100vw;
     max-height: 100vh;
-    margin: 0;
-    padding: 0;
+
     font-size: 16px;
     font-weight: 500;
     line-height: 130%;
     color: #000;
-
+    margin: 0;
+    padding: 0;
   }
 
   // light

@@ -7,6 +7,7 @@ export const ChatLayout = styled.div`
   flex: row;
   align-items: center;
   width: 100%;
+  height: 100%;
 `;
 
 export const ChatBox = styled.div`
@@ -66,6 +67,9 @@ export const SidebarContainer = styled.div`
   transition: width 0.3s ease-in-out;
   overflow: hidden;
   border-right: 1px solid #e0e0e0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const ToggleButton = styled.button`
