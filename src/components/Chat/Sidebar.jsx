@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "../../styles/sidebar.style";
 import ChatListItem from "./ChatListItem";
 import { getMessages } from "../../apis/chat";
+import { IoChevronForwardOutline, IoChevronBackOutline } from "react-icons/io5";
 
 const Sidebar = ({ chatList, setSelectedChat }) => {
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+    console.log(isOpen);
+  };
+
   const handleCreateNewChat = () => {
     setSelectedChat(null);
   };
@@ -19,17 +27,22 @@ const Sidebar = ({ chatList, setSelectedChat }) => {
   return (
     <>
       <S.SidebarLayout>
-        <S.CreateNewChat onClick={handleCreateNewChat} />
-        <S.ChatItemsContainer>
-          {chatList.map((chat, index) => (
-            <ChatListItem
-              key={index}
-              chat={chat}
-              onClick={() => handleChatListItemClick(chat)}
-            />
-          ))}
-        </S.ChatItemsContainer>
-        <S.Settings />
+        <S.SidebarContainer isOpen={isOpen}>
+          <S.CreateNewChat onClick={handleCreateNewChat} />
+          <S.ChatItemsContainer>
+            {chatList.map((chat, index) => (
+              <ChatListItem
+                key={index}
+                chat={chat}
+                onClick={() => handleChatListItemClick(chat)}
+              />
+            ))}
+          </S.ChatItemsContainer>
+          <S.Settings />
+        </S.SidebarContainer>
+        <S.ToggleButton onClick={toggleSidebar}>
+          {isOpen ? <IoChevronBackOutline /> : <IoChevronForwardOutline />}
+        </S.ToggleButton>
       </S.SidebarLayout>
     </>
   );

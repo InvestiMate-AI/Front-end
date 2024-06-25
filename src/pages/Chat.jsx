@@ -4,21 +4,14 @@ import DefaultLayout from "../components/Layout/DefaultLayout";
 import Sidebar from "../components/Chat/Sidebar";
 import MessageInput from "../components/Chat/MessageInput";
 import ReportSelection from "../components/Chat/CreateChat";
-import { IoChevronForwardOutline, IoChevronBackOutline } from "react-icons/io5";
 import { getThreads } from "../apis/chat";
 
 function Chat() {
-  const [isOpen, setIsOpen] = useState(true);
   const [selectedChat, setSelectedChat] = useState(null);
   const [chatList, setChatList] = useState([]);
 
   const addChatToChatList = (newThread) => {
     setChatList((prevList) => [...prevList, newThread]);
-  };
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-    console.log(isOpen);
   };
 
   const reportTypes = {
@@ -52,12 +45,7 @@ function Chat() {
     <>
       <DefaultLayout>
         <C.ChatLayout>
-          <C.SidebarContainer isOpen={isOpen}>
-            <Sidebar setSelectedChat={setSelectedChat} chatList={chatList} />
-          </C.SidebarContainer>
-          <C.ToggleButton onClick={toggleSidebar}>
-            {isOpen ? <IoChevronBackOutline /> : <IoChevronForwardOutline />}
-          </C.ToggleButton>
+          <Sidebar setSelectedChat={setSelectedChat} chatList={chatList} />
           {selectedChat ? (
             <MessageInput
               threadId={selectedChat.threadId}

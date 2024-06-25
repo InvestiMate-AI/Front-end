@@ -7,11 +7,15 @@ export const ChatItemLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
   padding: 1rem;
-  margin: 1rem;
+  margin: 0 1rem;
   border-radius: 10px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: lightgrey;
+  }
 
   .chat-item-header {
     display: flex;
@@ -19,12 +23,14 @@ export const ChatItemLayout = styled.div`
     flex-direction: row;
     justify-content: space-between;
     gap: 1rem;
+    white-space: nowrap;
   }
 
   .chat-item-content {
     display: flex;
     align-items: left;
     gap: 1rem;
+    white-space: nowrap;
   }
 `;
 
