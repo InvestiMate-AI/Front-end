@@ -1,9 +1,9 @@
 import axios from "axios";
 import { Get, Post, Delete, Patch, Put } from ".";
 
-export const createThreads = async (reportYear, companyName, reportType) => {
+export const createThread = async (reportYear, companyName, reportType) => {
   try {
-    const token = process.env.REACT_APP_ACCESSTOKEN;
+    const token = process.env.REACT_APP_REFRESHTOKEN;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { IoIosArrowBack } from "react-icons/io5";
 import { IoAddOutline } from "react-icons/io5";
 import { IoEllipsisVertical } from "react-icons/io5";
+import themes from "./theme";
 
 export const ChatItemLayout = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ export const ChatItemLayout = styled.div`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: lightgrey;
+    background-color: ${themes.colors.gray_200};
   }
 
   .chat-item-header {

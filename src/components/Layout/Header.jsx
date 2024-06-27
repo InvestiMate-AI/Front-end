@@ -31,7 +31,7 @@ function Header({ isLoggedIn, userName }) {
             </>
           ) : (
             <H.LoginButton as={Link} to="/auth">
-              Login
+              로그인
             </H.LoginButton>
           )}
         </H.UserContainer>

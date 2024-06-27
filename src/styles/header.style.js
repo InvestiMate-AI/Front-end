@@ -8,6 +8,7 @@ export const HeaderLayout = styled.div`
   width: 100%;
   height: 50px;
   border-bottom: 1px solid #e0e0e0;
+  background: ${themes.colors.gray_50};
 `;
 
 export const HomeButton = styled.button`

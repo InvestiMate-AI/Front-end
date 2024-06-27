@@ -19,6 +19,7 @@ export const SidebarContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  background: ${themes.colors.gray_50};
 `;
 
 export const ToggleButton = styled.button`
@@ -29,7 +30,7 @@ export const ToggleButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: lightgrey;
+    background-color: ${themes.colors.gray_200};
   }
 `;
 
@@ -54,7 +55,7 @@ const CreateNewChatButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: lightgrey;
+    background-color: ${themes.colors.gray_200};
   }
 `;
 
@@ -70,7 +71,7 @@ const SettingsButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: lightgrey;
+    background-color: ${themes.colors.gray_200};
   }
 `;
 
