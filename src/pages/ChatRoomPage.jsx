@@ -17,21 +17,10 @@ function ChatRoomPage() {
     const fetchChatList = async () => {
       const threadsData = await getThreads();
       console.log("threadsData:", threadsData); // API 호출 결과 확인
-
-      const formattedData = threadsData.map((thread) => ({
-        chatRoomId: thread.chatRoomId,
-        reportCompany: thread.reportCompany,
-        reportType: thread.reportType,
-        reportYear: thread.reportYear,
-        threadId: thread.threadId,
-        assistantId: thread.assistantId,
-      }));
-      console.log("formattedData:", formattedData); // 데이터 형성 결과 확인
-
-      setChatList(formattedData);
+      setChatList(threadsData);
 
       // Find the selected chat from the fetched chat list using chatRoomId
-      const selected = formattedData.find((chat) => {
+      const selected = threadsData.find((chat) => {
         if (chat.chatRoomId == chatRoomId) {
           console.log(chat);
           return chat;

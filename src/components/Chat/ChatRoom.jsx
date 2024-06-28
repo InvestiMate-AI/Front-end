@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import OpenAI from "openai";
 import { saveMessages, getMessages } from "../../apis/chat";
 import * as C from "../../styles/chat-room.style";
@@ -7,7 +7,16 @@ import { IoSend } from "react-icons/io5";
 export default function ChatRoom({ threadId, assistantId, chatRoomId }) {
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState([]);
-  const [currentAssistantMessage, setCurrentAssistantMessage] = useState("");
+  const latestMessageRef = useRef("");
+
+  useEffect(() => {
+    const fetchMessages = async () => {
+      const prevMessages = await getMessages(chatRoomId);
+      console.log("prevMessages:", prevMessages); // API 호출 결과 확인
+      setMessages(prevMessages);
+    };
+    fetchMessages();
+  }, [chatRoomId]);
 
   const openai = new OpenAI({
     // organization: process.env.REACT_APP_ORGANIZATION_ID,
@@ -28,68 +37,49 @@ export default function ChatRoom({ threadId, assistantId, chatRoomId }) {
 
   const handleSendMessage = async () => {
     if (inputValue.trim() !== "") {
-      // Add user message to the messages state
+      const question = inputValue;
       setMessages((prevMessages) => [
         ...prevMessages,
-        { sender: "user", text: inputValue },
+        { question: question, answer: "" },
       ]);
-
+      latestMessageRef.current = "";
       setInputValue("");
-      setCurrentAssistantMessage("");
 
       try {
-        const stream = openai.beta.threads.runs
+        const run = openai.beta.threads.runs
           .stream(threadId, {
             assistant_id: assistantId,
-            instructions: `반드시 주어진 기업 정기 보고서 파일에서 정보를 찾아서 아래 질문에 대해 한국어로 답변해줘. ${inputValue}`,
+            instructions: `반드시 주어진 기업 정기 보고서 파일에서 정보를 찾아서 아래 질문에 대해 한국어로 답변해줘. ${question}`,
             tools: [{ type: "file_search" }, { type: "code_interpreter" }],
             temperature: 0.1,
             stream: true,
           })
           .on("textCreated", () => {
-            setCurrentAssistantMessage(""); // Reset buffer when a new text is created
+            console.log(question);
           })
           .on("textDelta", (textDelta) => {
-            setCurrentAssistantMessage(
-              (prevMessage) => prevMessage + textDelta.value
-            ); // Accumulate text in buffer
+            latestMessageRef.current += textDelta.value;
+            setMessages((prevMessages) => {
+              const updatedMessages = [...prevMessages];
+              updatedMessages[updatedMessages.length - 1].answer =
+                latestMessageRef.current;
+              return updatedMessages;
+            });
+            console.log("textDelta", textDelta.value);
           })
-          .on("textDeltaEnd", () => {
-            setMessages((prevMessages) => [
-              ...prevMessages,
-              { sender: "assistant", text: currentAssistantMessage },
-            ]);
-            setCurrentAssistantMessage(""); // Clear buffer after processing the complete message
-          })
-          .on("toolCallCreated", (toolCall) => {
-            setMessages((prevMessages) => [
-              ...prevMessages,
-              {
-                sender: "assistant",
-                text: `\nassistant > ${toolCall.type}\n\n`,
-              },
-            ]);
+          .on("end", async () => {
+            saveAndLogMessages(question, latestMessageRef.current, chatRoomId);
           });
       } catch (error) {
         console.error("Error starting chat:", error);
       }
-
-      const response = saveMessages(
-        inputValue,
-        currentAssistantMessage,
-        chatRoomId
-      );
-      console.log(response);
-
-      // let res = async () => {
-      //   const response = await saveMessages(
-      //     inputValue,
-      //     currentAssistantMessage,
-      //     chatRoomId
-      //   );
-      //   console.log(response);
-      // };
     }
+  };
+
+  const saveAndLogMessages = async (question, answer, chatRoomId) => {
+    const response = await saveMessages(question, answer, chatRoomId);
+    console.log(question, answer, chatRoomId);
+    console.log(response);
   };
 
   return (
@@ -97,19 +87,15 @@ export default function ChatRoom({ threadId, assistantId, chatRoomId }) {
       <C.ChatRoomMain>
         <C.MessagesContainer>
           {messages.map((message, index) => (
-            <C.UserMessageItem key={index}>
-              {/* <strong>
-                {message.sender === "user" ? "You: " : "Assistant: "}
-              </strong> */}
-              {message.text}
-            </C.UserMessageItem>
+            <React.Fragment key={index}>
+              {message.question && (
+                <C.UserMessageItem>{message.question}</C.UserMessageItem>
+              )}
+              {message.answer && (
+                <C.BotMessageItem>{message.answer}</C.BotMessageItem>
+              )}
+            </React.Fragment>
           ))}
-          {currentAssistantMessage && (
-            <C.BotMessageItem>
-              {/* <strong>Assistant: </strong> */}
-              {currentAssistantMessage}
-            </C.BotMessageItem>
-          )}
         </C.MessagesContainer>
       </C.ChatRoomMain>
       <C.ChatRoomFooter>

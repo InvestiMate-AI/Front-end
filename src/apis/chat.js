@@ -3,7 +3,7 @@ import { Get, Post } from ".";
 
 export const createThread = async (reportYear, companyName, reportType) => {
   try {
-    const token = process.env.REACT_APP_REFRESHTOKEN;
+    const token = process.env.REACT_APP_ACCESSTOKEN;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -31,7 +31,7 @@ export const createThread = async (reportYear, companyName, reportType) => {
 // getThreads 함수에서 Authorization 헤더 설정
 export const getThreads = async () => {
   try {
-    const token = process.env.REACT_APP_REFRESHTOKEN;
+    const token = process.env.REACT_APP_ACCESSTOKEN;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -64,7 +64,7 @@ export const saveMessages = async (question, answer, chatRoomId) => {
       },
       config
     );
-    return res.data.data;
+    return res.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       const errorCode = error.response.data.errorCode;
