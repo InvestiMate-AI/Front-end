@@ -7,6 +7,7 @@ import themes from "./styles/theme";
 import Home from "./pages/Home";
 import Chat from "./pages/Chat";
 import Auth from "./pages/Auth";
+import ChatRoom from "./pages/ChatRoom";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/chat" element={<Chat />} />
+            <Route path="/chat/:chatRoomId" element={<ChatRoom />} />
             <Route path="/auth" element={<Auth />} />
           </Routes>
         </BrowserRouter>

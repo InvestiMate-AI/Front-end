@@ -1,7 +1,7 @@
 import React from "react";
 import * as C from "../../styles/chat-list-item.style";
 
-export default function ChatItem({ chat, onClick }) {
+export default function ChatListItem({ chat, onClick }) {
   return (
     <>
       <C.ChatItemLayout onClick={onClick}>
@@ -13,7 +13,7 @@ export default function ChatItem({ chat, onClick }) {
         </div>
         <div className="chat-item-content">
           {/* {chat.title} */}
-          <C.OptionsButton />
+          {/* <C.OptionsButton /> */}
         </div>
       </C.ChatItemLayout>
     </>
