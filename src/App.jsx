@@ -4,10 +4,10 @@ import { GlobalStyle } from "./styles/global.style";
 import { ThemeProvider } from "styled-components";
 import themes from "./styles/theme";
 
-import Home from "./pages/Home";
-import Chat from "./pages/Chat";
-import Auth from "./pages/Auth";
-import ChatRoom from "./pages/ChatRoom";
+import Home from "./pages/HomePage";
+import Chat from "./pages/ChatPage";
+import Auth from "./pages/AuthPage";
+import ChatRoom from "./pages/ChatRoomPage";
 
 function App() {
   return (

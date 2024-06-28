@@ -3,7 +3,7 @@ import * as H from "../styles/home.style";
 import DefaultLayout from "../components/Layout/DefaultLayout";
 import { useNavigate } from "react-router-dom";
 
-function Home() {
+function HomePage() {
   const navigate = useNavigate();
 
   const handleLoginClick = (path) => {
@@ -21,4 +21,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;

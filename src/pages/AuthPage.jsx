@@ -6,7 +6,7 @@ import googleIcon from "../assets/google-icon.svg";
 
 import DefaultLayout from "../components/Layout/DefaultLayout";
 
-function Auth() {
+function AuthPage() {
   const handleNaverLogin = () => {
     window.location.href =
       "http://54.180.196.124:80/oauth2/authorization/naver";
@@ -58,4 +58,4 @@ function Auth() {
   );
 }
 
-export default Auth;
+export default AuthPage;
