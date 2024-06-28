@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import OpenAI from "openai";
 import { saveMessages, getMessages } from "../../apis/chat";
 import * as C from "../../styles/chat-room.style";
+import { IoSend } from "react-icons/io5";
 
 export default function ChatRoom({ threadId, assistantId, chatRoomId }) {
   const [inputValue, setInputValue] = useState("");
@@ -92,31 +93,38 @@ export default function ChatRoom({ threadId, assistantId, chatRoomId }) {
   };
 
   return (
-    <C.ChatContainer>
-      <C.MessagesContainer>
-        {messages.map((message, index) => (
-          <C.Message key={index}>
-            <strong>
-              {message.sender === "user" ? "You: " : "Assistant: "}
-            </strong>
-            {message.text}
-          </C.Message>
-        ))}
-        {currentAssistantMessage && (
-          <C.Message>
-            <strong>Assistant: </strong>
-            {currentAssistantMessage}
-          </C.Message>
-        )}
-      </C.MessagesContainer>
-      <C.MessageInputContainer>
-        <C.StyledMessageInput
-          value={inputValue}
-          onKeyDown={handleKeyDown}
-          onChange={handleChange}
-        />
-        <C.SendButton onClick={handleSendMessage}>Send</C.SendButton>
-      </C.MessageInputContainer>
-    </C.ChatContainer>
+    <C.ChatRoomLayout>
+      <C.ChatRoomMain>
+        <C.MessagesContainer>
+          {messages.map((message, index) => (
+            <C.UserMessageItem key={index}>
+              {/* <strong>
+                {message.sender === "user" ? "You: " : "Assistant: "}
+              </strong> */}
+              {message.text}
+            </C.UserMessageItem>
+          ))}
+          {currentAssistantMessage && (
+            <C.BotMessageItem>
+              {/* <strong>Assistant: </strong> */}
+              {currentAssistantMessage}
+            </C.BotMessageItem>
+          )}
+        </C.MessagesContainer>
+      </C.ChatRoomMain>
+      <C.ChatRoomFooter>
+        <C.MessageInputContainer>
+          <C.MessageInput
+            value={inputValue}
+            onKeyDown={handleKeyDown}
+            onChange={handleChange}
+            placeholder="메시지를 입력하세요"
+          />
+          <C.SendButton onClick={handleSendMessage}>
+            <IoSend style={{ fontSize: "1rem" }} />
+          </C.SendButton>
+        </C.MessageInputContainer>
+      </C.ChatRoomFooter>
+    </C.ChatRoomLayout>
   );
 }

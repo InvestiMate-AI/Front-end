@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { IoSearch } from "react-icons/io5";
-import { IoCaretDown } from "react-icons/io5";
 import themes from "./theme";
 
 export const ChatCreationLayout = styled.div`

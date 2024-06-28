@@ -71,4 +71,9 @@ export const GlobalStyle = createGlobalStyle`
     cursor: default;
     text-decoration: none;
   }
+
+  input{
+    border: none;
+    outline: none;
+  }
 `;
