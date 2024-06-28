@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Get, Post, Delete, Patch, Put } from ".";
+import { Get, Post } from ".";
 
 export const createThread = async (reportYear, companyName, reportType) => {
   try {

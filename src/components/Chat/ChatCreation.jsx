@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import kospiCorpData from "../../assets/corps/KOSPI_list.json";
 import { chosungIncludes } from "es-hangul";
-import * as R from "../../styles/report-selection.style";
+import * as C from "../../styles/chat-creation.style";
 
 import { createThread } from "../../apis/chat";
 import { IoCaretDown } from "react-icons/io5";
 
-const CreateChat = ({ addChatToChatList }) => {
+const ChatCreation = ({ addChatToChatList }) => {
   const [corp, setCorp] = useState("");
   const [reportType, setReportType] = useState("사업보고서");
   const [year, setYear] = useState("2023");
@@ -77,92 +77,92 @@ const CreateChat = ({ addChatToChatList }) => {
   };
 
   return (
-    <R.CreateChatLayout>
-      <R.CreateChatContainer>
-        <R.Heading>새 채팅 만들기</R.Heading>
-        <R.SelectionContainer>
-          <R.SelectionName>기업 선택</R.SelectionName>
-          <R.SelectionButton
+    <C.ChatCreationLayout>
+      <C.ChatCreationContainer>
+        <C.Heading>새 채팅 만들기</C.Heading>
+        <C.SelectionContainer>
+          <C.SelectionName>기업 선택</C.SelectionName>
+          <C.SelectionButton
             onClick={() => setCorpDropdownVisible(!corpDropdownVisible)}
           >
             <span>
               {!selectedCorp ? "기업을 선택하세요" : selectedCorp.회사명}
             </span>
             <IoCaretDown />
-          </R.SelectionButton>
+          </C.SelectionButton>
           {corpDropdownVisible && (
-            <R.CorpSearchContainer>
-              <R.CorpSearchInput
+            <C.CorpSearchContainer>
+              <C.CorpSearchInput
                 value={corp}
                 onChange={handleCorpChange}
                 placeholder="회사명/종목코드"
               />
               {filteredCorps.length > 0 && (
-                <R.CorpSearchList>
+                <C.CorpSearchList>
                   {filteredCorps.map((corp) => (
-                    <R.CorpSearchListItem
+                    <C.CorpSearchListItem
                       key={corp.종목코드}
                       onClick={() => handleCorpItemClick(corp)}
                     >
                       {corp.회사명} ({corp.종목코드})
-                    </R.CorpSearchListItem>
+                    </C.CorpSearchListItem>
                   ))}
-                </R.CorpSearchList>
+                </C.CorpSearchList>
               )}
-            </R.CorpSearchContainer>
+            </C.CorpSearchContainer>
           )}
-        </R.SelectionContainer>
-        <R.SelectionTypeContainer>
-          <R.SelectionContainer>
-            <R.SelectionName>보고서 유형</R.SelectionName>
-            <R.SelectionButton
+        </C.SelectionContainer>
+        <C.SelectionTypeContainer>
+          <C.SelectionContainer>
+            <C.SelectionName>보고서 유형</C.SelectionName>
+            <C.SelectionButton
               onClick={() => setReportDropdownVisible(!reportDropdownVisible)}
             >
               <span>{reportType}</span>
               <IoCaretDown />
-            </R.SelectionButton>
+            </C.SelectionButton>
             {reportDropdownVisible && (
-              <R.OtherList>
+              <C.OtherList>
                 {Object.entries(reportTypes).map(([code, name]) => (
-                  <R.OtherListItem
+                  <C.OtherListItem
                     key={code}
                     value={name}
                     onClick={() => handleReportItemClick(name)}
                   >
                     {name}
-                  </R.OtherListItem>
+                  </C.OtherListItem>
                 ))}
-              </R.OtherList>
+              </C.OtherList>
             )}
-          </R.SelectionContainer>
-          <R.SelectionContainer>
-            <R.SelectionName>사업 연도</R.SelectionName>
-            <R.SelectionButton
+          </C.SelectionContainer>
+          <C.SelectionContainer>
+            <C.SelectionName>사업 연도</C.SelectionName>
+            <C.SelectionButton
               onClick={() => setYearDropdownVisible(!yearDropdownVisible)}
             >
               <span>{year}</span>
               <IoCaretDown />
-            </R.SelectionButton>
+            </C.SelectionButton>
             {yearDropdownVisible && (
-              <R.OtherList>
+              <C.OtherList>
                 {years.map((y) => (
-                  <R.OtherListItem
+                  <C.OtherListItem
                     value={y}
                     onClick={() => handleYearItemClick(y)}
                   >
                     {y}
-                  </R.OtherListItem>
+                  </C.OtherListItem>
                 ))}
-              </R.OtherList>
+              </C.OtherList>
             )}
-          </R.SelectionContainer>
-        </R.SelectionTypeContainer>
-        <R.createChatButton onClick={handleClickCreateButton}>
+          </C.SelectionContainer>
+        </C.SelectionTypeContainer>
+        <C.createChatButton onClick={handleClickCreateButton}>
           생성하기
-        </R.createChatButton>
-      </R.CreateChatContainer>
-    </R.CreateChatLayout>
+        </C.createChatButton>
+      </C.ChatCreationContainer>
+    </C.ChatCreationLayout>
   );
 };
 
-export default CreateChat;
+export default ChatCreation;

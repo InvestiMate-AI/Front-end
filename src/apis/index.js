@@ -1,6 +1,6 @@
 import axios from "axios";
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { requestRefreshToken } from "./user";
+// import { AxiosRequestConfig, AxiosResponse } from "axios";
+// import { requestRefreshToken } from "./user";
 
 // axios instance 생성
 export const axiosInstance = axios.create({

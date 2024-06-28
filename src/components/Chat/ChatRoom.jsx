@@ -1,60 +1,9 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import OpenAI from "openai";
 import { saveMessages, getMessages } from "../../apis/chat";
+import * as C from "../../styles/chat-room.style";
 
-const ChatContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 80%;
-`;
-
-const MessageInputContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 20px;
-`;
-
-const StyledMessageInput = styled.input`
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 90%;
-`;
-
-const SendButton = styled.button`
-  margin-left: 10px;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #0056b3;
-  }
-`;
-
-const MessagesContainer = styled.div`
-  margin: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  height: 300px;
-  overflow-y: auto;
-`;
-
-const Message = styled.div`
-  margin: 10px 0;
-  padding: 10px;
-  background-color: #f1f1f1;
-  border-radius: 4px;
-`;
-
-export default function MessageInput({ threadId, assistantId, chatRoomId }) {
+export default function ChatRoom({ threadId, assistantId, chatRoomId }) {
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState([]);
   const [currentAssistantMessage, setCurrentAssistantMessage] = useState("");
@@ -143,31 +92,31 @@ export default function MessageInput({ threadId, assistantId, chatRoomId }) {
   };
 
   return (
-    <ChatContainer>
-      <MessagesContainer>
+    <C.ChatContainer>
+      <C.MessagesContainer>
         {messages.map((message, index) => (
-          <Message key={index}>
+          <C.Message key={index}>
             <strong>
               {message.sender === "user" ? "You: " : "Assistant: "}
             </strong>
             {message.text}
-          </Message>
+          </C.Message>
         ))}
         {currentAssistantMessage && (
-          <Message>
+          <C.Message>
             <strong>Assistant: </strong>
             {currentAssistantMessage}
-          </Message>
+          </C.Message>
         )}
-      </MessagesContainer>
-      <MessageInputContainer>
-        <StyledMessageInput
+      </C.MessagesContainer>
+      <C.MessageInputContainer>
+        <C.StyledMessageInput
           value={inputValue}
           onKeyDown={handleKeyDown}
           onChange={handleChange}
         />
-        <SendButton onClick={handleSendMessage}>Send</SendButton>
-      </MessageInputContainer>
-    </ChatContainer>
+        <C.SendButton onClick={handleSendMessage}>Send</C.SendButton>
+      </C.MessageInputContainer>
+    </C.ChatContainer>
   );
 }

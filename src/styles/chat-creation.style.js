@@ -3,7 +3,7 @@ import { IoSearch } from "react-icons/io5";
 import { IoCaretDown } from "react-icons/io5";
 import themes from "./theme";
 
-export const CreateChatLayout = styled.div`
+export const ChatCreationLayout = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,7 +12,7 @@ export const CreateChatLayout = styled.div`
   flex: 1;
 `;
 
-export const CreateChatContainer = styled.div`
+export const ChatCreationContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;

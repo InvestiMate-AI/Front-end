@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import * as C from "../styles/chat.style";
 import DefaultLayout from "../components/Layout/DefaultLayout";
 import Sidebar from "../components/Chat/Sidebar";
-import MessageInput from "../components/Chat/MessageInput";
-import ReportSelection from "../components/Chat/CreateChat";
+import ChatRoom from "../components/Chat/ChatRoom";
+import ChatCreation from "../components/Chat/ChatCreation";
 import { getThreads } from "../apis/chat";
 
 function Chat() {
@@ -12,13 +12,6 @@ function Chat() {
 
   const addChatToChatList = (newThread) => {
     setChatList((prevList) => [...prevList, newThread]);
-  };
-
-  const reportTypes = {
-    11011: "사업보고서",
-    11012: "반기보고서",
-    11013: "1분기보고서",
-    11014: "3분기보고서",
   };
 
   useEffect(() => {
@@ -47,13 +40,13 @@ function Chat() {
         <C.ChatLayout>
           <Sidebar setSelectedChat={setSelectedChat} chatList={chatList} />
           {selectedChat ? (
-            <MessageInput
+            <ChatRoom
               threadId={selectedChat.threadId}
               assistantId={selectedChat.assistantId}
               chatRoomId={selectedChat.chatRoomId}
             />
           ) : (
-            <ReportSelection addChatToChatList={addChatToChatList} />
+            <ChatCreation addChatToChatList={addChatToChatList} />
           )}
         </C.ChatLayout>
       </DefaultLayout>

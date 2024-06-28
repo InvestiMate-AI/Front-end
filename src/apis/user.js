@@ -1,4 +1,4 @@
-import { Get, Post, Patch, axiosInstance } from "./index";
+import { Get, Post, axiosInstance } from "./index";
 import axios from "axios";
 // import { Cookies } from "react-cookie";
 
