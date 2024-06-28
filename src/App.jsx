@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { GlobalStyle } from "./styles/global-style.style";
+import { GlobalStyle } from "./styles/global.style";
 import { ThemeProvider } from "styled-components";
 import themes from "./styles/theme";
 
-import Home from "./pages/Home";
-import Chats from "./pages/Chats";
-import Auth from "./pages/Auth";
+import Home from "./pages/HomePage";
+import Chat from "./pages/ChatPage";
+import Auth from "./pages/AuthPage";
+import ChatRoom from "./pages/ChatRoomPage";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/chats" element={<Chats />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/chat/:chatRoomId" element={<ChatRoom />} />
             <Route path="/auth" element={<Auth />} />
           </Routes>
         </BrowserRouter>

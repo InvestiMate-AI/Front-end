@@ -4,9 +4,19 @@ import * as A from "../styles/auth.style";
 import naverIcon from "../assets/naver-icon.svg";
 import googleIcon from "../assets/google-icon.svg";
 
-import DefaultLayout from "../components/DefaultLayout";
+import DefaultLayout from "../components/Layout/DefaultLayout";
 
-function Auth() {
+function AuthPage() {
+  const handleNaverLogin = () => {
+    window.location.href =
+      "http://54.180.196.124:80/oauth2/authorization/naver";
+  };
+
+  const handleGoogleLogin = () => {
+    window.location.href =
+      "http://54.180.196.124:80/oauth2/authorization/google";
+  };
+
   return (
     <>
       <A.Header>
@@ -18,6 +28,7 @@ function Auth() {
           <li>
             <button
               className="auth-button"
+              onClick={handleNaverLogin}
               style={{ backgroundColor: "#03C75A" }}
             >
               <img
@@ -47,4 +58,4 @@ function Auth() {
   );
 }
 
-export default Auth;
+export default AuthPage;
