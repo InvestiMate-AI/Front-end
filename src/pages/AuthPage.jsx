@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-// import DefaultLayout from "../components/DefaultLayout";
+import React from "react";
 import * as A from "../styles/auth.style";
 import naverIcon from "../assets/naver-icon.svg";
 import googleIcon from "../assets/google-icon.svg";
-
-import DefaultLayout from "../components/Layout/DefaultLayout";
+import { useNavigate } from "react-router-dom";
 
 function AuthPage() {
+  const navigate = useNavigate();
+
   const handleNaverLogin = () => {
     window.location.href =
       "http://54.180.196.124:80/oauth2/authorization/naver";
@@ -17,10 +17,14 @@ function AuthPage() {
       "http://54.180.196.124:80/oauth2/authorization/google";
   };
 
+  const handleHomeButtonClick = () => {
+    navigate("/chat");
+  };
+
   return (
     <>
       <A.Header>
-        <button className="button">INVESTIMATE</button>
+        <A.HomeButton onClick={handleHomeButtonClick}>INVESTIMATE</A.HomeButton>
       </A.Header>
       <A.MainLayout>
         빠르게 시작하세요

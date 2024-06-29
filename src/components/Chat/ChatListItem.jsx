@@ -6,9 +6,9 @@ export default function ChatListItem({ chat, onClick }) {
     <>
       <C.ChatItemLayout onClick={onClick}>
         <div className="chat-item-header">
-          <div>{chat.reportCompany}</div>
-          <div>{chat.reportYear}</div>
-          <div>{chat.reportType}</div>
+          <div>
+            {chat.reportCompany} {chat.reportYear}년 {chat.reportType}
+          </div>
           {/* <div>{chat.lastChatDate}</div> */}
         </div>
         <div className="chat-item-content">
