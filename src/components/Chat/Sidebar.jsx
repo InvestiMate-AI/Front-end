@@ -8,7 +8,6 @@ const Sidebar = ({ chatList, onChatItemClick, onCreateNewChat }) => {
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
-    console.log(isOpen);
   };
 
   return (

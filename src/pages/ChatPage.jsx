@@ -18,18 +18,7 @@ function ChatPage() {
   useEffect(() => {
     const fetchChatList = async () => {
       const threadsData = await getThreads();
-      console.log(threadsData);
-      // Format the thread data to match chatList structure
-      const formattedData = threadsData.map((thread) => ({
-        chatRoomId: thread.chatRoomId,
-        reportCompany: thread.reportCompany,
-        reportType: thread.reportType,
-        reportYear: thread.reportYear,
-        threadId: thread.threadId,
-        assistantId: thread.assistantId,
-      }));
-
-      setChatList(formattedData);
+      setChatList(threadsData);
     };
 
     fetchChatList();
