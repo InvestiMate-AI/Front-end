@@ -2,8 +2,20 @@ import React from "react";
 import * as H from "../../styles/header.style";
 import { Link } from "react-router-dom";
 import constants from "../../utils/constants";
+import { useRecoilState } from "recoil";
+import { isLoggedInState, memberIdState } from "../../contexts/UserState";
+// import { useQuery } from '@tanstack/react-query';
 
-function Header({ isLoggedIn, userName }) {
+function Header() {
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
+  // const [memberId, setMemberId] = useRecoilState(memberIdState);
+
+  // const { isLoading, data } = useQuery({
+  //   queryKey: ['getUser'],
+  //   queryFn: () => getUser(),
+  //   enabled: isLoggedIn, //로그인한 상태에서만 실행
+  // });
+
   return (
     <header>
       <H.HeaderLayout>
@@ -24,10 +36,13 @@ function Header({ isLoggedIn, userName }) {
         <H.UserContainer>
           {isLoggedIn ? (
             <>
-              <H.UserName>{userName}</H.UserName>
-              <H.UserButton as={Link} to="/user-profile">
+              {/* <H.UserName>{userName}</H.UserName> */}
+              {/* <H.UserButton as={Link} to="/user-profile">
                 Profile
-              </H.UserButton>
+              </H.UserButton> */}
+              <H.LoginButton as={Link} to="/">
+                로그아웃
+              </H.LoginButton>
             </>
           ) : (
             <H.LoginButton as={Link} to="/auth">
