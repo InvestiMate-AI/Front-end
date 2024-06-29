@@ -39,6 +39,7 @@ export const ChatItemsContainer = styled.div`
   flex: 1 1 auto;
   flex-direction: column;
   align-items: center;
+  overflow-y: auto;
 `;
 
 const CreateNewChatButton = styled.button`

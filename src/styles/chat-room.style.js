@@ -16,6 +16,8 @@ export const ChatRoomMain = styled.div`
   justify-content: center;
   align-items: center;
   flex: 1;
+  overflow-y: auto;
+  width: 100%;
 `;
 
 export const MessagesContainer = styled.div`
@@ -23,7 +25,6 @@ export const MessagesContainer = styled.div`
   padding: 10px;
   flex: 1;
   width: 800px;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
 `;
