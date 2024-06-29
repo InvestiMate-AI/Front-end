@@ -8,17 +8,14 @@ export const authNaverUser = async (code) => {
 
     if (res.status === 200) {
       const { accessToken, refreshToken } = res.data.data[0];
-      console.log(accessToken, refreshToken);
+      // console.log(accessToken, refreshToken);
       onLogInSuccess(accessToken, refreshToken);
 
       return res.data;
     }
   } catch (error) {
-    console.log(error);
     if (axios.isAxiosError && error.response) {
-      const errorCode = error.response.data.errorCode;
-      const message = error.response.data.message;
-      console.log(`${errorCode}: ${message}`);
+      // console.log(error);
     }
   }
 };
@@ -45,15 +42,11 @@ export const issueAccessToken = async () => {
       if (res.status == 200) {
         // const { accessToken } = res.data.data[0];
         // onLogInSuccess(accessToken, refreshToken); //토큰 갱신
-        console.log(res);
+        // console.log(res);
       }
     } catch (error) {
-      console.log(error); // log
       if (axios.isAxiosError(error) && error.response) {
-        const errorCode = error.response.data.errorCode;
-        const message = error.response.data.message;
-
-        console.log(`${errorCode}: ${message}`); // log
+        // console.log(error);
 
         alert("로그인 후 이용해주세요.");
         window.location.href = "/auth";

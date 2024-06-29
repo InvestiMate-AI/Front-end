@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import * as C from "../styles/chat.style";
 import DefaultLayout from "../components/Layout/DefaultLayout";
 import Sidebar from "../components/Chat/Sidebar";
-import ChatRoom from "../components/Chat/ChatRoom";
 import ChatCreation from "../components/Chat/ChatCreation";
 import { getThreads } from "../apis/chat";
 import { useNavigate } from "react-router-dom";
@@ -19,18 +18,7 @@ function ChatPage() {
   useEffect(() => {
     const fetchChatList = async () => {
       const threadsData = await getThreads();
-      console.log(threadsData);
-      // Format the thread data to match chatList structure
-      const formattedData = threadsData.map((thread) => ({
-        chatRoomId: thread.chatRoomId,
-        reportCompany: thread.reportCompany,
-        reportType: thread.reportType,
-        reportYear: thread.reportYear,
-        threadId: thread.threadId,
-        assistantId: thread.assistantId,
-      }));
-
-      setChatList(formattedData);
+      setChatList(threadsData);
     };
 
     fetchChatList();

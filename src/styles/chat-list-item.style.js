@@ -9,7 +9,7 @@ export const ChatItemLayout = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  margin: 0 1rem;
+  margin: 0 auto;
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;

@@ -16,13 +16,11 @@ function ChatRoomPage() {
   useEffect(() => {
     const fetchChatList = async () => {
       const threadsData = await getThreads();
-      console.log("threadsData:", threadsData); // API 호출 결과 확인
       setChatList(threadsData);
 
       // Find the selected chat from the fetched chat list using chatRoomId
       const selected = threadsData.find((chat) => {
         if (chat.chatRoomId == chatRoomId) {
-          console.log(chat);
           return chat;
         }
       });

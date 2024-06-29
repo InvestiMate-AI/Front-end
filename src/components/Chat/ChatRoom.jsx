@@ -12,7 +12,6 @@ export default function ChatRoom({ threadId, assistantId, chatRoomId }) {
   useEffect(() => {
     const fetchMessages = async () => {
       const prevMessages = await getMessages(chatRoomId);
-      console.log("prevMessages:", prevMessages); // API 호출 결과 확인
       setMessages(prevMessages);
     };
     fetchMessages();
@@ -54,9 +53,7 @@ export default function ChatRoom({ threadId, assistantId, chatRoomId }) {
             temperature: 0.1,
             stream: true,
           })
-          .on("textCreated", () => {
-            console.log(question);
-          })
+          .on("textCreated", () => {})
           .on("textDelta", (textDelta) => {
             latestMessageRef.current += textDelta.value;
             setMessages((prevMessages) => {
@@ -65,7 +62,6 @@ export default function ChatRoom({ threadId, assistantId, chatRoomId }) {
                 latestMessageRef.current;
               return updatedMessages;
             });
-            console.log("textDelta", textDelta.value);
           })
           .on("end", async () => {
             saveAndLogMessages(question, latestMessageRef.current, chatRoomId);
@@ -78,8 +74,6 @@ export default function ChatRoom({ threadId, assistantId, chatRoomId }) {
 
   const saveAndLogMessages = async (question, answer, chatRoomId) => {
     const response = await saveMessages(question, answer, chatRoomId);
-    console.log(question, answer, chatRoomId);
-    console.log(response);
   };
 
   return (

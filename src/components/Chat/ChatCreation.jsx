@@ -73,7 +73,6 @@ const ChatCreation = ({ addChatToChatList }) => {
     }
 
     const res = await createThread(year, selectedCorp.회사명, reportType);
-    console.log(`create thread: ${res}`);
   };
 
   return (

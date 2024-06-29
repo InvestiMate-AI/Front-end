@@ -13,14 +13,14 @@ export const HeaderLayout = styled.div`
 
 export const HomeButton = styled.button`
   background: none;
-  color: ${themes.theme.primaryColor}; /* 텍스트 색상 */
+  color: ${themes.theme.primaryColor};
   font-family: "${themes.theme.fontFamily}";
   font-weight: 900;
   font-size: 1.25rem;
   width: auto;
   height: auto;
   cursor: pointer;
-  padding: 0 15px; /* 텍스트 주변 패딩 */
+  padding: 0 1rem;
 `;
 
 export const NavContainer = styled.div`
