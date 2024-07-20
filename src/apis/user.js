@@ -54,18 +54,10 @@ export const onSilentRefresh = async () => {
 };
 
 export const logout = async () => {
-  const cookies = new Cookies();
-  const refreshToken = cookies.get("refreshToken");
-
-  if (refreshToken && refreshToken.length > 0) {
-    try {
-      const res = await Post("/logout", {
-        Cookie: `refresh=${refreshToken}`,
-      });
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        // console.log(error);
-      }
-    }
+  try {
+    const res = await Post("/api/logout");
+    return res.data;
+  } catch (error) {
+    // console.log(error);
   }
 };

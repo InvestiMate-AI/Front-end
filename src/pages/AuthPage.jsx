@@ -18,7 +18,7 @@ function AuthPage() {
   };
 
   const handleHomeButtonClick = () => {
-    navigate("/chat");
+    navigate("/");
   };
 
   return (

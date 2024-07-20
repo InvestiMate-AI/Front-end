@@ -6,9 +6,11 @@ import { useRecoilState } from "recoil";
 import { isLoggedInState } from "../../contexts/UserState";
 // import { useQuery } from '@tanstack/react-query';
 import { logout } from "../../apis/user";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
+  const { isLoggedIn, handleLogin, handleLogout } = useAuth();
+  // const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
   // const [memberId, setMemberId] = useRecoilState(memberIdState);
 
   // const { isLoading, data } = useQuery({
@@ -17,12 +19,13 @@ function Header() {
   //   enabled: isLoggedIn, //로그인한 상태에서만 실행
   // });
 
-  const handleLogoutClick = async (event) => {
-    event.preventDefault(); // Link 기본 동작 방지
-    await logout();
-    setIsLoggedIn(false); // 로그아웃 상태로 설정
-    window.location.reload(); // 페이지 새로고침
-  };
+  // const handleLogoutClick = async (event) => {
+  //   event.preventDefault(); // Link 기본 동작 방지
+  //   await logout();
+  //   setIsLoggedIn(false); // 로그아웃 상태로 설정
+  //   window.location.href = "/";
+  //   // window.location.reload(); // 페이지 새로고침
+  // };
 
   return (
     <header>
@@ -48,12 +51,10 @@ function Header() {
               {/* <H.UserButton as={Link} to="/user-profile">
                 Profile
               </H.UserButton> */}
-              <H.LoginButton as={Link} to="/" onClick={handleLogoutClick}>
-                로그아웃
-              </H.LoginButton>
+              <H.LoginButton onClick={handleLogout}>로그아웃</H.LoginButton>
             </>
           ) : (
-            <H.LoginButton as={Link} to="/auth">
+            <H.LoginButton as={Link} to="/auth" onClick={handleLogin}>
               로그인
             </H.LoginButton>
           )}
