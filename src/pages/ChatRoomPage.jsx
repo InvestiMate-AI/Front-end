@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import * as C from "../styles/chat.style";
 import DefaultLayout from "../components/Layout/DefaultLayout";
-import Sidebar from "../components/Chat/Sidebar";
+import Sidebar from "../components/Chat/ChatSidebar";
 import ChatRoom from "../components/Chat/ChatRoom";
 import { getThreads } from "../apis/chat";
 import { useNavigate } from "react-router-dom";

@@ -3,7 +3,7 @@ import * as S from "../../styles/sidebar.style";
 import ChatListItem from "./ChatListItem";
 import { IoChevronForwardOutline, IoChevronBackOutline } from "react-icons/io5";
 
-const Sidebar = ({ chatList, onChatItemClick, onCreateNewChat }) => {
+const ChatSidebar = ({ chatList, onChatItemClick, onCreateNewChat }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   const toggleSidebar = () => {
@@ -34,4 +34,4 @@ const Sidebar = ({ chatList, onChatItemClick, onCreateNewChat }) => {
   );
 };
 
-export default Sidebar;
+export default ChatSidebar;

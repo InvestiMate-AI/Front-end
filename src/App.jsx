@@ -15,8 +15,11 @@ import Home from "./pages/HomePage";
 import Chat from "./pages/ChatPage";
 import Auth from "./pages/AuthPage";
 import ChatRoom from "./pages/ChatRoomPage";
+import Feedback from "./pages/FeedbackPage";
+import FeedbackRoom from "./pages/FeedbackRoomPage";
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./ProtectedRoute";
+import Redirect from "./components/Auth/RedirectPage";
 
 function App() {
   // const [cookies, setCookie, removeCookie] = useCookies(["refresh"]);
@@ -119,17 +122,12 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<Auth />} />
             <Route element={<ProtectedRoute />}>
-              <Route path="/chat/:chatRoomId" element={<ChatRoom />} />
               <Route path="/chat" element={<Chat />} />
-              <Route
-                path="feature2"
-                element={
-                  <>
-                    <h1>Hello</h1>
-                  </>
-                }
-              />
+              <Route path="/chat/:chatRoomId" element={<ChatRoom />} />
+              <Route path="/feedback" element={<Feedback />} />
+              <Route path="/feedback/:feedbackId" element={<FeedbackRoom />} />
             </Route>
+            <Route path="/redirect" element={<Redirect />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>

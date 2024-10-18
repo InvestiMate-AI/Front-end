@@ -1,0 +1,6 @@
+{ "data":
+  [
+    {"feedbackId": 1, "feedbackName": "피드백 1", "feedbackDate": "1234"},
+    {"feedbackId": 2, "feedbackName": "피드백 2", "feedbackDate": "1234314"}
+  ]
+}

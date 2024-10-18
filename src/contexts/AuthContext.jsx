@@ -1,25 +1,20 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { useCookies } from "react-cookie";
+import { useCookies, Cookies } from "react-cookie";
 import { CookiesProvider } from "react-cookie";
+import { onSilentRefresh, logout } from "../apis/user";
 
 // Context 생성
 const AuthContext = createContext();
 
 // Provider 생성
 export const AuthProvider = ({ children }) => {
-  const [cookies, setCookie, removeCookie] = useCookies(["refresh"]);
-  const [refresh, setRefresh] = useState(null);
+  const cookies = new Cookies();
+  // const [cookies, setCookie, removeCookie] = useCookies(["refresh", "access"]);
   const [isLoggedIn, setIsLoggedIn] = useState(!!cookies.refresh);
 
   useEffect(() => {
-    const token = cookies.refresh;
-    if (token) {
-      setRefresh(token);
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, [cookies.refresh]);
+    setIsLoggedIn(true);
+  }, []);
 
   useEffect(() => {
     console.log(`isloggedIn: ${isLoggedIn}`);
@@ -30,16 +25,16 @@ export const AuthProvider = ({ children }) => {
   };
 
   const handleLogout = () => {
-    removeCookie("refresh", { path: "/" });
-    setRefresh(null);
+    logout(cookies.refresh);
+    cookies.remove("refresh");
+    cookies.remove("access");
+
     setIsLoggedIn(false);
   };
 
   return (
     <CookiesProvider>
-      <AuthContext.Provider
-        value={{ refresh, isLoggedIn, handleLogin, handleLogout }}
-      >
+      <AuthContext.Provider value={{ isLoggedIn, handleLogin, handleLogout }}>
         {children}
       </AuthContext.Provider>
     </CookiesProvider>

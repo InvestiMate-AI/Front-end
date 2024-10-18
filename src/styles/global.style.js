@@ -15,35 +15,35 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
-  @font-face{
-    font-family: "NanumSquareNeo";
-    font-weight: 300;
-    src: url('../assets/fonts/NanumSquareNeo-aLt.ttf') format('truetype');
-  }
+  // @font-face{
+  //   font-family: "NanumSquareNeo";
+  //   font-weight: 300;
+  //   src: url('../assets/fonts/NanumSquareNeo-aLt.ttf') format('truetype');
+  // }
 
-  @font-face{
-    font-family: "NanumSquareNeo";
-    font-weight: 500;
-    src: url('../assets/fonts/NanumSquareNeo-bRg.ttf') format('truetype');
-  }
+  // @font-face{
+  //   font-family: "NanumSquareNeo";
+  //   font-weight: 500;
+  //   src: url('../assets/fonts/NanumSquareNeo-bRg.ttf') format('truetype');
+  // }
 
-  @font-face{
-    font-family: "NanumSquareNeo";
-    font-weight: 700;
-    src: url('../assets/fonts/NanumSquareNeo-cBd.ttf') format('truetype');
-  }
+  // @font-face{
+  //   font-family: "NanumSquareNeo";
+  //   font-weight: 700;
+  //   src: url('../assets/fonts/NanumSquareNeo-cBd.ttf') format('truetype');
+  // }
 
-  @font-face{
-    font-family: "NanumSquareNeo";
-    font-weight: 800;
-    src: url('../assets/fonts/NanumSquareNeo-bRg.dEb') format('truetype');
-  }
+  // @font-face{
+  //   font-family: "NanumSquareNeo";
+  //   font-weight: 800;
+  //   src: url('../assets/fonts/NanumSquareNeo-bRg.dEb') format('truetype');
+  // }
 
-  @font-face{
-    font-family: "NanumSquareNeo";
-    font-weight: 900;
-    src: url('../assets/fonts/NanumSquareNeo-eHv.ttf') format('truetype');
-  }
+  // @font-face{
+  //   font-family: "NanumSquareNeo";
+  //   font-weight: 900;
+  //   src: url('../assets/fonts/NanumSquareNeo-eHv.ttf') format('truetype');
+  // }
   
   *,
   *::before,
