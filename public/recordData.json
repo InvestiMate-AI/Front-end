@@ -1,0 +1,3 @@
+{"StockRecord": [{ "date": 1729227600000, "name": "AAPL", "volume": 100, "type": "Buy" },
+{ "date": 1729227600000, "name": "GOOG", "volume": 50, "type": "Sell" },
+{ "date": 1729227600000, "name": "MSFT", "volume": 200, "type": "Buy" }]}

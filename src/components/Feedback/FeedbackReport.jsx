@@ -150,7 +150,6 @@ export default function FeedbackReport() {
 
   return (
     <div>
-      <h1>Report Page</h1>
       {data.length > 0 ? (
         data.map((item) => renderContent(item))
       ) : (

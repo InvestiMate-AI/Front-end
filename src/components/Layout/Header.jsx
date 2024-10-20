@@ -40,7 +40,7 @@ function Header() {
           <H.NavButton as={Link} to="/feedback">
             {constants.names.FEEDBACK_SERVICE_NAME}
           </H.NavButton>
-          <H.NavButton as={Link} to="/feature3">
+          <H.NavButton as={Link} to="/record">
             {constants.names.MANAGE_SERVICE_NAME}
           </H.NavButton>
         </H.NavContainer>
