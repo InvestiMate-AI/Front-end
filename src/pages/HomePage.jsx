@@ -7,21 +7,21 @@ function HomePage() {
   const [records, setRecords] = useState([]);
   const [recordId, setRecordId] = useState(0);
 
-  useEffect(() => {
-    const fetchRecords = async () => {
-      const recordsData = await getRecords();
-      setRecords(recordsData);
-    };
+  // useEffect(() => {
+  //   const fetchRecords = async () => {
+  //     const recordsData = await getRecords();
+  //     setRecords(recordsData);
+  //   };
 
-    fetchRecords();
-  }, []);
+  //   fetchRecords();
+  // }, []);
 
   return (
     <>
       <DefaultLayout>
         <H.Section1>
           <h1>INVESTIMATE</h1>
-          {records.length > 0 ? (
+          {/* {records.length > 0 ? (
             <ul>
               {records.map((record) => (
                 <li key={record.stockRecordId}>
@@ -51,7 +51,7 @@ function HomePage() {
             <button onClick={(event) => deleteRecord(records[0].stockRecordId)}>
               삭제
             </button>
-          )}
+          )} */}
         </H.Section1>
       </DefaultLayout>
     </>

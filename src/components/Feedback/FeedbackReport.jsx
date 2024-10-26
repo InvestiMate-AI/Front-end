@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Chart from "./Chart";
+import * as F from "../../styles/feedback-report.style";
 
 export default function FeedbackReport() {
   const [data, setData] = useState([]);
@@ -77,13 +78,13 @@ export default function FeedbackReport() {
     const volumeValues = Object.values(data.Volume);
 
     return (
-      <>
+      <div>
         <Chart
           labels={labels}
           priceValues={priceValues}
           volumeValues={volumeValues}
         />
-      </>
+      </div>
     );
   };
 
@@ -91,47 +92,30 @@ export default function FeedbackReport() {
     switch (item.type) {
       case "table":
         return (
-          <div
-            key={item.index}
-            style={{
-              width: "1400px",
-              height: "700px",
-              border: "2px solid rgba(211, 220, 50, .6)",
-              wordBreak: "keep-all",
-              whiteSpace: "normal",
-              overflow: "auto",
-            }}
-          >
+          <F.FeedbackReportItemLayout key={item.index}>
+            <h3>테이블</h3>
             {renderTable(item.data)} {/* 테이블 렌더링 */}
-          </div>
+          </F.FeedbackReportItemLayout>
         );
 
       case "chart":
         return (
-          <div
-            key={item.index}
-            style={{
-              width: "1400px",
-              border: "2px solid rgba(211, 220, 50, .6)",
-              wordBreak: "keep-all",
-              whiteSpace: "normal",
-            }}
-          >
+          <F.FeedbackReportChartLayout key={item.index}>
+            <h3>차트</h3>
             {renderChart(item.data)}
-          </div>
+          </F.FeedbackReportChartLayout>
         );
 
       case "text":
         return (
-          <div
+          <F.FeedbackReportItemLayout
             key={item.index}
             style={{
-              width: "1400px",
-              border: "2px solid rgba(211, 220, 50, .6)",
               wordBreak: "keep-all",
               whiteSpace: "normal",
             }}
           >
+            <h3>텍스트</h3>
             <p>
               {item.data.split("\n").map((line, index) => (
                 <React.Fragment key={index}>
@@ -140,21 +124,20 @@ export default function FeedbackReport() {
                 </React.Fragment>
               ))}
             </p>
-          </div>
+          </F.FeedbackReportItemLayout>
         );
-
       default:
         return null;
     }
   };
 
   return (
-    <div>
+    <F.FeedbackReportListContainer>
       {data.length > 0 ? (
         data.map((item) => renderContent(item))
       ) : (
         <p>Loading...</p>
       )}
-    </div>
+    </F.FeedbackReportListContainer>
   );
 }

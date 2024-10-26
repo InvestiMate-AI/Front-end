@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import * as F from "../styles/feedback.style";
+import * as F from "../styles/feedback-room.style";
 import DefaultLayout from "../components/Layout/DefaultLayout";
-import Sidebar from "../components/Chat/ChatSidebar";
-import ChatRoom from "../components/Chat/ChatRoom";
-import { getThreads } from "../apis/chat";
 import { useNavigate } from "react-router-dom";
-import FeedbackCreation from "../components/Feedback/FeedbackCreation";
 import FeedbackSidebar from "../components/Feedback/FeedbackSidebar";
 import FeedbackReport from "../components/Feedback/FeedbackReport";
 
@@ -33,10 +28,12 @@ function FeedbackRoomPage() {
 
   return (
     <DefaultLayout>
-      <F.ChatLayout>
+      <F.FeedbackRoomLayout>
         <FeedbackSidebar feedbackList={feedbackList}></FeedbackSidebar>
-        <FeedbackReport></FeedbackReport>
-      </F.ChatLayout>
+        <F.FeedbackReportListLayout>
+          <FeedbackReport></FeedbackReport>
+        </F.FeedbackReportListLayout>
+      </F.FeedbackRoomLayout>
     </DefaultLayout>
   );
 }

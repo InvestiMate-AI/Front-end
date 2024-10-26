@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import * as C from "../../styles/feedback-list-item.style";
+import * as F from "../../styles/feedback-list-item.style";
 import { useNavigate } from "react-router-dom";
 
 export default function FeedbackListItem({ feedback }) {
@@ -15,7 +15,7 @@ export default function FeedbackListItem({ feedback }) {
 
   return (
     <>
-      <C.ChatItemLayout onClick={handleFeedbackListItemClick}>
+      <F.ChatItemLayout onClick={handleFeedbackListItemClick}>
         <div className="chat-item-header">
           <div>
             {feedback.feedbackName} {feedback.feedbackDate}
@@ -26,7 +26,7 @@ export default function FeedbackListItem({ feedback }) {
           {/* {chat.title} */}
           {/* <C.OptionsButton /> */}
         </div>
-      </C.ChatItemLayout>
+      </F.ChatItemLayout>
     </>
   );
 }

@@ -128,14 +128,11 @@ export default function ChartComponent({ labels, priceValues, volumeValues }) {
   };
 
   return (
-    <div>
-      {/* 데이터셋에 매매 기록 데이터 추가 */}
-      <Line
-        options={options}
-        data={{
-          ...chartData,
-        }}
-      />
-    </div>
+    <Line
+      options={options}
+      data={{
+        ...chartData,
+      }}
+    />
   );
 }

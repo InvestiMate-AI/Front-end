@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import * as F from "../styles/feedback.style";
 import DefaultLayout from "../components/Layout/DefaultLayout";
-import Sidebar from "../components/Chat/ChatSidebar";
-import ChatRoom from "../components/Chat/ChatRoom";
-import { getThreads } from "../apis/chat";
 import { useNavigate } from "react-router-dom";
 import FeedbackCreation from "../components/Feedback/FeedbackCreation";
 import FeedbackSidebar from "../components/Feedback/FeedbackSidebar";
@@ -32,10 +28,10 @@ function FeedbackPage() {
 
   return (
     <DefaultLayout>
-      <F.ChatLayout>
+      <F.FeedbackLayout>
         <FeedbackSidebar feedbackList={feedbackList}></FeedbackSidebar>
         {!selectedFeedback && <FeedbackCreation />}
-      </F.ChatLayout>
+      </F.FeedbackLayout>
     </DefaultLayout>
   );
 }

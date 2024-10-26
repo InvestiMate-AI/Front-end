@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { IoSend } from "react-icons/io5";
 import { clear } from "@testing-library/user-event/dist/clear";
 
-export const ChatLayout = styled.div`
+export const FeedbackLayout = styled.div`
   display: flex;
   flex: row;
   align-items: center;

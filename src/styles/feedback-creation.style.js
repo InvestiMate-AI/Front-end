@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import themes from "./theme";
 
-export const ChatCreationLayout = styled.div`
+export const FeedbackCreationLayout = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,7 +10,7 @@ export const ChatCreationLayout = styled.div`
   flex: 1;
 `;
 
-export const ChatCreationContainer = styled.div`
+export const FeedbackCreationContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -131,7 +131,7 @@ export const OtherListItem = styled.li`
   }
 `;
 
-export const createChatButton = styled.button`
+export const createFeedbackButton = styled.button`
   padding: 0.5rem 2rem;
   margin-top: 1rem;
   border: none;
