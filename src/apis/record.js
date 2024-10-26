@@ -12,7 +12,7 @@ export const createRecords = async ({ date, name, volume, type }) => {
     return res.data.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      // console.log(error);
+      console.log(error);
     }
   }
 };
@@ -20,21 +20,21 @@ export const createRecords = async ({ date, name, volume, type }) => {
 export const getRecords = async () => {
   try {
     const res = await Get("/api/v1/stock-records");
-    return res.data.StockRecord;
+    return res.data.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      // console.log(error);
+      console.log(error);
     }
   }
 };
 
-export const deleteMessages = async (chatRoomId) => {
+export const deleteRecord = async (recordId) => {
   try {
-    const res = await Delete(`/api/v1/stock-records`);
+    const res = await Delete(`/api/v1/stock-records/${recordId}`);
     return res.data.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      // console.log(error);
+      console.log(error);
     }
   }
 };
