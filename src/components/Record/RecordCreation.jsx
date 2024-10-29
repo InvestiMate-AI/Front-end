@@ -139,7 +139,9 @@ export default function RecordCreation() {
           <RC.ItemPickerContainer></RC.ItemPickerContainer>
         </RC.ItemContainer>
         <RC.ItemContainer>
-          <RC.CreationButton>추가</RC.CreationButton>
+          <RC.CreationButton onClick={handleClickCreationButton}>
+            추가
+          </RC.CreationButton>
         </RC.ItemContainer>
       </RC.RecordCreationLayout>
     </>

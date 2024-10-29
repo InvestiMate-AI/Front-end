@@ -14,8 +14,8 @@ export default function RecordTable() {
     try {
       // const response = await fetch("/recordData.json");
       const response = await getRecords("/recordData.json");
-      const jsonData = await response.json();
-      setData(jsonData["StockRecord"]);
+      setData(response);
+      console.log(response);
     } catch (error) {
       console.error("Error fetching the data: ", error);
     }
@@ -27,6 +27,9 @@ export default function RecordTable() {
 
   // 타임스탬프를 날짜 형식으로 변환하는 함수
   const convertTimestampToDate = (timestamp) => {
+    if (Object.prototype.toString.call(timestamp) !== "[object Date]") {
+      return timestamp;
+    }
     const date = new Date(parseInt(timestamp));
     return date.toISOString().split("T")[0]; // 'YYYY-MM-DD' 형식으로 변환
   };
@@ -47,28 +50,39 @@ export default function RecordTable() {
     setData(sortedData);
   };
 
+  // const requestCreateFeedback = async () => {
+
+  // }
+
+  // const handleClickCreateFeedbackButton = () => {
+  //   requestCreateFeedback();
+  // }
+
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>번호</th>
-          <th onClick={() => sortData("date")}>날짜</th>
-          <th onClick={() => sortData("name")}>종목</th>
-          <th onClick={() => sortData("volume")}>수량</th>
-          <th onClick={() => sortData("type")}>매매유형</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item, index) => (
-          <tr key={index}>
-            <td>{index + 1}</td> {/* 번호는 자동으로 오름차순 */}
-            <td>{convertTimestampToDate(item.date)}</td>
-            <td>{item.name}</td>
-            <td>{item.volume}</td>
-            <td>{item.type}</td>
+    <>
+      <table>
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th onClick={() => sortData("date")}>날짜</th>
+            <th onClick={() => sortData("name")}>종목</th>
+            <th onClick={() => sortData("volume")}>수량</th>
+            <th onClick={() => sortData("type")}>매매유형</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {data.map((item, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td> {/* 번호는 자동으로 오름차순 */}
+              <td>{convertTimestampToDate(item.date)}</td>
+              <td>{item.name}</td>
+              <td>{item.volume}</td>
+              <td>{item.type}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {/* <button onClick={handleClickCreateFeedbackButton}>피드백 생성</button> */}
+    </>
   );
 }
