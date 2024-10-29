@@ -95,3 +95,10 @@ export const Settings = () => (
     </SettingsButton>
   </>
 );
+
+export const MenuContainer = styled.div`
+  font-weight: 900;
+  font-size: 1.25rem;
+  display: flex;
+  flex: 1 1 auto;
+`;

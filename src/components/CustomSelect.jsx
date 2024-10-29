@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { IoCaretDown } from "react-icons/io5";
 import * as C from "../styles/custom-select.style";
 
 const CustomSelect = ({ options, placeholder, onChange }) => {
@@ -30,14 +31,16 @@ const CustomSelect = ({ options, placeholder, onChange }) => {
   return (
     <C.CustomSelectContainer ref={selectRef}>
       <C.CustomSelectTrigger onClick={toggleDropdown}>
-        {selectedOption ? selectedOption.label : placeholder}
+        <span style={{ flexGrow: 1 }}>
+          {selectedOption ? selectedOption.label : placeholder}
+        </span>
+        <IoCaretDown style={{ flexShrink: 0 }} />
       </C.CustomSelectTrigger>
       {isOpen && (
         <C.CustomSelectOptions>
           {options.map((option) => (
             <C.CustomSelectOption
               key={option.value}
-              className="custom-select-option"
               onClick={() => handleOptionClick(option)}
             >
               {option.label}

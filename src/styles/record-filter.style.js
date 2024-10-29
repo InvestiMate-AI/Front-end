@@ -1,30 +1,39 @@
 import styled from "styled-components";
 import themes from "./theme";
 
-export const RecordFilterContainer = styled.div`
+export const RecordFilterLayout = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  width: 800px;
-  height: auto;
-  border-radius: 10px;
-  border: 1px solid ${themes.colors.gray_100};
+  align-items: start;
+  width: 100%;
+  height: 100%;
   padding: 1rem;
-  background: ${themes.colors.gray_50};
+`;
+
+export const FilterItemContainer = styled.div`
+  justify-content: start;
+  width: 100%;
+  margin: 0 0 1rem 0;
+`;
+
+export const FilterItemHeading = styled.h4`
+  width: 100%
+  height: auto;
+  padding: 0;
+  margin: 1rem 0 ;
 `;
 
 export const SelectionButton = styled.button`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.5rem;
   background-color: ${themes.colors.white};
   border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
 `;
 
 export const SelectionTypeContainer = styled.div`
@@ -39,6 +48,11 @@ export const SelectionName = styled.h3``;
 
 export const selectionButton = styled.button``;
 
+export const CorpSelectionContainer = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
 export const SelectionContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -50,13 +64,18 @@ export const SelectionContainer = styled.div`
 `;
 
 export const CorpSearchContainer = styled.div`
-  position: absolute;
-  top: calc(90% - 4px);
-  left: 0;
-  right: 0;
   width: 100%;
-  padding: 0 1rem;
-  z-index: 1;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-width: 0 1px 1px 1px;
+  border-radius: 0 0 5px 5px;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 100;
+  font-size: 1rem;
+  position: absolute;
+  top: 100%;
+  margin: 0;
 `;
 
 export const CorpSearchInput = styled.input`

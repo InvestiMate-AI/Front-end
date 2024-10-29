@@ -72,20 +72,22 @@ function RecordFilter() {
     setEndDate(date);
   };
 
-  const handleClickSearchButton = async () => {
+  const handleClickApplyButton = async () => {
     //
   };
 
   return (
-    <R.RecordFilterContainer>
-      <div style={{ display: "flex", flexDirection: "row" }}>
-        <div style={{ display: "flex", flexDirection: "row" }}>
-          <div>회사명</div>
+    <R.RecordFilterLayout>
+      <R.FilterItemContainer>
+        <R.FilterItemHeading>회사명</R.FilterItemHeading>
+        <R.CorpSelectionContainer>
           <R.SelectionButton
             onClick={() => setCorpDropdownVisible(!corpDropdownVisible)}
           >
-            <span>{!selectedCorp ? "기업 선택" : selectedCorp.회사명}</span>
-            <IoCaretDown />
+            <span style={{ flexGrow: 1 }}>
+              {!selectedCorp ? "기업 선택" : selectedCorp.회사명}
+            </span>
+            <IoCaretDown style={{ flexShrink: 0 }} />
           </R.SelectionButton>
           {corpDropdownVisible && (
             <R.CorpSearchContainer>
@@ -108,25 +110,24 @@ function RecordFilter() {
               )}
             </R.CorpSearchContainer>
           )}
-        </div>
-        <div
-          style={{ display: "flex", flexDirection: "row", marginLeft: "20px" }}
-        >
-          <div>매매 유형</div>
-          <CustomSelect
-            options={tradeTypeOptions}
-            onChange={handleTradeTypeChange}
-            placeholder="Select an option"
-          />
-        </div>
-      </div>
-      <div style={{ marginTop: "20px" }}>
+        </R.CorpSelectionContainer>
+      </R.FilterItemContainer>
+      <R.FilterItemContainer>
+        <R.FilterItemHeading>매매 유형</R.FilterItemHeading>
+        <CustomSelect
+          options={tradeTypeOptions}
+          onChange={handleTradeTypeChange}
+          placeholder={tradeType}
+        />
+      </R.FilterItemContainer>
+      <R.FilterItemContainer>
+        <R.FilterItemHeading>기간</R.FilterItemHeading>
         <button onClick={() => handleDateChange(1)}>1개월</button>
         <button onClick={() => handleDateChange(3)}>3개월</button>
         <button onClick={() => handleDateChange(6)}>6개월</button>
         <button onClick={() => handleDateChange(12)}>1년</button>
-      </div>
-      <div>
+      </R.FilterItemContainer>
+      <R.FilterItemContainer>
         <CustomDatePicker
           label="시작일"
           selectedDate={startDate}
@@ -137,8 +138,8 @@ function RecordFilter() {
           selectedDate={endDate}
           onChange={handleEndDateChange}
         />
-      </div>
-    </R.RecordFilterContainer>
+      </R.FilterItemContainer>
+    </R.RecordFilterLayout>
   );
 }
 

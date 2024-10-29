@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getRecords } from "../../apis/record";
 
 export default function RecordTable() {
   // 예시 데이터
@@ -11,9 +12,10 @@ export default function RecordTable() {
 
   const getData = async () => {
     try {
-      const response = await fetch("/recordData.json");
+      // const response = await fetch("/recordData.json");
+      const response = await getRecords("/recordData.json");
       const jsonData = await response.json();
-      setData(jsonData["data"]);
+      setData(jsonData["StockRecord"]);
     } catch (error) {
       console.error("Error fetching the data: ", error);
     }

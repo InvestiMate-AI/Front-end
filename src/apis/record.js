@@ -1,14 +1,9 @@
 import axios from "axios";
 import { Get, Post, Delete } from ".";
 
-export const createRecords = async ({ date, name, volume, type }) => {
+export const postRecord = async (data) => {
   try {
-    const res = await Post("/api/v1/stock-records", {
-      date: date,
-      name: name,
-      volume: volume,
-      type: type,
-    });
+    const res = await Post("/api/v1/stock-records", data);
     return res.data.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
