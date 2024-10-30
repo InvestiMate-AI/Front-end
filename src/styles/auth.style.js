@@ -11,7 +11,6 @@ export const Header = styled.div`
 export const HomeButton = styled.button`
   background: none;
   color: ${themes.theme.primaryColor};
-  font-family: "${themes.theme.fontFamily}";
   font-weight: 900;
   font-size: 2rem;
   cursor: pointer;
@@ -43,7 +42,6 @@ export const MainLayout = styled.div`
     justify-content: center;
     border-radius: 50px;
     padding: 1rem 10rem;
-    ${(props) => props.theme.fonts.font_lg};
     color: rgb(0, 0, 0);
     cursor: pointer;
   }

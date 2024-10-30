@@ -139,5 +139,4 @@ export const createChatButton = styled.button`
   background-color: ${themes.colors.gray_800};
   color: ${themes.colors.white};
   cursor: pointer;
-  font: ${themes.fonts.font_lg};
 `;

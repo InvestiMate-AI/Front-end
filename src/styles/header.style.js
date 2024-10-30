@@ -14,7 +14,6 @@ export const HeaderLayout = styled.div`
 export const HomeButton = styled.button`
   background: none;
   color: ${themes.theme.primaryColor};
-  font-family: "${themes.theme.fontFamily}";
   font-weight: 900;
   font-size: 1.25rem;
   width: auto;
@@ -33,7 +32,6 @@ export const NavContainer = styled.div`
 export const NavButton = styled.button`
   margin: 0 10px;
   padding: 5px 10px;
-  font-family: "${themes.theme.fontFamily}";
   font-weight: 700;
   text-align: center;
   min-width: 50px;
@@ -55,7 +53,6 @@ export const UserContainer = styled.div`
 export const LoginButton = styled.button`
   margin: 10px;
   padding: 5px 10px;
-  font-family: "${themes.theme.fontFamily}";
   font-weight: 500;
   // font-size: 1.25rem;
   color: black;

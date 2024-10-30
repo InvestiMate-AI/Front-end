@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import themes from "./theme";
 
-export const CustomDatePicker = styled.div`
-  margin-bottom: 20px;
-`;
+export const CustomDatePicker = styled.div``;
 
 export const CustomDatePickerInput = styled.input`
   padding: 10px;

@@ -50,7 +50,6 @@ const CreateNewChatButton = styled.button`
   border: 1px solid #e0e0e0;
   cursor: pointer;
   white-space: nowrap;
-  font-family: "${themes.theme.fontFamily}";
   font-weight: 500;
 
   transition: background-color 0.3s ease;

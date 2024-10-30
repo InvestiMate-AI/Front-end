@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'PretendardVariable'; 
+  src: url('./fonts/PretendardVariable.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'MyFont', sans-serif; /* 대체 폰트도 추가 가능 */
+}

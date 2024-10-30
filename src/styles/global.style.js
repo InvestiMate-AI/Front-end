@@ -1,12 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
-  html, body, #root {
-    font-family: "NanumSquareNeo";
+  body {
     box-sizing: border-box;
     max-width: 100vw;
     max-height: 100vh;
-
     font-size: 16px;
     font-weight: 500;
     line-height: 130%;
@@ -14,36 +12,6 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-
-  // @font-face{
-  //   font-family: "NanumSquareNeo";
-  //   font-weight: 300;
-  //   src: url('../assets/fonts/NanumSquareNeo-aLt.ttf') format('truetype');
-  // }
-
-  // @font-face{
-  //   font-family: "NanumSquareNeo";
-  //   font-weight: 500;
-  //   src: url('../assets/fonts/NanumSquareNeo-bRg.ttf') format('truetype');
-  // }
-
-  // @font-face{
-  //   font-family: "NanumSquareNeo";
-  //   font-weight: 700;
-  //   src: url('../assets/fonts/NanumSquareNeo-cBd.ttf') format('truetype');
-  // }
-
-  // @font-face{
-  //   font-family: "NanumSquareNeo";
-  //   font-weight: 800;
-  //   src: url('../assets/fonts/NanumSquareNeo-bRg.dEb') format('truetype');
-  // }
-
-  // @font-face{
-  //   font-family: "NanumSquareNeo";
-  //   font-weight: 900;
-  //   src: url('../assets/fonts/NanumSquareNeo-eHv.ttf') format('truetype');
-  // }
   
   *,
   *::before,

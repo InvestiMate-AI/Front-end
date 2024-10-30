@@ -70,7 +70,6 @@ export const MessageInput = styled.input`
   flex: 1;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0);
-  font: ${themes.fonts.font_lg};
 `;
 
 export const SendButton = styled.button`

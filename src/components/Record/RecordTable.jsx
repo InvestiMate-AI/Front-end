@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getRecords } from "../../apis/record";
+import * as R from "../../styles/record-table.style";
 
 export default function RecordTable() {
   // 예시 데이터
@@ -22,7 +23,7 @@ export default function RecordTable() {
   };
 
   useEffect(() => {
-    getData();
+    // getData();
   }, []);
 
   // 타임스탬프를 날짜 형식으로 변환하는 함수
@@ -61,15 +62,15 @@ export default function RecordTable() {
   return (
     <>
       <table>
-        <thead>
-          <tr>
+        <R.THead>
+          <R.TR>
             <th>번호</th>
             <th onClick={() => sortData("date")}>날짜</th>
             <th onClick={() => sortData("name")}>종목</th>
             <th onClick={() => sortData("volume")}>수량</th>
             <th onClick={() => sortData("type")}>매매유형</th>
-          </tr>
-        </thead>
+          </R.TR>
+        </R.THead>
         <tbody>
           {data.map((item, index) => (
             <tr key={index}>
