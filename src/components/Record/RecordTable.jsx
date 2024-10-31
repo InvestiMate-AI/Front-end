@@ -4,7 +4,38 @@ import * as R from "../../styles/record-table.style";
 
 export default function RecordTable() {
   // 예시 데이터
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([
+    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+  ]);
 
   const [sortConfig, setSortConfig] = useState({
     key: "date",
@@ -60,30 +91,30 @@ export default function RecordTable() {
   // }
 
   return (
-    <>
-      <table>
+    <R.TableContainer>
+      <R.Table>
         <R.THead>
-          <R.TR>
-            <th>번호</th>
-            <th onClick={() => sortData("date")}>날짜</th>
-            <th onClick={() => sortData("name")}>종목</th>
-            <th onClick={() => sortData("volume")}>수량</th>
-            <th onClick={() => sortData("type")}>매매유형</th>
-          </R.TR>
+          <tr>
+            <R.Th>번호</R.Th>
+            <R.Th onClick={() => sortData("date")}>날짜</R.Th>
+            <R.Th onClick={() => sortData("name")}>종목</R.Th>
+            <R.Th onClick={() => sortData("volume")}>수량</R.Th>
+            <R.Th onClick={() => sortData("type")}>매매유형</R.Th>
+          </tr>
         </R.THead>
-        <tbody>
+        <R.TBody>
           {data.map((item, index) => (
             <tr key={index}>
-              <td>{index + 1}</td> {/* 번호는 자동으로 오름차순 */}
-              <td>{convertTimestampToDate(item.date)}</td>
-              <td>{item.name}</td>
-              <td>{item.volume}</td>
-              <td>{item.type}</td>
+              <R.Td>{index + 1}</R.Td> {/* 번호는 자동으로 오름차순 */}
+              <R.Td>{convertTimestampToDate(item.date)}</R.Td>
+              <R.Td>{item.name}</R.Td>
+              <R.Td>{item.volume}</R.Td>
+              <R.Td>{item.type}</R.Td>
             </tr>
           ))}
-        </tbody>
-      </table>
+        </R.TBody>
+      </R.Table>
       {/* <button onClick={handleClickCreateFeedbackButton}>피드백 생성</button> */}
-    </>
+    </R.TableContainer>
   );
 }
