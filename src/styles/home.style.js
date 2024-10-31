@@ -1,23 +1,31 @@
 import styled from "styled-components";
 
-export const SectionContainer = styled.section`
-  display: flex;
-  justify-content: space-between;
+export const HomePageLayout = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 100%;
-  height: auto;
+  height: 100%;
 `;
 
-const HeadingContainer = styled.div`
-  display: flex;
-`;
+export const StartButton = styled.button`
+  background: black;
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: 500;
+  border: 1px;
+  border-radius: 50px;
+  margin: 1rem;
+  padding: 1.5rem 2.5rem;
+  cursor: pointer;
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
 
-export function Section1({ children }) {
-  return (
-    <>
-      <SectionContainer>
-        <HeadingContainer>{children}</HeadingContainer>
-      </SectionContainer>
-    </>
-  );
-}
+  &:hover {
+    background-color: #fff5cd;
+    color: black;
+  }
+`;

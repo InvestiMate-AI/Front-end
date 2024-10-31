@@ -8,5 +8,5 @@ export const Layout = styled.div`
 
 export const Main = styled.main`
   flex: 1 1 auto; /* 나머지 공간을 차지 */
-  overflow-y: hidden;
+  overflow: hidden;
 `;
