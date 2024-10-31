@@ -67,14 +67,15 @@ export const LoginButton = styled.button`
   min-height: 2.25rem;
   margin: 1rem;
   padding: 0.5rem 1rem;
-
   transition:
     background-color 0.5s ease,
-    color 0.5s ease;
+    color 0.5s ease,
+    font-weight 0.5s ease;
 
   &:hover {
     background-color: #ffe79b;
     color: black;
+    font-weight: bold;
   }
 `;
 

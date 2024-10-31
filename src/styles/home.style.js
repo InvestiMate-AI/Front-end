@@ -34,11 +34,23 @@ export const StartButton = styled.button`
   cursor: pointer;
   transition:
     background-color 0.5s ease,
-    color 0.5s ease;
+    color 0.5s ease,
+    box-shadow 0.3s ease;
+
   animation: ${fadeIn} 1.5s ease forwards;
 
   &:hover {
     background-color: #fff5cd;
     color: black;
+    box-shadow:
+      0 0 10px #db8b0350,
+      0 0 20px #db8b0350,
+      0 0 30px #db8b0350;
   }
+
+  /* 기본 빛나는 효과 */
+  box-shadow:
+    0 0 10px #db8b033c,
+    0 0 20px #db8b033c,
+    0 0 30px #db8b033c;
 `;
