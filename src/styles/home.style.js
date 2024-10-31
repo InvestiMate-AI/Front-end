@@ -1,4 +1,16 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+// 나타나는 애니메이션 정의
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 export const HomePageLayout = styled.div`
   display: inline-flex;
@@ -23,6 +35,7 @@ export const StartButton = styled.button`
   transition:
     background-color 0.5s ease,
     color 0.5s ease;
+  animation: ${fadeIn} 1.5s ease forwards;
 
   &:hover {
     background-color: #fff5cd;

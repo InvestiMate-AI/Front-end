@@ -5,6 +5,8 @@ import DefaultLayout from "../components/Layout/DefaultLayout";
 import styled, { keyframes } from "styled-components";
 
 function HomePage() {
+  const [typingFinished, setTypingFinished] = useState(false);
+
   return (
     <>
       <DefaultLayout>
@@ -12,8 +14,9 @@ function HomePage() {
           <Typing
             textLines={["Invest Smarter,", "Powered by AI."]}
             typingSpeed={100}
+            onTypingComplete={() => setTypingFinished(true)} // 타이핑 완료 시 상태 업데이트
           />
-          <H.StartButton>Get Started</H.StartButton>
+          {typingFinished && <H.StartButton>Get Started</H.StartButton>}
         </H.HomePageLayout>
       </DefaultLayout>
     </>
@@ -41,10 +44,9 @@ const Letter = styled.span`
 `;
 
 // 타이핑 컴포넌트
-const Typing = ({ textLines, typingSpeed = 300 }) => {
+const Typing = ({ textLines, typingSpeed = 300, onTypingComplete }) => {
   const [displayedText, setDisplayedText] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [hideCursor, setHideCursor] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(null); // highlight 상태 관리
 
   useEffect(() => {
@@ -64,10 +66,9 @@ const Typing = ({ textLines, typingSpeed = 300 }) => {
 
       return () => clearTimeout(timer);
     } else {
-      // 타이핑 완료 후 커서 숨기기
-      setTimeout(() => setHideCursor(true), 500);
+      onTypingComplete(); // 타이핑이 끝났을 때 콜백 호출
     }
-  }, [currentIndex, textLines, typingSpeed]);
+  }, [currentIndex, textLines, typingSpeed, onTypingComplete]);
 
   return (
     <TypingContainer style={{ minHeight: "20rem" }}>

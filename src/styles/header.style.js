@@ -6,7 +6,7 @@ export const HeaderLayout = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 50px;
+  height: 60px;
   border-bottom: 1px solid #e0e0e0;
   background: ${themes.colors.gray_50};
 `;
@@ -15,7 +15,7 @@ export const HomeButton = styled.button`
   background: none;
   color: ${themes.theme.primaryColor};
   font-weight: 900;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   width: auto;
   height: auto;
   cursor: pointer;
@@ -32,7 +32,8 @@ export const NavContainer = styled.div`
 export const NavButton = styled.button`
   margin: 0 10px;
   padding: 5px 10px;
-  font-weight: 700;
+  font-weight: 550;
+  font-size: 1rem;
   text-align: center;
   min-width: 50px;
   white-space: nowrap;
@@ -40,8 +41,11 @@ export const NavButton = styled.button`
   cursor: pointer;
   color: black;
   text-decoration: none;
+
+  transition: font-weigh 0.5s ease;
+
   &:hover {
-    color: red;
+    font-weight: bold;
   }
 `;
 
@@ -51,15 +55,27 @@ export const UserContainer = styled.div`
 `;
 
 export const LoginButton = styled.button`
-  margin: 10px;
-  padding: 5px 10px;
   font-weight: 500;
-  // font-size: 1.25rem;
+  background: #fff5cd;
+  text-align: center;
   color: black;
-  text-decoration: none;
-  background: none;
+  border: 1px;
+  border-radius: 50px;
   cursor: pointer;
   white-space: nowrap;
+  width: 5rem;
+  min-height: 2.25rem;
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
+
+  &:hover {
+    background-color: #ffe79b;
+    color: black;
+  }
 `;
 
 export const UserName = styled.span`

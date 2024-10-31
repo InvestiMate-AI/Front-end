@@ -51,11 +51,16 @@ function Header() {
               {/* <H.UserButton as={Link} to="/user-profile">
                 Profile
               </H.UserButton> */}
-              <H.LoginButton onClick={handleLogout}>로그아웃</H.LoginButton>
+              <H.LoginButton onClick={handleLogout}>Sign Out</H.LoginButton>
             </>
           ) : (
-            <H.LoginButton as={Link} to="/auth" onClick={handleLogin}>
-              로그인
+            <H.LoginButton
+              as={Link}
+              to="/auth"
+              onClick={handleLogin}
+              style={{ textDecoration: "none", fontWeight: "500" }}
+            >
+              Sign In
             </H.LoginButton>
           )}
         </H.UserContainer>
