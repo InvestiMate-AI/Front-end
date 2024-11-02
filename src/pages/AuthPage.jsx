@@ -28,12 +28,17 @@ function AuthPage() {
       </A.Header>
       <A.MainLayout>
         빠르게 시작하세요
-        <ol className="auth-button-list">
-          <li>
+        <ol className="auth-button-list" style={{ width: "100%" }}>
+          <li style={{ width: "400px" }}>
             <button
               className="auth-button"
               onClick={handleNaverLogin}
-              style={{ backgroundColor: "#03C75A" }}
+              style={{
+                fontWeight: "500",
+                fontSize: "1rem",
+                backgroundColor: "#03C75A",
+                margin: "0 0 1rem 0",
+              }}
             >
               <img
                 src={naverIcon}
@@ -42,16 +47,20 @@ function AuthPage() {
               />
               네이버로 시작하기
             </button>
-          </li>
-          <li>
+
             <button
               className="auth-button"
-              style={{ backgroundColor: "rgb(245, 245, 245)" }}
-              disabled
+              onClick={handleGoogleLogin}
+              style={{
+                fontWeight: "500",
+                fontSize: "1rem",
+                backgroundColor: "#f5f5f5",
+                margin: "0 0 1rem 0",
+              }}
             >
               <img
                 src={googleIcon}
-                alt="naver-logo"
+                alt="google-logo"
                 style={{ marginRight: "5px" }}
               />
               구글로 시작하기

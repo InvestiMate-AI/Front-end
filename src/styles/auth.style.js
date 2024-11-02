@@ -22,7 +22,6 @@ export const MainLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
   padding-top: 50px;
   margin: 0 auto;
   font-size: 1.5rem;
@@ -41,8 +40,9 @@ export const MainLayout = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 50px;
-    padding: 1rem 10rem;
+    padding: 1rem;
     color: rgb(0, 0, 0);
     cursor: pointer;
+    width: 100%; /* 너비를 100%로 설정하여 버튼 너비를 동일하게 만듦 */
   }
 `;

@@ -117,12 +117,15 @@ export default function FeedbackReport() {
           >
             <h3>텍스트</h3>
             <p>
-              {item.data.split("\n").map((line, index) => (
-                <React.Fragment key={index}>
-                  {line}
-                  <br />
-                </React.Fragment>
-              ))}
+              {item.data
+                .trim()
+                .split("\n")
+                .map((line, index) => (
+                  <React.Fragment key={index}>
+                    {line}
+                    <br />
+                  </React.Fragment>
+                ))}
             </p>
           </F.FeedbackReportItemLayout>
         );
