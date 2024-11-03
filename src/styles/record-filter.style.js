@@ -50,7 +50,10 @@ export const selectionButton = styled.button``;
 
 export const CorpSelectionContainer = styled.div`
   position: relative;
-  width: 100%;
+  min-width: 12.5rem;
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  text-overflow: ellipsis; /* 넘칠 경우 '...'으로 표시 */
+  overflow-x: clip;
 `;
 
 export const SelectionContainer = styled.div`
@@ -69,8 +72,8 @@ export const CorpSearchContainer = styled.div`
   border: 1px solid #ccc;
   border-width: 0 1px 1px 1px;
   border-radius: 0 0 5px 5px;
-  max-height: 150px;
-  overflow-y: auto;
+  max-height: 200px;
+  overflow-y: hidden;
   z-index: 100;
   font-size: 1rem;
   position: absolute;

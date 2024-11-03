@@ -10,6 +10,7 @@ export const SidebarLayout = styled.div`
   align-items: center;
   height: 100%;
   white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  overflow-x: hidden;
 `;
 
 export const SidebarContainer = styled.div`
@@ -24,10 +25,12 @@ export const SidebarContainer = styled.div`
 `;
 
 export const ToggleButton = styled.button`
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
   cursor: pointer;
   background: none;
   border: none;
-  border-radius: 6px;
+  border-radius: 0.5rem;
   transition: background-color 0.3s ease;
 
   &:hover {
@@ -41,6 +44,7 @@ export const ChatItemsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const CreateNewChatButton = styled.button`

@@ -10,7 +10,7 @@ import { postRecord } from "../../apis/record";
 
 export default function RecordCreation() {
   const [corp, setCorp] = useState(null);
-  const [date, setDate] = useState();
+  const [date, setDate] = useState(null);
   const [volume, setVolume] = useState(null);
   const [tradeType, setTradeType] = useState("매수");
   const [corpDropdownVisible, setCorpDropdownVisible] = useState(false);
@@ -72,7 +72,12 @@ export default function RecordCreation() {
     return response;
   };
 
-  const handleClickCreationButton = () => {
+  const handleClickCreationButton = async () => {
+    if (!corp || !date || volume === null || !tradeType) {
+      alert("모든 필드를 입력해주세요."); // 입력되지 않은 값이 있음을 알림
+      return;
+    }
+
     const data = {
       date: date,
       name: corp,
@@ -80,8 +85,18 @@ export default function RecordCreation() {
       type: tradeType,
     };
 
-    const response = createRecord(data);
-    return response;
+    const response = await createRecord(data);
+
+    if (response) {
+      // 성공적으로 레코드가 생성되었을 때 모든 필드를 초기화
+      setCorp(null);
+      setDate(null);
+      setVolume(null);
+      setTradeType("매수");
+      setSelectedCorp(null);
+      setFilteredCorps([]);
+      setCorpDropdownVisible(false);
+    }
   };
 
   useEffect(() => {
@@ -118,7 +133,7 @@ export default function RecordCreation() {
                             key={corp.종목코드}
                             onClick={() => handleCorpItemClick(corp)}
                           >
-                            {corp.회사명} ({corp.종목코드})
+                            {corp.회사명}
                           </RF.CorpSearchListItem>
                         ))}
                       </RF.CorpSearchList>

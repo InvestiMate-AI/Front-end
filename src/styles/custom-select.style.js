@@ -3,12 +3,13 @@ import themes from "./theme";
 
 export const CustomSelectContainer = styled.div`
   position: relative;
+  width: 100%; // 부모 요소의 너비를 따르도록 설정
 `;
 
 export const CustomSelectTrigger = styled.button`
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 100%; // 부모 요소의 전체 너비 사용
   padding: 0.5rem;
   background-color: ${themes.colors.white};
   border-radius: 1rem;

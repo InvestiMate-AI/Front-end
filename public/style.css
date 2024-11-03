@@ -13,6 +13,10 @@ button {
   font-family: 'PretendardVariable'; 
 }
 
+input {
+  font-family: 'PretendardVariable'; 
+}
+
 /* width */
 ::-webkit-scrollbar {
   background-color: #fff;

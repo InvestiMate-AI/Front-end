@@ -17,7 +17,7 @@ export const RecordCreationContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  align-items: start;
+  align-items: stretch;
   width: 100%;
   max-width: 1200px;
   height: auto;
@@ -31,9 +31,11 @@ export const RecordCreationContainer = styled.div`
 export const ItemContainer = styled.span`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
   padding: 0 1rem;
   white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  height: 100%;
 `;
 
 export const ItemHeading = styled.span`
@@ -43,7 +45,9 @@ export const ItemHeading = styled.span`
   padding: 0 1rem;
 `;
 
-export const ItemPickerContainer = styled.span``;
+export const ItemPickerContainer = styled.span`
+  width: 100%;
+`;
 
 export const VolumeInput = styled.input`
   height: 100%;

@@ -4,7 +4,7 @@ import { Get, Post, Delete } from ".";
 export const postRecord = async (data) => {
   try {
     const res = await Post("/api/v1/stock-records", data);
-    return res.data.data;
+    return res.data.success;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       console.log(error);
