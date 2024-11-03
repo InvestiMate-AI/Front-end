@@ -4,7 +4,7 @@ import * as C from "../styles/chat.style";
 import DefaultLayout from "../components/Layout/DefaultLayout";
 import Sidebar from "../components/Chat/ChatSidebar";
 import ChatRoom from "../components/Chat/ChatRoom";
-import { getThreads } from "../apis/chat";
+import { getThreads, deleteThread } from "../apis/chat";
 import { useNavigate } from "react-router-dom";
 
 function ChatRoomPage() {
@@ -12,6 +12,17 @@ function ChatRoomPage() {
   const [selectedChat, setSelectedChat] = useState(null);
   const [chatList, setChatList] = useState([]);
   const navigate = useNavigate();
+
+  const handleDeleteChat = async (chatRoomId) => {
+    try {
+      await deleteThread(chatRoomId);
+      setChatList((prevChatList) =>
+        prevChatList.filter((chat) => chat.chatRoomId !== chatRoomId)
+      );
+    } catch (error) {
+      console.error("Error deleting chat:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchChatList = async () => {
@@ -46,6 +57,7 @@ function ChatRoomPage() {
           chatList={chatList}
           onChatItemClick={handleChatListItemClick}
           onCreateNewChat={handleCreateNewChat}
+          onDeleteChat={handleDeleteChat} // 삭제 핸들러 추가
         />
         {selectedChat && (
           <ChatRoom

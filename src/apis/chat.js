@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Get, Post } from ".";
+import { Get, Post, Delete } from ".";
 
 export const createThread = async (reportYear, companyName, reportType) => {
   try {
@@ -23,7 +23,37 @@ export const getThreads = async () => {
     return res.data.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      // console.log(error);
+      console.log(error);
+      // 예시 데이터
+      return [
+        {
+          chatRoomId: 1,
+          assistantId: "asst_uXaZHnWAxMtFh9YMq2DfNynx",
+          threadId: "thread_YoOhrxQTRicnNyeO4ZEJAYql",
+          reportYear: 2022,
+          reportCompany: "기아",
+          reportType: "사업보고서",
+        },
+        {
+          chatRoomId: 1,
+          assistantId: "asst_uXaZHnWAxMtFh9YMq2DfNynx",
+          threadId: "thread_YoOhrxQTRicnNyeO4ZEJAYql",
+          reportYear: 2022,
+          reportCompany: "삼성전자111111111111111111111",
+          reportType: "사업보고서",
+        },
+      ];
+    }
+  }
+};
+
+export const deleteThread = async (chatRoomId) => {
+  try {
+    const res = await Delete(`/api/v1/chats/${chatRoomId}`);
+    return res.data.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      console.log(error);
     }
   }
 };
@@ -48,7 +78,20 @@ export const getMessages = async (chatRoomId) => {
     return res.data.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      // console.log(error);
+      console.log(error);
+      // 예시 데이터
+      return [
+        {
+          time: "2024-06-06 23:34:20",
+          question: "1+1은?",
+          answer: "2야",
+        },
+        {
+          time: "2024-06-29 04:33:56",
+          question: "두번째 질문",
+          answer: "두번째 답",
+        },
+      ];
     }
   }
 };
