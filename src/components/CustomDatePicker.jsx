@@ -16,26 +16,28 @@ const CustomDatePicker = ({ label, selectedDate, onChange }) => {
   };
 
   return (
-    <C.CustomDatePicker>
-      <label>{label}</label>
-      <div>
-        <C.CustomDatePickerInput
-          type="text"
-          value={inputDate}
-          placeholder="YYYY-MM-DD"
-          onClick={toggleCalendar}
-          readOnly
-        />
-        {isCalendarVisible && (
+    <C.CustomDateContainer>
+      <C.CustomDatePicker>
+        <label>{label}</label>
+        <div>
           <C.CustomDatePickerInput
-            type="date"
+            type="text"
             value={inputDate}
-            onChange={handleDateChange}
-            style={{ display: "block" }}
+            placeholder="YYYY-MM-DD"
+            onClick={toggleCalendar}
+            readOnly
           />
-        )}
-      </div>
-    </C.CustomDatePicker>
+          {isCalendarVisible && (
+            <C.CustomDatePickerInput
+              type="date"
+              value={inputDate}
+              onChange={handleDateChange}
+              style={{ display: "block" }}
+            />
+          )}
+        </div>
+      </C.CustomDatePicker>
+    </C.CustomDateContainer>
   );
 };
 

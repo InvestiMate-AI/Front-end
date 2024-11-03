@@ -1,56 +1,56 @@
 import React, { useState, useEffect, useRef } from "react";
-import { getRecords } from "../../apis/record";
+import { getRecords, deleteRecord } from "../../apis/record";
 import * as R from "../../styles/record-table.style";
 import { IoMdMore } from "react-icons/io";
 
 export default function RecordTable() {
   // 예시 데이터
   const [data, setData] = useState([
-    { date: 1729227600000, name: "삼성전자", volume: 100, type: "매수" },
-    { date: 1729227600000, name: "GOOG", volume: 50, type: "매도" },
-    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    // { stockRecordId: 1, date: 1729227600000, name: "삼성전자", volume: 100, type: "매수" },
+    // { date: 1729227600000, name: "GOOG", volume: 50, type: "매도" },
+    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
+    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
+    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
+    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
   ]);
 
   const [sortConfig, setSortConfig] = useState({
     key: "date",
     direction: "ascending",
   });
-
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+  const [currentRecordId, setCurrentRecordId] = useState(null);
   const popupRef = useRef(null);
 
   const getData = async () => {
     try {
       // const response = await fetch("/recordData.json");
-      const response = await getRecords("/recordData.json");
+      const response = await getRecords();
       setData(response);
       console.log(response);
     } catch (error) {
@@ -58,7 +58,7 @@ export default function RecordTable() {
     }
   };
 
-  const handleButtonClick = (event) => {
+  const handleButtonClick = (event, recordId) => {
     // 마우스 위치에 팝업을 띄우기 위한 기본 위치
     let popupX = event.clientX;
     let popupY = event.clientY;
@@ -79,6 +79,7 @@ export default function RecordTable() {
     // 팝업 위치 업데이트
     setPopupPosition({ x: popupX, y: popupY });
     setPopupVisible((prev) => !prev);
+    setCurrentRecordId(recordId);
   };
 
   // 외부 클릭 감지
@@ -87,13 +88,6 @@ export default function RecordTable() {
       setPopupVisible(false);
     }
   };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   // 타임스탬프를 날짜 형식으로 변환하는 함수
   const convertTimestampToDate = (timestamp) => {
@@ -120,6 +114,18 @@ export default function RecordTable() {
     setData(sortedData);
   };
 
+  const handleClickDeleteButton = () => {
+    deleteRecord(currentRecordId);
+  };
+
+  useEffect(() => {
+    getData();
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <R.RecordTableLayout>
       <R.RecordTableContainer>
@@ -145,7 +151,6 @@ export default function RecordTable() {
           {data.map((item, index) => (
             <R.TableBodyRow key={index}>
               <R.TableBodyCell>{index + 1}</R.TableBodyCell>
-              {/* 번호는 자동으로 오름차순 */}
               <R.TableBodyCell>{item.name}</R.TableBodyCell>
               <R.TableBodyCell>
                 {convertTimestampToDate(item.date)}
@@ -153,14 +158,18 @@ export default function RecordTable() {
               <R.TableBodyCell>{item.volume}</R.TableBodyCell>
               <R.TableBodyCell>{item.type}</R.TableBodyCell>
               <R.TableBodyCell className="button-cell">
-                <R.sideButton onClick={handleButtonClick}>
+                <R.sideButton
+                  onClick={(event) =>
+                    handleButtonClick(event, item.stockRecordId)
+                  }
+                >
                   <IoMdMore
                     style={{
                       width: "1.5rem",
                       height: "1.5rem",
                       minWidth: "1.5rem",
                       minHeight: "1.5rem",
-                      color: "inherit", // 부모의 색상 상속
+                      color: "inherit",
                     }}
                   />
                 </R.sideButton>
@@ -192,6 +201,7 @@ export default function RecordTable() {
               color="#FF000050"
               hoverColor="#FF0000FF"
               style={{ margin: "0" }}
+              onClick={handleClickDeleteButton}
             >
               삭제
             </R.PopUpMenuButton>

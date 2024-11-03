@@ -9,6 +9,7 @@ export const SidebarLayout = styled.div`
   flex-direction: row;
   align-items: center;
   height: 100%;
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
 `;
 
 export const SidebarContainer = styled.div`

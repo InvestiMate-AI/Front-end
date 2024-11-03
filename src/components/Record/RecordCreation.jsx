@@ -57,6 +57,12 @@ export default function RecordCreation() {
     setDate(date);
   };
 
+  const handleVolumeChange = (event) => {
+    const inputVolume = event.target.value;
+    const clampedVolume = Math.max(0, Math.min(1000, Number(inputVolume)));
+    setVolume(clampedVolume);
+  };
+
   const handleTradeTypeChange = (option) => {
     setTradeType(option.value);
   };
@@ -78,71 +84,87 @@ export default function RecordCreation() {
     return response;
   };
 
+  useEffect(() => {
+    console.log(volume);
+  }, [volume]);
+
   return (
     <>
       <RC.RecordCreationLayout>
-        <RC.ItemContainer>
-          <RC.ItemHeading>회사</RC.ItemHeading>
-          <RC.ItemPickerContainer>
-            <RF.CorpSelectionContainer>
-              <RF.SelectionButton
-                onClick={() => setCorpDropdownVisible(!corpDropdownVisible)}
-              >
-                <span style={{ flexGrow: 1 }}>
-                  {!selectedCorp ? "기업 선택" : selectedCorp.회사명}
-                </span>
-                <IoCaretDown style={{ flexShrink: 0 }} />
-              </RF.SelectionButton>
-              {corpDropdownVisible && (
-                <RF.CorpSearchContainer>
-                  <RF.CorpSearchInput
-                    value={corp}
-                    onChange={handleCorpChange}
-                    placeholder="회사명/종목코드"
-                  />
-                  {filteredCorps.length > 0 && (
-                    <RF.CorpSearchList>
-                      {filteredCorps.map((corp) => (
-                        <RF.CorpSearchListItem
-                          key={corp.종목코드}
-                          onClick={() => handleCorpItemClick(corp)}
-                        >
-                          {corp.회사명} ({corp.종목코드})
-                        </RF.CorpSearchListItem>
-                      ))}
-                    </RF.CorpSearchList>
-                  )}
-                </RF.CorpSearchContainer>
-              )}
-            </RF.CorpSelectionContainer>
-          </RC.ItemPickerContainer>
-        </RC.ItemContainer>
-        <RC.ItemContainer>
-          <RC.ItemHeading>날짜</RC.ItemHeading>
-          <RC.ItemPickerContainer>
-            <CustomDatePicker selectedDate={date} onChange={handleDateChange} />
-          </RC.ItemPickerContainer>
-        </RC.ItemContainer>
-        <RC.ItemContainer>
-          <RC.ItemHeading>수량</RC.ItemHeading>
-          <RC.ItemPickerContainer>
-            <RC.VolumeInput type="number"></RC.VolumeInput>
-          </RC.ItemPickerContainer>
-        </RC.ItemContainer>
-        <RC.ItemContainer>
-          <RC.ItemHeading>매매유형</RC.ItemHeading>
-          <CustomSelect
-            options={tradeTypeOptions}
-            onChange={handleTradeTypeChange}
-            placeholder={tradeType}
-          />
-          <RC.ItemPickerContainer></RC.ItemPickerContainer>
-        </RC.ItemContainer>
-        <RC.ItemContainer>
-          <RC.CreationButton onClick={handleClickCreationButton}>
-            추가
-          </RC.CreationButton>
-        </RC.ItemContainer>
+        <RC.RecordCreationContainer>
+          <RC.ItemContainer>
+            <RC.ItemHeading>종목</RC.ItemHeading>
+            <RC.ItemPickerContainer>
+              <RF.CorpSelectionContainer>
+                <RF.SelectionButton
+                  onClick={() => setCorpDropdownVisible(!corpDropdownVisible)}
+                >
+                  <span style={{ flexGrow: 1 }}>
+                    {!selectedCorp ? "기업 선택" : selectedCorp.회사명}
+                  </span>
+                  <IoCaretDown style={{ flexShrink: 0 }} />
+                </RF.SelectionButton>
+                {corpDropdownVisible && (
+                  <RF.CorpSearchContainer>
+                    <RF.CorpSearchInput
+                      value={corp}
+                      onChange={handleCorpChange}
+                      placeholder="회사명/종목코드"
+                    />
+                    {filteredCorps.length > 0 && (
+                      <RF.CorpSearchList>
+                        {filteredCorps.map((corp) => (
+                          <RF.CorpSearchListItem
+                            key={corp.종목코드}
+                            onClick={() => handleCorpItemClick(corp)}
+                          >
+                            {corp.회사명} ({corp.종목코드})
+                          </RF.CorpSearchListItem>
+                        ))}
+                      </RF.CorpSearchList>
+                    )}
+                  </RF.CorpSearchContainer>
+                )}
+              </RF.CorpSelectionContainer>
+            </RC.ItemPickerContainer>
+          </RC.ItemContainer>
+          <RC.ItemContainer>
+            <RC.ItemHeading>날짜</RC.ItemHeading>
+            <RC.ItemPickerContainer>
+              <CustomDatePicker
+                selectedDate={date}
+                onChange={handleDateChange}
+              />
+            </RC.ItemPickerContainer>
+          </RC.ItemContainer>
+          <RC.ItemContainer>
+            <RC.ItemHeading>수량</RC.ItemHeading>
+            <RC.ItemPickerContainer>
+              <RC.VolumeInput
+                type="number"
+                min="0"
+                max="1000"
+                step="1"
+                value={volume || ""}
+                onChange={handleVolumeChange}
+              />
+            </RC.ItemPickerContainer>
+          </RC.ItemContainer>
+          <RC.ItemContainer>
+            <RC.ItemHeading>매매유형</RC.ItemHeading>
+            <CustomSelect
+              options={tradeTypeOptions}
+              onChange={handleTradeTypeChange}
+              placeholder={tradeType}
+            />
+            <RC.ItemPickerContainer></RC.ItemPickerContainer>
+          </RC.ItemContainer>
+          <RC.ItemContainer>
+            <RC.CreationButton onClick={handleClickCreationButton}>
+              추가
+            </RC.CreationButton>
+          </RC.ItemContainer>
+        </RC.RecordCreationContainer>
       </RC.RecordCreationLayout>
     </>
   );

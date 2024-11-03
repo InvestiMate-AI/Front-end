@@ -3,7 +3,6 @@ import themes from "./theme";
 
 export const CustomSelectContainer = styled.div`
   position: relative;
-  width: 100%;
 `;
 
 export const CustomSelectTrigger = styled.button`
@@ -12,10 +11,11 @@ export const CustomSelectTrigger = styled.button`
   width: 100%;
   padding: 0.5rem;
   background-color: ${themes.colors.white};
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 1rem;
   cursor: pointer;
   font-size: 1rem;
+  box-shadow: 0 0 4px #d3d3d3;
+  white-space: nowrap;
 `;
 
 export const CustomSelectOptions = styled.ul`
@@ -23,7 +23,7 @@ export const CustomSelectOptions = styled.ul`
   background-color: #fff;
   border: 1px solid #ccc;
   border-width: 0 1px 1px 1px;
-  border-radius: 0 0 5px 5px;
+  border-radius: 1rem;
   max-height: 150px;
   overflow-y: auto;
   z-index: 100;
@@ -31,12 +31,17 @@ export const CustomSelectOptions = styled.ul`
   position: absolute;
   top: 100%;
   margin: 0;
+  box-shadow: 0 0 4px #d3d3d3;
+  white-space: nowrap;
 `;
 
 export const CustomSelectOption = styled.li`
-  padding: 10px;
+  padding: 0.5rem;
+  white-space: nowrap;
   cursor: pointer;
-  &:hover: {
+  transition: color 0.5s ease;
+
+  &:hover {
+    color: ${(props) => props.hoverColor || "black"};
     background-color: #f0f0f0;
-  }
 `;

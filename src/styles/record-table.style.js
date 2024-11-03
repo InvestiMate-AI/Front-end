@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const RecordTableLayout = styled.div`
   max-width: 1200px; /* 화면 크기에 따라 조절 */
+  min-width: 1100px;
   width: 100%; /* 부모 요소의 100%를 차지 */
   overflow-x: auto; /* 가로 스크롤 활성화 */
   overflow-y: hidden;
