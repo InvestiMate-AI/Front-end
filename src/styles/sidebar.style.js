@@ -80,13 +80,11 @@ const SettingsButton = styled.button`
   }
 `;
 
-export const CreateNewChat = ({ onClick }) => (
+export const CreateNewChat = ({ onClick, text }) => (
   <>
     <CreateNewChatButton onClick={onClick}>
-      {" "}
-      {/* Attach onClick to button */}
       <IoAddOutline />
-      <span style={{ marginLeft: "0.5rem" }}>새로운 채팅</span>
+      <span style={{ marginLeft: "0.5rem" }}>{text}</span>
     </CreateNewChatButton>
   </>
 );

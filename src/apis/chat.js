@@ -35,7 +35,7 @@ export const getThreads = async () => {
           reportType: "사업보고서",
         },
         {
-          chatRoomId: 1,
+          chatRoomId: 2,
           assistantId: "asst_uXaZHnWAxMtFh9YMq2DfNynx",
           threadId: "thread_YoOhrxQTRicnNyeO4ZEJAYql",
           reportYear: 2022,

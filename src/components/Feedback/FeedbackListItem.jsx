@@ -2,15 +2,17 @@ import React, { useEffect } from "react";
 import * as F from "../../styles/feedback-list-item.style";
 import { useNavigate } from "react-router-dom";
 
-export default function FeedbackListItem({ feedback }) {
+export default function FeedbackListItem({ stockRecordsWithFeedback }) {
   const navigate = useNavigate();
 
   const handleFeedbackListItemClick = () => {
-    navigate(`/feedback/${feedback.feedbackId}`);
+    navigate(`/feedback/${stockRecordsWithFeedback.stockRecordId}`);
   };
 
   useEffect(() => {
-    console.log(`feedback.feedbackId: ${feedback.feedbackId}`);
+    console.log(
+      `feedback.feedbackId: ${stockRecordsWithFeedback.stockRecordId}`
+    );
   });
 
   return (
@@ -18,7 +20,7 @@ export default function FeedbackListItem({ feedback }) {
       <F.ChatItemLayout onClick={handleFeedbackListItemClick}>
         <div className="chat-item-header">
           <div>
-            {feedback.feedbackName} {feedback.feedbackDate}
+            {stockRecordsWithFeedback.name} {stockRecordsWithFeedback.date}
           </div>
           {/* <div>{chat.lastChatDate}</div> */}
         </div>

@@ -1,37 +1,59 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import * as F from "../styles/feedback-room.style";
 import DefaultLayout from "../components/Layout/DefaultLayout";
 import { useNavigate } from "react-router-dom";
 import FeedbackSidebar from "../components/Feedback/FeedbackSidebar";
-import FeedbackReport from "../components/Feedback/FeedbackReport";
+import FeedbackReportList from "../components/Feedback/FeedbackReportList";
+import { getStockRecordsWithFeedback } from "../apis/feedback";
 
 function FeedbackRoomPage() {
-  const [selectedFeedback, setSelectedFeedback] = useState(null);
-  const [feedbackList, setFeedbackList] = useState([]);
+  const { feedbackId } = useParams();
+  const [stockRecordsWithFeedbackList, setStockRecordsWithFeedbackList] =
+    useState([]);
+  const [selectedStockRecord, setSelectedStockRecord] = useState(null);
 
   const navigate = useNavigate();
 
-  const getData = async () => {
-    try {
-      const response = await fetch("/feedbackList.json");
-      console.log(response);
-      const jsonData = await response.json();
-      setFeedbackList(jsonData.data);
-    } catch (error) {
-      console.error("Error fetching the data: ", error);
-    }
+  const handleCreateNewFeedback = () => {
+    navigate("/feedback");
+  };
+
+  const handleFeedbackListItemClick = (stockRecordsWithFeedback) => {
+    navigate(`/feedback/${stockRecordsWithFeedback.stockRecordId}`);
+  };
+
+  const fetchStockRecordsWithFeedback = async () => {
+    const stockRecordsWithFeedbackList = await getStockRecordsWithFeedback();
+    setStockRecordsWithFeedbackList(stockRecordsWithFeedbackList);
+
+    const selected = stockRecordsWithFeedbackList.find(
+      (stockRecordWithFeedback) => {
+        if (stockRecordWithFeedback.stockRecordId == feedbackId) {
+          return stockRecordWithFeedback;
+        } else {
+          return null;
+        }
+      }
+    );
+    setSelectedStockRecord(selected);
   };
 
   useEffect(() => {
-    getData();
+    fetchStockRecordsWithFeedback();
   }, []);
 
   return (
     <DefaultLayout>
       <F.FeedbackRoomLayout>
-        <FeedbackSidebar feedbackList={feedbackList}></FeedbackSidebar>
+        <FeedbackSidebar
+          stockRecordsWithFeedbackList={stockRecordsWithFeedbackList}
+          setSelectedFeedback={setSelectedStockRecord}
+          onCreateNewFeedback={handleCreateNewFeedback}
+          onFeedbackItemClick={handleFeedbackListItemClick}
+        ></FeedbackSidebar>
         <F.FeedbackReportListLayout>
-          <FeedbackReport></FeedbackReport>
+          <FeedbackReportList feedbackId={Number(feedbackId)} />
         </F.FeedbackReportListLayout>
       </F.FeedbackRoomLayout>
     </DefaultLayout>

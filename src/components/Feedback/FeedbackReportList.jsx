@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Chart from "./Chart";
 import * as F from "../../styles/feedback-report.style";
+import { getFeedback } from "../../apis/feedback";
 
-export default function FeedbackReport() {
-  const [data, setData] = useState([]);
+export default function FeedbackReportList({ feedbackId }) {
+  const [reportData, setReportData] = useState([]);
 
-  const getData = async () => {
-    try {
-      const response = await fetch("/data.json");
-      const jsonData = await response.json();
-      setData(jsonData);
-    } catch (error) {
-      console.error("Error fetching the data: ", error);
-    }
+  const fetchReport = async (id) => {
+    const report = await getFeedback(id);
+    setReportData(report);
   };
 
   useEffect(() => {
-    getData();
+    fetchReport(feedbackId);
   }, []);
 
   // 타임스탬프를 날짜 형식으로 변환하는 함수
@@ -27,7 +23,10 @@ export default function FeedbackReport() {
 
   const renderTable = (tableData) => {
     const parsedData = JSON.parse(tableData);
-    const timestamps = Object.keys(parsedData.Open);
+
+    // 각 데이터의 속성 이름을 추출하여 테이블 헤더에 사용
+    const headers = Object.keys(parsedData);
+    const keys = Object.keys(parsedData[headers[0]]); // 첫 번째 속성의 키를 가져와서 행 헤더로 사용
 
     return (
       <table
@@ -38,31 +37,68 @@ export default function FeedbackReport() {
       >
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Open</th>
-            <th>High</th>
-            <th>Low</th>
-            <th>Close</th>
-            <th>Volume</th>
-            <th>Change</th>
+            <th>Key</th>
+            {headers.map((header) => (
+              <th key={header}>{header}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {timestamps.map((timestamp) => (
-            <tr key={timestamp}>
-              <td>{convertTimestampToDate(timestamp)}</td>
-              <td>{parsedData.Open[timestamp]}</td>
-              <td>{parsedData.High[timestamp]}</td>
-              <td>{parsedData.Low[timestamp]}</td>
-              <td>{parsedData.Close[timestamp]}</td>
-              <td>{parsedData.Volume[timestamp]}</td>
-              <td>{parsedData.Change[timestamp]}</td>
+          {keys.map((key) => (
+            <tr key={key}>
+              <td>{key}</td>
+              {headers.map((header) => (
+                <td key={`${header}-${key}`}>
+                  {parsedData[header][key] !== undefined
+                    ? parsedData[header][key]
+                    : "N/A"}
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>
       </table>
     );
   };
+
+  // const renderTable = (tableData) => {
+  //   const parsedData = JSON.parse(tableData);
+  //   const timestamps = Object.keys(parsedData.Open);
+
+  //   return (
+  //     <table
+  //       border="1"
+  //       cellPadding="5"
+  //       cellSpacing="0"
+  //       style={{ tableLayout: "fixed", width: "100%" }}
+  //     >
+  //       <thead>
+  //         <tr>
+  //           <th>Date</th>
+  //           <th>Open</th>
+  //           <th>High</th>
+  //           <th>Low</th>
+  //           <th>Close</th>
+  //           <th>Volume</th>
+  //           <th>Change</th>
+  //         </tr>
+  //       </thead>
+  //       <tbody>
+  //         {timestamps.map((timestamp) => (
+  //           <tr key={timestamp}>
+  //             <td>{convertTimestampToDate(timestamp)}</td>
+  //             <td>{parsedData.Open[timestamp]}</td>
+  //             <td>{parsedData.High[timestamp]}</td>
+  //             <td>{parsedData.Low[timestamp]}</td>
+  //             <td>{parsedData.Close[timestamp]}</td>
+  //             <td>{parsedData.Volume[timestamp]}</td>
+  //             <td>{parsedData.Change[timestamp]}</td>
+  //           </tr>
+  //         ))}
+  //       </tbody>
+  //     </table>
+  //   );
+  // };
 
   const renderChart = (charData) => {
     const data = JSON.parse(charData);
@@ -136,8 +172,8 @@ export default function FeedbackReport() {
 
   return (
     <F.FeedbackReportListContainer>
-      {data.length > 0 ? (
-        data.map((item) => renderContent(item))
+      {reportData.length > 0 ? (
+        reportData.map((item) => renderContent(item))
       ) : (
         <p>Loading...</p>
       )}

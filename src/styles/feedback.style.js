@@ -93,3 +93,8 @@ export const MessageInput = ({ onSendMessage }) => {
     </MessageInputContainer>
   );
 };
+
+export const FeedbackCreationLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+`;

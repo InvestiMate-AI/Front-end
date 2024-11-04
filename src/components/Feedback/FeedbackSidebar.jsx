@@ -3,7 +3,10 @@ import * as S from "../../styles/sidebar.style";
 import FeedbackListItem from "./FeedbackListItem";
 import { IoChevronForwardOutline, IoChevronBackOutline } from "react-icons/io5";
 
-const FeedbackSidebar = ({ feedbackList }) => {
+const FeedbackSidebar = ({
+  stockRecordsWithFeedbackList,
+  onCreateNewFeedback,
+}) => {
   const [isOpen, setIsOpen] = useState(true);
 
   const toggleSidebar = () => {
@@ -11,17 +14,26 @@ const FeedbackSidebar = ({ feedbackList }) => {
   };
 
   useEffect(() => {
-    console.log(feedbackList);
-  });
+    console.log(stockRecordsWithFeedbackList);
+  }, []);
 
   return (
     <>
       <S.SidebarLayout>
         <S.SidebarContainer isOpen={isOpen}>
+          <S.CreateNewChat onClick={onCreateNewFeedback} text="새로운 피드백" />
           <S.ChatItemsContainer>
-            {feedbackList.map((feedback, index) => (
-              <FeedbackListItem key={index} feedback={feedback} />
-            ))}
+            {stockRecordsWithFeedbackList &&
+              stockRecordsWithFeedbackList.map(
+                (stockRecordWithFeedback, index) => (
+                  <FeedbackListItem
+                    key={index}
+                    stockRecordWithFeedback={stockRecordWithFeedback}
+                    // onClick={onFeedbackItemClick(stockRecordWithFeedback)}
+                    stockRecordsWithFeedback={stockRecordWithFeedback}
+                  />
+                )
+              )}
           </S.ChatItemsContainer>
           <S.Settings />
         </S.SidebarContainer>

@@ -4,33 +4,48 @@ import DefaultLayout from "../components/Layout/DefaultLayout";
 import { useNavigate } from "react-router-dom";
 import FeedbackCreation from "../components/Feedback/FeedbackCreation";
 import FeedbackSidebar from "../components/Feedback/FeedbackSidebar";
+import FeedbackableRecordTable from "../components/Feedback/FeedbackableRecordTable";
+import { getStockRecordsWithFeedback } from "../apis/feedback";
 
 function FeedbackPage() {
-  const [selectedFeedback, setSelectedFeedback] = useState(null);
-  const [feedbackList, setFeedbackList] = useState([]);
+  const [
+    selectedStockRecordsWithFeedbackId,
+    setSelectedStockRecordsWithFeedbackId,
+  ] = useState(null);
+  const [stockRecordsWithFeedbackList, setStockRecordsWithFeedbackList] =
+    useState([]);
 
   const navigate = useNavigate();
 
-  const getData = async () => {
-    try {
-      const response = await fetch("/feedbackList.json");
-      console.log(response);
-      const jsonData = await response.json();
-      setFeedbackList(jsonData.data);
-    } catch (error) {
-      console.error("Error fetching the data: ", error);
-    }
+  const handleCreateNewFeedback = () => {
+    navigate("/feedback");
+  };
+
+  const handleFeedbackListItemClick = (stockRecordsWithFeedback) => {
+    navigate(`/feedback/${stockRecordsWithFeedback.stockRecordId}`);
   };
 
   useEffect(() => {
-    getData();
+    const fetchStockRecordsWithFeedback = async () => {
+      const stockRecordsWithFeedbackList = await getStockRecordsWithFeedback();
+      setStockRecordsWithFeedbackList(stockRecordsWithFeedbackList);
+    };
+
+    fetchStockRecordsWithFeedback();
   }, []);
 
   return (
     <DefaultLayout>
       <F.FeedbackLayout>
-        <FeedbackSidebar feedbackList={feedbackList}></FeedbackSidebar>
-        {!selectedFeedback && <FeedbackCreation />}
+        <FeedbackSidebar
+          stockRecordsWithFeedbackList={stockRecordsWithFeedbackList}
+          onCreateNewFeedback={handleCreateNewFeedback}
+          onFeedbackItemClick={handleFeedbackListItemClick}
+        ></FeedbackSidebar>
+        <F.FeedbackCreationLayout>
+          {!selectedStockRecordsWithFeedbackId && <FeedbackCreation />}
+          <FeedbackableRecordTable></FeedbackableRecordTable>
+        </F.FeedbackCreationLayout>
       </F.FeedbackLayout>
     </DefaultLayout>
   );

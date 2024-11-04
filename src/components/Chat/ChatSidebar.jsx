@@ -18,7 +18,7 @@ const ChatSidebar = ({
   return (
     <S.SidebarLayout>
       <S.SidebarContainer isOpen={isOpen}>
-        <S.CreateNewChat onClick={onCreateNewChat} />
+        <S.CreateNewChat onClick={onCreateNewChat} text="새로운 채팅" />
         <S.ChatItemsContainer>
           {chatList.map((chat, index) => (
             <ChatListItem

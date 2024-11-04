@@ -24,22 +24,25 @@ function ChatRoomPage() {
     }
   };
 
+  const fetchChatList = async () => {
+    const threadsData = await getThreads();
+    setChatList(threadsData);
+    console.log(threadsData);
+
+    // Find the selected chat from the fetched chat list using chatRoomId
+    const selected = threadsData.find((chat) => {
+      if (chat.chatRoomId == chatRoomId) {
+        return chat;
+      } else {
+        return null;
+      }
+    });
+    setSelectedChat(selected);
+  };
+
   useEffect(() => {
-    const fetchChatList = async () => {
-      const threadsData = await getThreads();
-      setChatList(threadsData);
-
-      // Find the selected chat from the fetched chat list using chatRoomId
-      const selected = threadsData.find((chat) => {
-        if (chat.chatRoomId == chatRoomId) {
-          return chat;
-        }
-      });
-      setSelectedChat(selected);
-    };
-
     fetchChatList();
-  }, [chatRoomId]);
+  }, []);
 
   const handleChatListItemClick = (chat) => {
     navigate(`/chat/${chat.chatRoomId}`);
@@ -53,8 +56,8 @@ function ChatRoomPage() {
     <DefaultLayout>
       <C.ChatLayout>
         <Sidebar
-          setSelectedChat={setSelectedChat}
           chatList={chatList}
+          setSelectedChat={setSelectedChat}
           onChatItemClick={handleChatListItemClick}
           onCreateNewChat={handleCreateNewChat}
           onDeleteChat={handleDeleteChat} // 삭제 핸들러 추가
