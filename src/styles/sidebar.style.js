@@ -10,7 +10,6 @@ export const SidebarLayout = styled.div`
   align-items: center;
   height: 100%;
   white-space: nowrap; /* 텍스트 줄바꿈 방지 */
-  overflow-x: hidden;
 `;
 
 export const SidebarContainer = styled.div`
