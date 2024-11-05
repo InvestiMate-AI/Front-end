@@ -42,7 +42,7 @@ function ChatRoomPage() {
 
   useEffect(() => {
     fetchChatList();
-  }, []);
+  }, [chatRoomId]);
 
   const handleChatListItemClick = (chat) => {
     navigate(`/chat/${chat.chatRoomId}`);

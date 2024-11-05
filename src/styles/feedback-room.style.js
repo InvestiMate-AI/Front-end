@@ -12,5 +12,6 @@ export const FeedbackReportListLayout = styled.div`
   overflow: hidden;
   width: 100%;
   height: 100%;
-  align-items: center;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
 `;

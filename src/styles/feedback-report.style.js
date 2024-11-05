@@ -19,7 +19,7 @@ export const FeedbackReportItemLayout = styled.li`
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
-  width: 100%;
+  width: 1200px;
   min-height: 400px;
   border: solid ${themes.colors.gray_50};
   border-radius: 1rem;
@@ -32,7 +32,10 @@ export const FeedbackReportChartLayout = styled.li`
   display: flex;
   flex-direction: column;
 
-  width: 100%;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+
+  width: 1200px;
   height: auto;
   border: solid ${themes.colors.gray_50};
   border-radius: 1rem;

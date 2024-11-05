@@ -36,12 +36,12 @@ function FeedbackRoomPage() {
         }
       }
     );
-    setSelectedStockRecord(selected);
+    setSelectedStockRecord(selected.stockRecordId);
   };
 
   useEffect(() => {
     fetchStockRecordsWithFeedback();
-  }, []);
+  }, [feedbackId]);
 
   return (
     <DefaultLayout>
@@ -53,7 +53,9 @@ function FeedbackRoomPage() {
           onFeedbackItemClick={handleFeedbackListItemClick}
         ></FeedbackSidebar>
         <F.FeedbackReportListLayout>
-          <FeedbackReportList feedbackId={Number(feedbackId)} />
+          {selectedStockRecord && (
+            <FeedbackReportList feedbackId={feedbackId} />
+          )}
         </F.FeedbackReportListLayout>
       </F.FeedbackRoomLayout>
     </DefaultLayout>
