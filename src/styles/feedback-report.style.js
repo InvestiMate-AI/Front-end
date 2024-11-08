@@ -35,8 +35,8 @@ export const FeedbackReportChartLayout = styled.li`
   justify-content: center; /* 가로 중앙 정렬 */
   align-items: center; /* 세로 중앙 정렬 */
 
-  width: 1200px;
-  height: auto;
+  min-width: 1200px;
+  min-height: 600px;
   border: solid ${themes.colors.gray_50};
   border-radius: 1rem;
   background-color: ${themes.colors.gray_50};

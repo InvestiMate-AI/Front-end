@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Chart from "./Chart";
 import * as F from "../../styles/feedback-report.style";
+import { useParams } from "react-router";
 import { getFeedback } from "../../apis/feedback";
 
-export default function FeedbackReportList({ feedbackId }) {
+export default function FeedbackReportList({ feedbackIdTest }) {
+  const feedbackId = useParams();
   const [reportData, setReportData] = useState([]);
 
   const fetchReport = async (id) => {
@@ -12,8 +14,9 @@ export default function FeedbackReportList({ feedbackId }) {
   };
 
   useEffect(() => {
-    fetchReport(feedbackId);
-  }, []);
+    fetchReport(feedbackId.feedbackId);
+    console.log(`hihi${feedbackId.feedbackId} ${typeof feedbackId.feedbackId}`);
+  }, [feedbackId]);
 
   // 타임스탬프를 날짜 형식으로 변환하는 함수
   const convertTimestampToDate = (timestamp) => {
@@ -114,13 +117,11 @@ export default function FeedbackReportList({ feedbackId }) {
     const volumeValues = Object.values(data.Volume);
 
     return (
-      <div>
-        <Chart
-          labels={labels}
-          priceValues={priceValues}
-          volumeValues={volumeValues}
-        />
-      </div>
+      <Chart
+        labels={labels}
+        priceValues={priceValues}
+        volumeValues={volumeValues}
+      />
     );
   };
 

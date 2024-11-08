@@ -10,6 +10,7 @@ export const CustomSelectTrigger = styled.button`
   display: flex;
   align-items: center;
   width: 100%; // 부모 요소의 전체 너비 사용
+  height: 40px;
   padding: 0.5rem;
   background-color: ${themes.colors.white};
   border-radius: 1rem;

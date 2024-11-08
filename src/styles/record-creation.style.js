@@ -26,6 +26,7 @@ export const RecordCreationContainer = styled.div`
   border-radius: 1rem;
   margin: 0 1rem;
   padding: 1rem;
+  align-items: center; /* 세로 중앙 정렬 */
 `;
 
 export const ItemContainer = styled.span`
@@ -50,12 +51,20 @@ export const ItemPickerContainer = styled.span`
 `;
 
 export const VolumeInput = styled.input`
-  height: 100%;
+  height: 40px;
   padding: 0.5rem;
   background-color: ${themes.colors.white};
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
+
   font-size: 1rem;
+  width: 100%;
+  border-radius: 1rem;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 100;
+  top: 100%;
+  margin: 0;
+  box-shadow: 0 0 4px #d3d3d3;
+  white-space: nowrap;
 `;
 
 export const CreationButton = styled.button`

@@ -28,12 +28,21 @@ export const SelectionButton = styled.button`
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0.5rem;
-  background-color: ${themes.colors.white};
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  cursor: pointer;
   font-size: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+
+  border-radius: 1rem;
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  cursor: pointer;
+  white-space: nowrap;
+
+  background-color: ${themes.colors.white};
+  max-height: 150px;
+  margin: 0;
+  box-shadow: 0 0 4px #d3d3d3;
 `;
 
 export const SelectionTypeContainer = styled.div`
@@ -53,7 +62,6 @@ export const CorpSelectionContainer = styled.div`
   min-width: 12.5rem;
   white-space: nowrap; /* 텍스트 줄바꿈 방지 */
   text-overflow: ellipsis; /* 넘칠 경우 '...'으로 표시 */
-  overflow-x: clip;
 `;
 
 export const SelectionContainer = styled.div`
@@ -71,7 +79,6 @@ export const CorpSearchContainer = styled.div`
   background-color: #fff;
   border: 1px solid #ccc;
   border-width: 0 1px 1px 1px;
-  border-radius: 0 0 5px 5px;
   max-height: 200px;
   overflow-y: hidden;
   z-index: 100;
@@ -79,6 +86,12 @@ export const CorpSearchContainer = styled.div`
   position: absolute;
   top: 100%;
   margin: 0;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  white-space: nowrap;
+
+  box-shadow: 0 0 4px #d3d3d3;
 `;
 
 export const CorpSearchInput = styled.input`

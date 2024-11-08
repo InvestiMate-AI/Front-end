@@ -67,6 +67,7 @@ export default function ChartComponent({ labels, priceValues, volumeValues }) {
   // 옵션 설정
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top",

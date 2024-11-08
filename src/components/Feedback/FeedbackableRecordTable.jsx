@@ -88,6 +88,7 @@ export default function FeedbackableRecordTable() {
 
   const handleClickCreateButton = () => {
     createFeedback(currentRecordId);
+    console.log(`${currentRecordId}, ${typeof currentRecordId}`);
   };
 
   useEffect(() => {

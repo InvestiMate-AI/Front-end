@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as H from "../styles/home.style";
 import DefaultLayout from "../components/Layout/DefaultLayout";
-
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 function HomePage() {
   const [typingFinished, setTypingFinished] = useState(false);
