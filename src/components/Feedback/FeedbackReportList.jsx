@@ -4,8 +4,8 @@ import * as F from "../../styles/feedback-report.style";
 import { useParams } from "react-router";
 import { getFeedback } from "../../apis/feedback";
 
-export default function FeedbackReportList({ feedbackIdTest }) {
-  const feedbackId = useParams();
+export default function FeedbackReportList() {
+  const params = useParams();
   const [reportData, setReportData] = useState([]);
 
   const fetchReport = async (id) => {
@@ -14,9 +14,9 @@ export default function FeedbackReportList({ feedbackIdTest }) {
   };
 
   useEffect(() => {
-    fetchReport(feedbackId.feedbackId);
-    console.log(`hihi${feedbackId.feedbackId} ${typeof feedbackId.feedbackId}`);
-  }, [feedbackId]);
+    fetchReport(params.feedbackId);
+    console.log(`hihi${params.feedbackId} ${typeof params.feedbackId}`);
+  }, [params]);
 
   // 타임스탬프를 날짜 형식으로 변환하는 함수
   const convertTimestampToDate = (timestamp) => {
