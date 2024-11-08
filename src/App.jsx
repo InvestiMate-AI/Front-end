@@ -20,7 +20,8 @@ import FeedbackRoom from "./pages/FeedbackRoomPage";
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./ProtectedRoute";
 import Redirect from "./components/Auth/RedirectPage";
-import RecordPage from "./pages/RecordPage";
+import Record from "./pages/RecordPage";
+import Simulation from "./pages/SimulationPage";
 
 function App() {
   // const [cookies, setCookie, removeCookie] = useCookies(["refresh"]);
@@ -127,7 +128,8 @@ function App() {
               <Route path="/chat/:chatRoomId" element={<ChatRoom />} />
               <Route path="/feedback" element={<Feedback />} />
               <Route path="/feedback/:feedbackId" element={<FeedbackRoom />} />
-              <Route path="/record" element={<RecordPage />}></Route>
+              <Route path="/record" element={<Record />}></Route>
+              <Route path="/simulation" element={<Simulation />}></Route>
             </Route>
             <Route path="/redirect" element={<Redirect />} />
           </Routes>

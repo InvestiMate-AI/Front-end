@@ -41,7 +41,10 @@ function Header() {
             {constants.names.FEEDBACK_SERVICE_NAME}
           </H.NavButton>
           <H.NavButton as={Link} to="/record">
-            {constants.names.MANAGE_SERVICE_NAME}
+            {constants.names.RECORD_SERVICE_NAME}
+          </H.NavButton>
+          <H.NavButton as={Link} to="/simulation">
+            {constants.names.SIMULATION_SERVICE_NAME}
           </H.NavButton>
         </H.NavContainer>
         <H.UserContainer>
