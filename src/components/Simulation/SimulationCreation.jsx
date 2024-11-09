@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import * as RF from "../../styles/record-filter.style";
 import * as S from "../../styles/simulation-creation.style";
 import { IoCaretDown } from "react-icons/io5";
 import kospiCorpData from "../../assets/corps/KOSPI_list.json";
@@ -8,6 +7,7 @@ import CustomDatePicker from "../CustomDatePicker";
 import { fetchSimulationResult } from "../../apis/simulation";
 import { IoChevronUp, IoChevronDown } from "react-icons/io5";
 import * as Sidebar from "../../styles/sidebar.style";
+import { IoAddOutline, IoCloseOutline } from "react-icons/io5";
 
 export default function SimulationCreation() {
   const [corp, setCorp] = useState(null);
@@ -16,6 +16,9 @@ export default function SimulationCreation() {
   const [corpDropdownVisible, setCorpDropdownVisible] = useState(false);
   const [selectedCorp, setSelectedCorp] = useState(null); // 선택된 회사-회사번호 객체
   const [filteredCorps, setFilteredCorps] = useState([]); // 검색 결과
+
+  const [buyOptionRows, setBuyOptionRows] = useState([]); // 매도 조건 행 상태
+  const [sellOptionRows, setSellOptionRows] = useState([]); // 매도 조건 행 상태
 
   const [isOpen, setIsOpen] = useState(true);
   const [toggleDisabled, setToggleDisabled] = useState(false);
@@ -68,6 +71,22 @@ export default function SimulationCreation() {
   const createSimulation = async (data) => {
     const response = await fetchSimulationResult(data);
     return response;
+  };
+
+  const handleClickBuyOptionRowAddButton = () => {
+    setBuyOptionRows([...buyOptionRows, {}]);
+  };
+
+  const handleClickSellOptionRowAddButton = () => {
+    setSellOptionRows([...sellOptionRows, {}]);
+  };
+
+  const handleClickCloseRowButton = (index, type) => {
+    if (type === "buy") {
+      setBuyOptionRows(buyOptionRows.filter((_, i) => i !== index));
+    } else if (type === "sell") {
+      setSellOptionRows(sellOptionRows.filter((_, i) => i !== index));
+    }
   };
 
   const handleClickCreationButton = async () => {
@@ -124,37 +143,37 @@ export default function SimulationCreation() {
             <S.ItemContainer>
               <S.ItemHeading>종목</S.ItemHeading>
               <S.ItemPickerContainer>
-                <RF.CorpSelectionContainer>
-                  <RF.SelectionButton
+                <S.TradeOptionCellSelectionContainer>
+                  <S.SelectionButton
                     onClick={() => setCorpDropdownVisible(!corpDropdownVisible)}
                   >
                     <span style={{ flexGrow: 1 }}>
                       {!selectedCorp ? "기업 선택" : selectedCorp.회사명}
                     </span>
                     <IoCaretDown style={{ flexShrink: 0 }} />
-                  </RF.SelectionButton>
+                  </S.SelectionButton>
                   {corpDropdownVisible && (
-                    <RF.CorpSearchContainer>
-                      <RF.CorpSearchInput
+                    <S.TradeOptionSearchContainer>
+                      <S.TradeOptionSearchInput
                         value={corp}
                         onChange={handleCorpChange}
                         placeholder="회사명/종목코드"
                       />
                       {filteredCorps.length > 0 && (
-                        <RF.CorpSearchList>
+                        <S.TradeOptionSearchList>
                           {filteredCorps.map((corp) => (
-                            <RF.CorpSearchListItem
+                            <S.TradeOptionSearchListItem
                               key={corp.종목코드}
                               onClick={() => handleCorpItemClick(corp)}
                             >
                               {corp.회사명}
-                            </RF.CorpSearchListItem>
+                            </S.TradeOptionSearchListItem>
                           ))}
-                        </RF.CorpSearchList>
+                        </S.TradeOptionSearchList>
                       )}
-                    </RF.CorpSearchContainer>
+                    </S.TradeOptionSearchContainer>
                   )}
-                </RF.CorpSelectionContainer>
+                </S.TradeOptionCellSelectionContainer>
               </S.ItemPickerContainer>
             </S.ItemContainer>
             <S.ItemContainer>
@@ -173,62 +192,84 @@ export default function SimulationCreation() {
             </S.ItemContainer>
           </S.RowContainer>
           <S.RowContainer>
-            <S.ItemContainer>
-              <S.ItemHeading>종목</S.ItemHeading>
-              <S.ItemPickerContainer>
-                <RF.CorpSelectionContainer>
-                  <RF.SelectionButton
-                    onClick={() => setCorpDropdownVisible(!corpDropdownVisible)}
+            <S.TradeOptionsContainer>
+              <S.TradeOptionsHeader>매수 조건</S.TradeOptionsHeader>
+              {buyOptionRows.map((row, index) => (
+                <S.TradeOptionRow key={index}>
+                  <S.TradeOptionCellAddButton>
+                    <IoAddOutline color="gray" />
+                  </S.TradeOptionCellAddButton>
+                </S.TradeOptionRow>
+              ))}
+              <S.TradeOptionRowAddButton
+                onClick={handleClickBuyOptionRowAddButton}
+              >
+                <IoAddOutline color="gray" />
+              </S.TradeOptionRowAddButton>
+            </S.TradeOptionsContainer>
+          </S.RowContainer>
+          <S.RowContainer>
+            <S.TradeOptionsContainer>
+              <S.TradeOptionsHeader>매도 조건</S.TradeOptionsHeader>
+              {sellOptionRows.map((row, index) => (
+                <S.TradeOptionRow key={index}>
+                  <S.TradeOptionCellSelectionContainer>
+                    <S.SelectionButton
+                      onClick={() =>
+                        setCorpDropdownVisible(!corpDropdownVisible)
+                      }
+                    >
+                      <span style={{ flexGrow: 1 }}>
+                        {!selectedCorp ? "기업 선택" : selectedCorp.회사명}
+                      </span>
+                      <IoCaretDown style={{ flexShrink: 0 }} />
+                    </S.SelectionButton>
+                    {corpDropdownVisible && (
+                      <S.TradeOptionSearchContainer>
+                        <S.TradeOptionSearchInput
+                          value={corp}
+                          onChange={handleCorpChange}
+                          placeholder="회사명/종목코드"
+                        />
+                        {filteredCorps.length > 0 && (
+                          <S.TradeOptionSearchList>
+                            {filteredCorps.map((corp) => (
+                              <S.TradeOptionSearchListItem
+                                key={corp.종목코드}
+                                onClick={() => handleCorpItemClick(corp)}
+                              >
+                                {corp.회사명}
+                              </S.TradeOptionSearchListItem>
+                            ))}
+                          </S.TradeOptionSearchList>
+                        )}
+                      </S.TradeOptionSearchContainer>
+                    )}
+                  </S.TradeOptionCellSelectionContainer>
+                  <S.TradeOptionCellAddButton>
+                    <IoAddOutline color="gray" />
+                  </S.TradeOptionCellAddButton>
+                  <S.CloseButton
+                    onClick={() => handleClickCloseRowButton(index, "sell")}
                   >
-                    <span style={{ flexGrow: 1 }}>
-                      {!selectedCorp ? "기업 선택" : selectedCorp.회사명}
-                    </span>
-                    <IoCaretDown style={{ flexShrink: 0 }} />
-                  </RF.SelectionButton>
-                  {corpDropdownVisible && (
-                    <RF.CorpSearchContainer>
-                      <RF.CorpSearchInput
-                        value={corp}
-                        onChange={handleCorpChange}
-                        placeholder="회사명/종목코드"
-                      />
-                      {filteredCorps.length > 0 && (
-                        <RF.CorpSearchList>
-                          {filteredCorps.map((corp) => (
-                            <RF.CorpSearchListItem
-                              key={corp.종목코드}
-                              onClick={() => handleCorpItemClick(corp)}
-                            >
-                              {corp.회사명}
-                            </RF.CorpSearchListItem>
-                          ))}
-                        </RF.CorpSearchList>
-                      )}
-                    </RF.CorpSearchContainer>
-                  )}
-                </RF.CorpSelectionContainer>
-              </S.ItemPickerContainer>
-            </S.ItemContainer>
+                    <IoCloseOutline />
+                  </S.CloseButton>
+                </S.TradeOptionRow>
+              ))}
+              <S.TradeOptionRowAddButton
+                onClick={handleClickSellOptionRowAddButton}
+              >
+                <IoAddOutline color="gray" />
+              </S.TradeOptionRowAddButton>
+            </S.TradeOptionsContainer>
+          </S.RowContainer>
+          <S.RowContainer>
             <S.ItemContainer>
-              <S.ItemHeading>날짜</S.ItemHeading>
-              <S.ItemPickerContainer>
-                <CustomDatePicker
-                  selectedDate={startDate}
-                  onChange={handleStartDateChange}
-                />
-                <div style={{ margin: "0.5rem" }}>-</div>
-                <CustomDatePicker
-                  selectedDate={endDate}
-                  onChange={handleEndDateChange}
-                />
-              </S.ItemPickerContainer>
+              <S.CreationButton onClick={handleClickCreationButton}>
+                생성하기
+              </S.CreationButton>
             </S.ItemContainer>
           </S.RowContainer>
-          <S.ItemContainer>
-            <S.CreationButton onClick={handleClickCreationButton}>
-              생성하기
-            </S.CreationButton>
-          </S.ItemContainer>
         </S.SimulationCreationContainer>
       </S.SimulationCreationLayout>
       {!toggleDisabled && ( // toggleDisabled가 false일 때만 버튼 렌더링

@@ -86,7 +86,7 @@ function RecordFilter() {
       >
         기록 검색
       </h3>
-      <div style={{ marginBottom: "4rem" }}>
+      <div style={{ marginBottom: "1rem" }}>
         <R.FilterItemContainer>
           <R.FilterItemHeading>회사명</R.FilterItemHeading>
           <R.CorpSelectionContainer>

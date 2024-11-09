@@ -14,7 +14,7 @@ export const RecordFilterLayout = styled.div`
 export const FilterItemContainer = styled.div`
   justify-content: start;
   width: 100%;
-  margin: 0 0 1rem 0;
+  margin: 0 0 2.5rem 0;
 `;
 
 export const FilterItemHeading = styled.h4`
@@ -53,8 +53,6 @@ export const SelectionTypeContainer = styled.div`
 `;
 
 export const SelectionName = styled.h3``;
-
-export const selectionButton = styled.button``;
 
 export const CorpSelectionContainer = styled.div`
   position: relative;
