@@ -4,16 +4,14 @@ import themes from "./theme";
 export const SimulationPageLayout = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   height: 100%;
 `;
 
-export const SimulationContainer = styled.div`
+export const SimulationDashboardLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
-  height: 100%;
-  flex-grow: 1;
+  width: 100%;
 `;

@@ -73,72 +73,101 @@ function RecordFilter() {
   };
 
   const handleClickApplyButton = async () => {
-    //
+    console.log(1);
   };
 
   return (
     <R.RecordFilterLayout>
-      <R.FilterItemContainer>
-        <R.FilterItemHeading>회사명</R.FilterItemHeading>
-        <R.CorpSelectionContainer>
-          <R.SelectionButton
-            onClick={() => setCorpDropdownVisible(!corpDropdownVisible)}
+      <h3
+        style={{
+          alignSelf: "flex-start",
+          margin: "1rem 0 0 0",
+        }}
+      >
+        기록 검색
+      </h3>
+      <div style={{ marginBottom: "4rem" }}>
+        <R.FilterItemContainer>
+          <R.FilterItemHeading>회사명</R.FilterItemHeading>
+          <R.CorpSelectionContainer>
+            <R.SelectionButton
+              onClick={() => setCorpDropdownVisible(!corpDropdownVisible)}
+            >
+              <span style={{ flexGrow: 1 }}>
+                {!selectedCorp ? "기업 선택" : selectedCorp.회사명}
+              </span>
+              <IoCaretDown style={{ flexShrink: 0 }} />
+            </R.SelectionButton>
+            {corpDropdownVisible && (
+              <R.CorpSearchContainer>
+                <R.CorpSearchInput
+                  value={corp}
+                  onChange={handleCorpChange}
+                  placeholder="회사명/종목코드"
+                />
+                {filteredCorps.length > 0 && (
+                  <R.CorpSearchList>
+                    {filteredCorps.map((corp) => (
+                      <R.CorpSearchListItem
+                        key={corp.종목코드}
+                        onClick={() => handleCorpItemClick(corp)}
+                      >
+                        {corp.회사명} ({corp.종목코드})
+                      </R.CorpSearchListItem>
+                    ))}
+                  </R.CorpSearchList>
+                )}
+              </R.CorpSearchContainer>
+            )}
+          </R.CorpSelectionContainer>
+        </R.FilterItemContainer>
+        <R.FilterItemContainer>
+          <R.FilterItemHeading>매매 유형</R.FilterItemHeading>
+          <CustomSelect
+            options={tradeTypeOptions}
+            onChange={handleTradeTypeChange}
+            placeholder={tradeType}
+          />
+        </R.FilterItemContainer>
+        <R.FilterItemContainer>
+          <R.FilterItemHeading>기간</R.FilterItemHeading>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "start",
+              alignItems: "center",
+              margin: "0 0 0.5rem 0.5rem",
+              fontSize: "1rem",
+              fontWeight: "500",
+            }}
           >
-            <span style={{ flexGrow: 1 }}>
-              {!selectedCorp ? "기업 선택" : selectedCorp.회사명}
-            </span>
-            <IoCaretDown style={{ flexShrink: 0 }} />
-          </R.SelectionButton>
-          {corpDropdownVisible && (
-            <R.CorpSearchContainer>
-              <R.CorpSearchInput
-                value={corp}
-                onChange={handleCorpChange}
-                placeholder="회사명/종목코드"
-              />
-              {filteredCorps.length > 0 && (
-                <R.CorpSearchList>
-                  {filteredCorps.map((corp) => (
-                    <R.CorpSearchListItem
-                      key={corp.종목코드}
-                      onClick={() => handleCorpItemClick(corp)}
-                    >
-                      {corp.회사명} ({corp.종목코드})
-                    </R.CorpSearchListItem>
-                  ))}
-                </R.CorpSearchList>
-              )}
-            </R.CorpSearchContainer>
-          )}
-        </R.CorpSelectionContainer>
-      </R.FilterItemContainer>
-      <R.FilterItemContainer>
-        <R.FilterItemHeading>매매 유형</R.FilterItemHeading>
-        <CustomSelect
-          options={tradeTypeOptions}
-          onChange={handleTradeTypeChange}
-          placeholder={tradeType}
-        />
-      </R.FilterItemContainer>
-      <R.FilterItemContainer>
-        <R.FilterItemHeading>기간</R.FilterItemHeading>
-        <button onClick={() => handleDateChange(1)}>1개월</button>
-        <button onClick={() => handleDateChange(3)}>3개월</button>
-        <button onClick={() => handleDateChange(6)}>6개월</button>
-        <button onClick={() => handleDateChange(12)}>1년</button>
-      </R.FilterItemContainer>
-      <R.FilterItemContainer>
-        <CustomDatePicker
-          label="시작일"
-          selectedDate={startDate}
-          onChange={handleStartDateChange}
-        />
-        <CustomDatePicker
-          label="종료일"
-          selectedDate={endDate}
-          onChange={handleEndDateChange}
-        />
-      </R.FilterItemContainer>
+            시작일
+          </div>
+          <CustomDatePicker
+            label="시작일"
+            selectedDate={startDate}
+            onChange={handleStartDateChange}
+          />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "start",
+              alignItems: "center",
+              margin: "0.5rem 0 0.5rem 0.5rem",
+              fontSize: "1rem",
+              fontWeight: "500",
+            }}
+          >
+            종료일
+          </div>
+          <CustomDatePicker
+            label="종료일"
+            selectedDate={endDate}
+            onChange={handleEndDateChange}
+          />
+        </R.FilterItemContainer>
+      </div>
+      <R.FilterButton onClick={handleClickApplyButton}>검색</R.FilterButton>
     </R.RecordFilterLayout>
   );
 }
