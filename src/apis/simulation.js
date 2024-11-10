@@ -18,21 +18,23 @@ data: [
 ]
 */
 export const fetchSimulationResult = async (data) => {
+  console.log(data);
   try {
     const res = await Post("/api/v1/simulation");
+    console.log(res);
     return res.data.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       console.log(error);
     }
     return [
-      {
-        stockRecordId: Number(999),
+      JSON.stringify({
+        result: Number(999),
         date: String("2024-01-01"),
-        name: String("피드백안받은 회사"),
+        name: String("잘 왔나요?"),
         volume: Number(101),
         type: String("매도"),
-      },
+      }),
     ];
   }
 };

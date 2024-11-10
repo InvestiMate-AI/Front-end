@@ -87,6 +87,27 @@ export default function SimulationCreation() {
     } else if (type === "sell") {
       setSellOptionRows(sellOptionRows.filter((_, i) => i !== index));
     }
+
+    /*
+참고: buyOption, sellOption의 길이는 1 이상 ∞ 이하. 각 원소의 길이는 1 이상 3 이하.
+data: {
+  "corp": "삼성전자",
+  "total_asset": 100000000,
+  "split_rate": 0.1,
+  "startDate": "2023-10-14",
+  "endDate": "2024-03-18",
+  "buyOption": [
+    ["sma_golden_cross_50_200", "sma_dead_cross_50_200", "sma_golden_cross_recent_50_200"],
+    ["sma_golden_cross_50_200", "sma_dead_cross_50_200"],
+    ["sma_golden_cross_50_200", "sma_dead_cross_50_200", "sma_golden_cross_recent_50_200"],
+    ["sma_golden_cross_50_200"]
+  ],
+  "sellOption": [
+    ["sto_trend_reversal_recent", "pvt_divergence_recent"],
+    ["sto_buy_golden_cross_recent", "pvt_divergence", "pvt_divergence_recent"]
+  ]
+}
+    */
   };
 
   const handleClickCreationButton = async () => {

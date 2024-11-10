@@ -20,6 +20,7 @@ export const FeedbackCreationContainer = styled.div`
   border-radius: 10px;
   border: 1px solid ${themes.colors.gray_100};
   padding: 1rem;
+  margin: 2rem 1rem;
   background: ${themes.colors.gray_50};
 `;
 

@@ -5,10 +5,10 @@ import {
 } from "../../apis/feedback";
 import * as R from "../../styles/record-table.style";
 import { IoMdMore } from "react-icons/io";
+import FeedbackCreation from "./FeedbackCreation";
 
 export default function FeedbackableRecordTable() {
-  // 예시 데이터
-  const [data, setData] = useState([]);
+  const [feedbackableRecords, setFeedbackableRecords] = useState([]);
 
   const [sortConfig, setSortConfig] = useState({
     key: "date",
@@ -23,7 +23,7 @@ export default function FeedbackableRecordTable() {
     try {
       // const response = await fetch("/recordData.json");
       const response = await getFeedbackableStockRecords();
-      setData(response);
+      setFeedbackableRecords(response);
       console.log(response);
     } catch (error) {
       console.error("Error fetching the data: ", error);
@@ -72,7 +72,7 @@ export default function FeedbackableRecordTable() {
 
   // 정렬 함수
   const sortData = (key) => {
-    let sortedData = [...data];
+    let sortedData = [...feedbackableRecords];
     const direction =
       sortConfig.direction === "ascending" ? "descending" : "ascending";
 
@@ -83,7 +83,7 @@ export default function FeedbackableRecordTable() {
     });
 
     setSortConfig({ key, direction });
-    setData(sortedData);
+    setFeedbackableRecords(sortedData);
   };
 
   const handleClickCreateButton = () => {
@@ -120,36 +120,40 @@ export default function FeedbackableRecordTable() {
             <R.TableHeaderCell />
           </R.TableHeaderRow>
         </R.TableHeader>
-        <R.TableBody>
-          {data.map((item, index) => (
-            <R.TableBodyRow key={index}>
-              <R.TableBodyCell>{index + 1}</R.TableBodyCell>
-              <R.TableBodyCell>{item.name}</R.TableBodyCell>
-              <R.TableBodyCell>
-                {convertTimestampToDate(item.date)}
-              </R.TableBodyCell>
-              <R.TableBodyCell>{item.volume}</R.TableBodyCell>
-              <R.TableBodyCell>{item.type}</R.TableBodyCell>
-              <R.TableBodyCell className="button-cell">
-                <R.sideButton
-                  onClick={(event) =>
-                    handleButtonClick(event, item.stockRecordId)
-                  }
-                >
-                  <IoMdMore
-                    style={{
-                      width: "1.5rem",
-                      height: "1.5rem",
-                      minWidth: "1.5rem",
-                      minHeight: "1.5rem",
-                      color: "inherit",
-                    }}
-                  />
-                </R.sideButton>
-              </R.TableBodyCell>
-            </R.TableBodyRow>
-          ))}
-        </R.TableBody>
+        {feedbackableRecords.length === 0 ? (
+          <FeedbackCreation />
+        ) : (
+          <R.TableBody>
+            {feedbackableRecords.map((item, index) => (
+              <R.TableBodyRow key={index}>
+                <R.TableBodyCell>{index + 1}</R.TableBodyCell>
+                <R.TableBodyCell>{item.name}</R.TableBodyCell>
+                <R.TableBodyCell>
+                  {convertTimestampToDate(item.date)}
+                </R.TableBodyCell>
+                <R.TableBodyCell>{item.volume}</R.TableBodyCell>
+                <R.TableBodyCell>{item.type}</R.TableBodyCell>
+                <R.TableBodyCell className="button-cell">
+                  <R.sideButton
+                    onClick={(event) =>
+                      handleButtonClick(event, item.stockRecordId)
+                    }
+                  >
+                    <IoMdMore
+                      style={{
+                        width: "1.5rem",
+                        height: "1.5rem",
+                        minWidth: "1.5rem",
+                        minHeight: "1.5rem",
+                        color: "inherit",
+                      }}
+                    />
+                  </R.sideButton>
+                </R.TableBodyCell>
+              </R.TableBodyRow>
+            ))}
+          </R.TableBody>
+        )}
         {popupVisible && (
           <div
             ref={popupRef}

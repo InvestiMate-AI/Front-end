@@ -43,8 +43,7 @@ function FeedbackPage() {
           onFeedbackItemClick={handleFeedbackListItemClick}
         ></FeedbackSidebar>
         <F.FeedbackCreationLayout>
-          {!selectedStockRecordsWithFeedbackId && <FeedbackCreation />}
-          <FeedbackableRecordTable></FeedbackableRecordTable>
+          <FeedbackableRecordTable />
         </F.FeedbackCreationLayout>
       </F.FeedbackLayout>
     </DefaultLayout>

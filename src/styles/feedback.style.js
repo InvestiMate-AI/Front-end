@@ -97,7 +97,8 @@ export const MessageInput = ({ onSendMessage }) => {
 export const FeedbackCreationLayout = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 가로 중앙 정렬 */
-  align-items: center; /* 세로 중앙 정렬 */
+  align-items: center; /* 중앙 정렬 */
+  justify-content: flex-start; /* 상단 정렬 */
+  height: 100%;
   width: 100%;
 `;
