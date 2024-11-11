@@ -103,3 +103,36 @@ export const MenuContainer = styled.div`
   display: flex;
   flex: 1 1 auto;
 `;
+
+export const ItemListConatiner = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  padding: 1rem;
+`;
+
+export const ItemContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+
+  font-weight: 500;
+  font-size: 1rem;
+
+  padding: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+
+  margin: 0.25rem 0;
+
+  &:hover {
+    background-color: ${themes.colors.gray_200};
+  }
+`;

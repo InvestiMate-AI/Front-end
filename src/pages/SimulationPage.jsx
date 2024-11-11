@@ -1,21 +1,33 @@
 import React, { useState, useEffect } from "react";
 import DefaultLayout from "../components/Layout/DefaultLayout";
 import SimulationSidebar from "../components/Simulation/SimulationSidebar";
-import SimulationCreation from "../components/Simulation/SimulationCreation";
+import SimulationAutoCreation from "../components/Simulation/SimulationAutoCreation";
+import SimulationCustomCreation from "../components/Simulation/SimulationCustomCreation";
 import SimulationReportList from "../components/Simulation/SimulationReportList";
 import * as S from "../styles/simulation.style";
-import SimulationTest from "./SImulationTest";
 
 function SimulationPage() {
+  const [simulationType, setSimulationType] = useState("auto");
+
+  const handleSetSimulationType = (typeName) => {
+    setSimulationType(typeName);
+  };
+
   return (
     <DefaultLayout>
       <S.SimulationPageLayout>
-        <SimulationSidebar />
-        <S.SimulationDashboardLayout>
-          <SimulationCreation />
-          <SimulationReportList></SimulationReportList>
-        </S.SimulationDashboardLayout>
-        <SimulationTest></SimulationTest>
+        <SimulationSidebar handleSetSimulationType={handleSetSimulationType} />
+        {simulationType === "auto" ? (
+          <S.SimulationDashboardLayout>
+            <SimulationAutoCreation />
+            <SimulationReportList></SimulationReportList>
+          </S.SimulationDashboardLayout>
+        ) : (
+          <S.SimulationDashboardLayout>
+            <SimulationCustomCreation />
+            <SimulationReportList></SimulationReportList>
+          </S.SimulationDashboardLayout>
+        )}
       </S.SimulationPageLayout>
     </DefaultLayout>
   );

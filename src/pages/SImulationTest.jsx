@@ -4,13 +4,16 @@ import SimulationSidebar from "../components/Simulation/SimulationSidebar";
 import SimulationCreation from "../components/Simulation/SimulationCreation";
 import SimulationReportList from "../components/Simulation/SimulationReportList";
 import * as S from "../styles/simulation.style";
-import { fetchSimulationResult } from "../apis/simulation";
+import {
+  fetchUserSimulationResult,
+  fetchAutoSimulationResult,
+} from "../apis/simulation";
 
 function SimulationTest() {
   const [jsonData, setJsonData] = useState({
     corp: "삼성전자",
-    totalAsset: 100000000,
-    splitRate: 0.1,
+    totalAsset: "10000",
+    splitRate: "0.1",
     startDate: "2023-10-14",
     endDate: "2024-03-18",
     buyOption: [
@@ -40,7 +43,13 @@ function SimulationTest() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await fetchSimulationResult(jsonData);
+    const data = await fetchUserSimulationResult(jsonData);
+    setResponseMessage(JSON.stringify(data, null, 2)); // 응답 데이터를 문자열로 변환하여 상태에 저장
+  };
+
+  const handleSubmit2 = async (e) => {
+    e.preventDefault();
+    const data = await fetchAutoSimulationResult(jsonData);
     setResponseMessage(JSON.stringify(data, null, 2)); // 응답 데이터를 문자열로 변환하여 상태에 저장
   };
 
@@ -61,7 +70,8 @@ function SimulationTest() {
         defaultValue={JSON.stringify(jsonData, null, 2)}
         onChange={handleInputChange}
       />
-      <button onClick={handleSubmit}>Submit JSON</button>
+      <button onClick={handleSubmit}>첫번째 api 요청</button>
+      <button onClick={handleSubmit2}>두번째 api 요청</button>
       <h3>Response:</h3>
       <pre>{responseMessage}</pre> {/* 응답 메시지를 문자열로 출력 */}
     </div>

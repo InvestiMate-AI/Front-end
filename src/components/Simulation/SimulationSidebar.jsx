@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import * as S from "../../styles/sidebar.style";
 import { IoChevronForwardOutline, IoChevronBackOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
-const SimulationSidebar = () => {
+const SimulationSidebar = ({ handleSetSimulationType }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [toggleDisabled, setToggleDisabled] = useState(false);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     if (!toggleDisabled) {
@@ -38,7 +40,18 @@ const SimulationSidebar = () => {
     <>
       <S.SidebarLayout>
         <S.SidebarContainer isOpen={isOpen}>
-          <S.MenuContainer>{/* <RecordFilter /> */}</S.MenuContainer>
+          <S.MenuContainer>
+            <S.ItemListConatiner>
+              <S.ItemContainer onClick={() => handleSetSimulationType("auto")}>
+                AI 추천 시뮬레이션
+              </S.ItemContainer>
+              <S.ItemContainer
+                onClick={() => handleSetSimulationType("custom")}
+              >
+                사용자 설정 시뮬레이션
+              </S.ItemContainer>
+            </S.ItemListConatiner>
+          </S.MenuContainer>
         </S.SidebarContainer>
         {!toggleDisabled && ( // toggleDisabled가 false일 때만 버튼 렌더링
           <S.ToggleButton onClick={toggleSidebar}>
