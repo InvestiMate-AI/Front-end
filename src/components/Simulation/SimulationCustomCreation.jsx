@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 import * as S from "../../styles/simulation-creation.style";
-import { IoCaretDown, IoClose } from "react-icons/io5";
+import { IoCaretDown } from "react-icons/io5";
 import kospiCorpData from "../../assets/corps/KOSPI_list.json";
 import tradeOptionData from "../../assets/simulation_option_list.json";
 import { chosungIncludes } from "es-hangul";
 import CustomDatePicker from "../CustomDatePicker";
-import {
-  fetchUserSimulationResult,
-  fetchAutoSimulationResult,
-} from "../../apis/simulation";
+import { fetchCustomSimulationResult } from "../../apis/simulation";
 import { IoChevronUp, IoChevronDown } from "react-icons/io5";
 import * as Sidebar from "../../styles/sidebar.style";
 import { IoAddOutline, IoCloseOutline } from "react-icons/io5";
 
-export default function SimulationCustomCreation() {
+export default function SimulationCustomCreation({
+  handleFetchSimulationReports,
+}) {
   const [corp, setCorp] = useState(null);
   const [assetAmount, setAssetAmount] = useState(10000);
   const [splitRate, setSplitRate] = useState(0.1);
@@ -36,6 +35,9 @@ export default function SimulationCustomCreation() {
     ],
   ]);
 
+  const [displayAmount, setDisplayAmount] = useState("10,000"); // 콤마가 추가된 문자열
+  const [displayRate, setDisplayRate] = useState("1"); // 표시용 백분율 (0 ~ 100)
+
   const [sellOptions, setSellOptions] = useState([
     [
       {
@@ -57,12 +59,6 @@ export default function SimulationCustomCreation() {
   const [corpDropdownVisible, setCorpDropdownVisible] = useState(false);
   const [selectedCorp, setSelectedCorp] = useState(null); // 선택된 회사-회사번호 객체
   const [filteredCorps, setFilteredCorps] = useState([]); // 검색 결과
-
-  // 매매 조건 검색
-  const [filteredTradeOptions, setFilteredTradeOptions] = useState([]);
-  const [tradeOptionDropdownVisible, setTradeOptionDropdownVisible] =
-    useState(false);
-  const [selectedTradeOption, setSelectedTradeOption] = useState(null);
 
   // 토글
   const [isOpen, setIsOpen] = useState(true);
@@ -265,9 +261,37 @@ export default function SimulationCustomCreation() {
     setEndDate(endDate);
   };
 
-  const createSimulation1 = async (submitData) => {
-    const data = await fetchUserSimulationResult(submitData);
+  const createUserSimulation = async (submitData) => {
+    const data = await fetchCustomSimulationResult(submitData);
     return data;
+  };
+
+  const handleAssetAmountChange = (event) => {
+    const inputAssetAmount = event.target.value.replace(/[^0-9]/g, ""); // 숫자 외 문자 제거
+    const clampedAssetAmount = Math.max(
+      0,
+      Math.min(1000000000, Number(inputAssetAmount))
+    );
+
+    setAssetAmount(clampedAssetAmount); // 숫자로 상태 업데이트
+    setDisplayAmount(clampedAssetAmount.toLocaleString()); // 세 자리마다 콤마가 들어간 문자열 설정
+  };
+
+  const handleSplitRateChange = (event) => {
+    // 숫자와 소수점만 허용
+    let value = event.target.value.replace(/[^0-9.]/g, "");
+
+    // 값이 존재할 경우 소수점 세 자리까지 자르고, 0과 100 사이로 제한
+    if (value) {
+      const clampedValue = Math.min(100, Math.max(0, parseFloat(value)));
+      const actualRate = (clampedValue / 100).toFixed(3); // 백분율에서 소수로 변환
+
+      setSplitRate(actualRate); // 실제 값 저장
+      setDisplayRate(clampedValue); // 표시용 백분율 설정
+    } else {
+      setSplitRate(0); // 값이 없을 때 초기화
+      setDisplayRate(0);
+    }
   };
 
   const handleClickCreationButton = async () => {
@@ -306,17 +330,19 @@ export default function SimulationCustomCreation() {
       sellOption: formattedSellOptions,
     };
 
-    const response = await createSimulation1(data);
+    const response = await createUserSimulation(data);
 
-    if (response) {
-      // 성공적으로 레코드가 생성되었을 때 모든 필드를 초기화
-      // setCorp(null);
-      // setStartDate(null);
-      // setEndDate(null);
-      // setSelectedCorp(null);
-      // setFilteredCorps([]);
-      // setCorpDropdownVisible(false);
-    }
+    handleFetchSimulationReports(response);
+
+    // if (response) {
+    //   // 성공적으로 레코드가 생성되었을 때 모든 필드를 초기화
+    //   // setCorp(null);
+    //   // setStartDate(null);
+    //   // setEndDate(null);
+    //   // setSelectedCorp(null);
+    //   // setFilteredCorps([]);
+    //   // setCorpDropdownVisible(false);
+    // }
   };
 
   useEffect(() => {
@@ -394,6 +420,34 @@ export default function SimulationCustomCreation() {
                   selectedDate={endDate}
                   onChange={handleEndDateChange}
                 />
+              </S.ItemPickerContainer>
+            </S.ItemContainer>
+          </S.RowContainer>
+          <S.RowContainer>
+            <S.ItemContainer>
+              <S.ItemHeading>자본금</S.ItemHeading>
+              <S.ItemPickerContainer>
+                <S.InputContainer>
+                  <S.AssetAmountInput
+                    type="text"
+                    value={displayAmount || ""}
+                    onChange={handleAssetAmountChange}
+                  />
+                  <div>{"원"}</div>
+                </S.InputContainer>
+              </S.ItemPickerContainer>
+            </S.ItemContainer>
+            <S.ItemContainer>
+              <S.ItemHeading>분할 비율</S.ItemHeading>
+              <S.ItemPickerContainer>
+                <S.InputContainer>
+                  <S.SplitRateInput
+                    type="text"
+                    value={`${displayRate}`} // 백분율로 표시
+                    onChange={handleSplitRateChange}
+                  ></S.SplitRateInput>
+                  <div>{"%"}</div>
+                </S.InputContainer>
               </S.ItemPickerContainer>
             </S.ItemContainer>
           </S.RowContainer>

@@ -61,6 +61,7 @@ export const ItemPickerContainer = styled.span`
   flex-direction: row;
   justify-content: center; /* 가로 중앙 정렬 */
   align-items: center; /* 세로 중앙 정렬 */
+  min-width: 150px;
 `;
 
 export const CreationButton = styled.button`
@@ -81,6 +82,8 @@ export const CreationButton = styled.button`
     background-color: #fff5cd;
     color: black;
   }
+
+  margin: 2rem 0 0.25rem 0;
 `;
 
 export const TradeOptionsContainer = styled.div`

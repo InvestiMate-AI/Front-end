@@ -8,10 +8,19 @@ import * as S from "../styles/simulation.style";
 
 function SimulationPage() {
   const [simulationType, setSimulationType] = useState("auto");
+  const [simulationReports, setSimulationReports] = useState({});
 
   const handleSetSimulationType = (typeName) => {
     setSimulationType(typeName);
   };
+
+  const handleFetchSimulationReports = (reportsData) => {
+    setSimulationReports(reportsData);
+  };
+
+  useEffect(() => {
+    console.log(simulationReports);
+  }, [simulationReports]);
 
   return (
     <DefaultLayout>
@@ -19,13 +28,17 @@ function SimulationPage() {
         <SimulationSidebar handleSetSimulationType={handleSetSimulationType} />
         {simulationType === "auto" ? (
           <S.SimulationDashboardLayout>
-            <SimulationAutoCreation />
-            <SimulationReportList></SimulationReportList>
+            <SimulationAutoCreation
+              handleFetchSimulationReports={handleFetchSimulationReports}
+            />
+            <SimulationReportList simulationReports={simulationReports} />
           </S.SimulationDashboardLayout>
         ) : (
           <S.SimulationDashboardLayout>
-            <SimulationCustomCreation />
-            <SimulationReportList></SimulationReportList>
+            <SimulationCustomCreation
+              handleFetchSimulationReports={handleFetchSimulationReports}
+            />
+            <SimulationReportList simulationReports={simulationReports} />
           </S.SimulationDashboardLayout>
         )}
       </S.SimulationPageLayout>

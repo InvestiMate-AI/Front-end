@@ -25,18 +25,18 @@ ChartJS.register(
   Filler
 );
 
-export default function ChartComponent({ labels, priceValues, volumeValues }) {
+export default function ChartAssets({ labels, totalValueValues, cashValues }) {
   const [chartData, setChartData] = useState(null);
-  const [prices, setPrices] = useState([]);
-  const [volumes, setVolumes] = useState([]); // 거래량 상태 추가
+  const [totalValues, setTotalValues] = useState([]);
+  const [cashes, setCashes] = useState([]);
 
   useEffect(() => {
     setChartData({
       labels: labels,
       datasets: [
         {
-          label: "Price",
-          data: priceValues,
+          label: "Total Value",
+          data: totalValueValues,
           borderColor: "rgb(57, 139, 255)",
           backgroundColor: "rgba(140, 183, 245, 0.5)",
           fill: "origin", // 'origin'으로 채움 설정
@@ -45,8 +45,8 @@ export default function ChartComponent({ labels, priceValues, volumeValues }) {
           yAxisID: "y1", // 첫 번째 Y축 사용
         },
         {
-          label: "Volume",
-          data: volumeValues,
+          label: "Cash",
+          data: cashValues,
           backgroundColor: "rgba(75, 192, 192, 0.5)",
           borderColor: "rgba(75, 192, 192, 1)",
           type: "bar", // 거래량은 막대그래프 형태
@@ -56,8 +56,8 @@ export default function ChartComponent({ labels, priceValues, volumeValues }) {
     });
 
     // 상태로 저장하여 툴팁에서 사용 가능하도록 함
-    setPrices(priceValues);
-    setVolumes(volumeValues);
+    setTotalValues(totalValueValues);
+    setCashes(cashValues);
   }, []);
 
   if (!chartData) {
@@ -82,8 +82,8 @@ export default function ChartComponent({ labels, priceValues, volumeValues }) {
             const index = tooltipItem.dataIndex;
             return [
               `Date: ${labels[index]}`,
-              `Price: ${priceValues[index].toLocaleString()}`,
-              `Volume: ${volumeValues[index].toLocaleString()}`,
+              `Total Value: ${totalValueValues[index].toLocaleString()}`,
+              `Cash: ${cashValues[index].toLocaleString()}`,
             ];
           },
         },
@@ -96,7 +96,7 @@ export default function ChartComponent({ labels, priceValues, volumeValues }) {
         beginAtZero: false,
         title: {
           display: true,
-          text: "Price",
+          text: "Total Value",
         },
         ticks: {
           align: "right",
@@ -110,7 +110,7 @@ export default function ChartComponent({ labels, priceValues, volumeValues }) {
         beginAtZero: true,
         title: {
           display: true,
-          text: "Volume",
+          text: "Cash",
         },
         grid: {
           drawOnChartArea: false,

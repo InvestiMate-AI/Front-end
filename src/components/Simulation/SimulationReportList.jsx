@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Chart from "./Chart";
+import ChartAssets from "./Charts/ChartAssets";
+import ChartReturns from "./Charts/ChartReturns";
+import ChartShares from "./Charts/ChartShares";
+import ChartSignals from "./Charts/ChartSignals";
 import * as F from "../../styles/feedback-report.style";
-import { useParams } from "react-router";
 
-export default function FeedbackReportList() {
-  const params = useParams();
+export default function SimulationReportList({ simulationReports }) {
   const [reportData, setReportData] = useState([]);
 
-  useEffect(() => {}, [params]);
+  useEffect(() => {
+    setReportData(simulationReports ? simulationReports : []);
+  }, [simulationReports]);
 
   // 타임스탬프를 날짜 형식으로 변환하는 함수
   const convertTimestampToDate = (timestamp) => {
@@ -15,108 +18,135 @@ export default function FeedbackReportList() {
     return date.toISOString().split("T")[0]; // 'YYYY-MM-DD' 형식으로 변환
   };
 
-  const renderTable = (tableData) => {
-    const parsedData = JSON.parse(tableData);
-
-    // 각 데이터의 속성 이름을 추출하여 테이블 헤더에 사용
-    const headers = Object.keys(parsedData);
-    const keys = Object.keys(parsedData[headers[0]]); // 첫 번째 속성의 키를 가져와서 행 헤더로 사용
-
-    return (
-      <table
-        border="1"
-        cellPadding="5"
-        cellSpacing="0"
-        style={{ tableLayout: "fixed", width: "100%" }}
-      >
-        <thead>
-          <tr>
-            <th>Key</th>
-            {headers.map((header) => (
-              <th key={header}>{header}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {keys.map((key) => (
-            <tr key={key}>
-              <td>{key}</td>
-              {headers.map((header) => (
-                <td key={`${header}-${key}`}>
-                  {parsedData[header][key] !== undefined
-                    ? parsedData[header][key]
-                    : "N/A"}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
-  };
-
-  const renderChart = (charData) => {
+  const renderChartAssets = (charData) => {
     const data = JSON.parse(charData);
 
-    if (!data || !data.Close || !data.Volume) {
-      console.log(typeof data);
+    if (!data || !data.total_value || !data.cash) {
       console.error("Invalid data for rendering chart");
       return <div>No chart data available</div>;
     }
     // JSON 데이터를 처리
-    const labels = Object.keys(data.Close).map(convertTimestampToDate);
-    const priceValues = Object.values(data.Close);
-    const volumeValues = Object.values(data.Volume);
+    const labels = Object.keys(data.total_value).map(convertTimestampToDate);
+    const totalValueValues = Object.values(data.total_value);
+    const cashValues = Object.values(data.cash);
 
     return (
-      <Chart
+      <ChartAssets
+        labels={labels}
+        totalValueValues={totalValueValues}
+        cashValues={cashValues}
+      />
+    );
+  };
+
+  const renderChartReturns = (charData) => {
+    const data = JSON.parse(charData);
+
+    if (!data || !data.returns || !data.holding_returns) {
+      console.error("Invalid data for rendering chart");
+      return <div>No chart data available</div>;
+    }
+    // JSON 데이터를 처리
+    const labels = Object.keys(data.returns).map(convertTimestampToDate);
+    const returnValues = Object.values(data.returns);
+    const holdingReturnValues = Object.values(data.holding_returns);
+
+    return (
+      <ChartReturns
+        labels={labels}
+        returnValues={returnValues}
+        holdingReturnValues={holdingReturnValues}
+      />
+    );
+  };
+
+  const renderChartShares = (charData) => {
+    const data = JSON.parse(charData);
+
+    if (!data || !data.shares) {
+      console.error("Invalid data for rendering chart");
+      return <div>No chart data available</div>;
+    }
+    // JSON 데이터를 처리
+    const labels = Object.keys(data.shares).map(convertTimestampToDate);
+    const shareValues = Object.values(data.shares);
+
+    return <ChartShares labels={labels} shareValues={shareValues} />;
+  };
+
+  const renderChartSignals = (charData) => {
+    const data = JSON.parse(charData);
+
+    if (
+      !data ||
+      !data.Close ||
+      !data.buy_pattern_0 ||
+      !data.buy_pattern_1 ||
+      !data.buy_pattern_2 ||
+      !data.sell_pattern_0 ||
+      !data.sell_pattern_1
+    ) {
+      console.error("Invalid data for rendering chart");
+      return <div>No chart data available</div>;
+    }
+
+    // JSON 데이터를 처리하여 null 값을 대체
+    const replaceNullWithClose = (patternData) => {
+      return Object.keys(patternData).map((key) =>
+        patternData[key] === null ? data.Close[key] : patternData[key]
+      );
+    };
+
+    const labels = Object.keys(data.Close).map(convertTimestampToDate);
+    const priceValues = Object.values(data.Close);
+    const buyPattern0Values = replaceNullWithClose(data.buy_pattern_0);
+    const buyPattern1Values = replaceNullWithClose(data.buy_pattern_1);
+    const buyPattern2Values = replaceNullWithClose(data.buy_pattern_2);
+    const sellPattern0Values = replaceNullWithClose(data.sell_pattern_0);
+    const sellPattern1Values = replaceNullWithClose(data.sell_pattern_1);
+
+    return (
+      <ChartSignals
         labels={labels}
         priceValues={priceValues}
-        volumeValues={volumeValues}
+        buyPattern0Values={buyPattern0Values}
+        buyPattern1Values={buyPattern1Values}
+        buyPattern2Values={buyPattern2Values}
+        sellPattern0Values={sellPattern0Values}
+        sellPattern1Values={sellPattern1Values}
       />
     );
   };
 
   const renderContent = (item) => {
     switch (item.type) {
-      case "table":
-        return (
-          <F.FeedbackReportItemLayout key={item.index}>
-            <h3>테이블</h3>
-            {renderTable(item.data)} {/* 테이블 렌더링 */}
-          </F.FeedbackReportItemLayout>
-        );
-
-      case "chart":
+      case "chart_shares":
         return (
           <F.FeedbackReportChartLayout key={item.index}>
-            <h3>차트</h3>
-            {renderChart(item.data)}
+            <h3>chart_shares</h3>
+            {renderChartShares(item.data)}
           </F.FeedbackReportChartLayout>
         );
-
-      case "text":
+      case "chart_asset":
         return (
-          <F.FeedbackReportItemLayout
-            key={item.index}
-            style={{
-              wordBreak: "keep-all",
-              whiteSpace: "normal",
-            }}
-          >
-            <h3>텍스트</h3>
-            <p>
-              {item.data
-                .trim()
-                .split("\n")
-                .map((line, index) => (
-                  <React.Fragment key={index}>
-                    {line}
-                    <br />
-                  </React.Fragment>
-                ))}
-            </p>
-          </F.FeedbackReportItemLayout>
+          <F.FeedbackReportChartLayout key={item.index}>
+            <h3>chart_asset</h3>
+            {renderChartAssets(item.data)}
+          </F.FeedbackReportChartLayout>
+        );
+      case "chart_returns":
+        return (
+          <F.FeedbackReportChartLayout key={item.index}>
+            <h3>chart_returns</h3>
+            {renderChartReturns(item.data)}
+          </F.FeedbackReportChartLayout>
+        );
+      case "chart_signals":
+        return (
+          <F.FeedbackReportChartLayout key={item.index}>
+            <h3>chart_signals</h3>
+            {renderChartSignals(item.data)}
+          </F.FeedbackReportChartLayout>
         );
       default:
         return null;

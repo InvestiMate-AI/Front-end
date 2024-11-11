@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const SimulationSidebar = ({ handleSetSimulationType }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [toggleDisabled, setToggleDisabled] = useState(false);
-  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     if (!toggleDisabled) {
