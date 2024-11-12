@@ -51,9 +51,10 @@ export default function ChartReturns({
         {
           label: "Holding Return",
           data: holdingReturnValues,
-          backgroundColor: "rgba(75, 192, 192, 0.5)",
-          borderColor: "rgba(75, 192, 192, 1)",
-          type: "bar", // 거래량은 막대그래프 형태
+          backgroundColor: "#FF553880",
+          borderColor: "#FF5538",
+          pointBackgroundColor: "#FF5538", // 포인트 색상
+          fill: "origin", // 'origin'으로 채움 설정
           yAxisID: "y2", // 두 번째 Y축 사용 (거래량)
         },
       ],

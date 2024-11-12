@@ -17,7 +17,7 @@ export default function SimulationAutoCreation({
   const [splitRate, setSplitRate] = useState(0.1);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [strategy, setStrategy] = useState("유유자적");
+  const [strategy, setStrategy] = useState("balanced");
 
   // 회사 검색
   const [corpDropdownVisible, setCorpDropdownVisible] = useState(false);
@@ -105,10 +105,9 @@ export default function SimulationAutoCreation({
   };
 
   const strategyOptions = [
-    { value: "유유자적", label: "유유자적" },
-    { value: "진보적", label: "진보적" },
-    { value: "산적", label: "산적" },
-    { value: "보수적", label: "보수적" },
+    { value: "balanced", label: "균형잡힌" },
+    { value: "long_term", label: "장기적인" },
+    { value: "short_term", label: "단기적인" },
   ];
 
   const handleStrategyChange = (option) => {
@@ -268,7 +267,7 @@ export default function SimulationAutoCreation({
                 <CustomSelect
                   options={strategyOptions}
                   onChange={handleStrategyChange}
-                  placeholder={strategy}
+                  placeholder={"균형잡힌"}
                 />
               </S.ItemPickerContainer>
             </S.ItemContainer>

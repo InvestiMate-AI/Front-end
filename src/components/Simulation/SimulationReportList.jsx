@@ -77,20 +77,12 @@ export default function SimulationReportList({ simulationReports }) {
   const renderChartSignals = (charData) => {
     const data = JSON.parse(charData);
 
-    if (
-      !data ||
-      !data.Close ||
-      !data.buy_pattern_0 ||
-      !data.buy_pattern_1 ||
-      !data.buy_pattern_2 ||
-      !data.sell_pattern_0 ||
-      !data.sell_pattern_1
-    ) {
+    if (!data || !data.Close) {
       console.error("Invalid data for rendering chart");
       return <div>No chart data available</div>;
     }
 
-    // JSON 데이터를 처리하여 null 값을 대체
+    // JSON 데이터를 처리하여 null 값을 Close 값으로 대체
     const replaceNullWithClose = (patternData) => {
       return Object.keys(patternData).map((key) =>
         patternData[key] === null ? data.Close[key] : patternData[key]
@@ -99,21 +91,20 @@ export default function SimulationReportList({ simulationReports }) {
 
     const labels = Object.keys(data.Close).map(convertTimestampToDate);
     const priceValues = Object.values(data.Close);
-    const buyPattern0Values = replaceNullWithClose(data.buy_pattern_0);
-    const buyPattern1Values = replaceNullWithClose(data.buy_pattern_1);
-    const buyPattern2Values = replaceNullWithClose(data.buy_pattern_2);
-    const sellPattern0Values = replaceNullWithClose(data.sell_pattern_0);
-    const sellPattern1Values = replaceNullWithClose(data.sell_pattern_1);
+
+    // 패턴 데이터를 유동적으로 필터링하여 처리
+    const patterns = {};
+    Object.keys(data).forEach((key) => {
+      if (key.startsWith("buy_pattern") || key.startsWith("sell_pattern")) {
+        patterns[key] = replaceNullWithClose(data[key]);
+      }
+    });
 
     return (
       <ChartSignals
         labels={labels}
         priceValues={priceValues}
-        buyPattern0Values={buyPattern0Values}
-        buyPattern1Values={buyPattern1Values}
-        buyPattern2Values={buyPattern2Values}
-        sellPattern0Values={sellPattern0Values}
-        sellPattern1Values={sellPattern1Values}
+        patterns={patterns} // 유동적인 패턴 데이터 전달
       />
     );
   };
