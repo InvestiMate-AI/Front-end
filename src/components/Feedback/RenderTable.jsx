@@ -113,8 +113,10 @@ export default function RenderTable({ originalTableData }) {
                       rowSpan={rowSpan}
                       style={{
                         textAlign: "center",
-                        borderTop: "1px solid white",
-                        border: "1px solid gray",
+                        borderLeft: "1px solid gray", // 왼쪽 테두리
+                        borderRight: "1px solid gray", // 오른쪽 테두리
+                        borderBottom: "1px solid gray", // 아래쪽 테두리
+                        borderTop: "none", // 상단 테두리 제거
                       }}
                     >
                       {tableData[header][rowKey]}
@@ -129,14 +131,16 @@ export default function RenderTable({ originalTableData }) {
                     ? {
                         fontSize: "1.25rem",
                         textAlign: "center",
-                        border: "1px solid gray",
-                        borderTop: "1px solid white",
-                        borderLeft: "1px solid white",
+                        borderTop: "1px solid white", // 상단 테두리 제거
+                        borderRight: "1px solid gray", // 오른쪽 테두리
+                        borderBottom: "1px solid gray", // 아래쪽 테두리
+                        borderLeft: "1px solid white", // 왼쪽 테두리
                       }
                     : {
-                        border: "1px solid gray",
-                        borderTop: "1px solid white",
-                        borderLeft: "1px solid white",
+                        borderTop: "1px solid white", // 상단 테두리 제거
+                        borderRight: "1px solid gray", // 오른쪽 테두리
+                        borderBottom: "1px solid gray", // 아래쪽 테두리
+                        borderLeft: "1px solid white", // 왼쪽 테두리
                         padding: "0 0.75rem",
                       };
 
@@ -176,7 +180,7 @@ export default function RenderTable({ originalTableData }) {
                                 left: "100%", // 버튼의 왼쪽 정렬
                                 backgroundColor: "black",
                                 borderRadius: "0.25rem",
-                                padding: "0.825rem",
+                                padding: "0.75rem",
                                 zIndex: 1000,
                                 color: "white",
                                 fontSize: "0.825rem",

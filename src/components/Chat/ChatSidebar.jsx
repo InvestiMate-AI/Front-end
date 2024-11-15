@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as S from "../../styles/sidebar.style";
 import ChatListItem from "./ChatListItem";
 import { IoChevronForwardOutline, IoChevronBackOutline } from "react-icons/io5";
+import Spinner from "../../styles/spinner.style";
 
 const ChatSidebar = ({
   chatList,
@@ -20,7 +21,7 @@ const ChatSidebar = ({
       <S.SidebarContainer isOpen={isOpen}>
         <S.CreateNewChat onClick={onCreateNewChat} text="새로운 채팅" />
         <S.ChatItemsContainer>
-          {chatList.map((chat, index) => (
+          {chatList?.map((chat, index) => (
             <ChatListItem
               key={index}
               chat={chat}

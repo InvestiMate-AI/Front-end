@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import { getFeedback } from "../../apis/feedback";
 import ReactMarkdown from "react-markdown";
 import RenderTable from "./RenderTable";
+import Spinner from "../../styles/spinner.style";
 
 export default function FeedbackReportList() {
   const params = useParams();
@@ -233,7 +234,7 @@ export default function FeedbackReportList() {
       {reportData.length > 0 ? (
         reportData.map((item) => renderContent(item))
       ) : (
-        <p>Loading...</p>
+        <Spinner size="32px" />
       )}
     </F.FeedbackReportListContainer>
   );

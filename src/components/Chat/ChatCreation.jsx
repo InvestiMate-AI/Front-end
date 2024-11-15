@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import kospiCorpData from "../../assets/corps/KOSPI_list.json";
 import { chosungIncludes } from "es-hangul";
 import * as C from "../../styles/chat-creation.style";
 
 import { createThread } from "../../apis/chat";
 import { IoCaretDown } from "react-icons/io5";
+import { ChatContext } from "../Chat/ChatContext";
 
 const ChatCreation = ({ addChatToChatList }) => {
   const [corp, setCorp] = useState("");
@@ -15,6 +16,8 @@ const ChatCreation = ({ addChatToChatList }) => {
   const [corpDropdownVisible, setCorpDropdownVisible] = useState(false);
   const [reportDropdownVisible, setReportDropdownVisible] = useState(false);
   const [yearDropdownVisible, setYearDropdownVisible] = useState(false);
+
+  const { fetchChatList } = useContext(ChatContext);
 
   const reportTypes = {
     11011: "사업보고서",
@@ -72,7 +75,13 @@ const ChatCreation = ({ addChatToChatList }) => {
       return;
     }
 
-    const res = await createThread(year, selectedCorp.회사명, reportType);
+    try {
+      console.log("123123123123");
+      await createThread(year, selectedCorp.회사명, reportType);
+      fetchChatList(); // 채팅 리스트 새로고침
+    } catch (error) {
+      console.error("Error creating thread:", error);
+    }
   };
 
   return (
