@@ -22,13 +22,13 @@ export const getFeedbackableStockRecords = async (data) => {
       console.log(error);
     }
     return [
-      {
-        stockRecordId: Number(999),
-        date: String("2024-01-01"),
-        name: String("피드백안받은 회사"),
-        volume: Number(101),
-        type: String("매도"),
-      },
+      // {
+      //   stockRecordId: Number(999),
+      //   date: String("2024-01-01"),
+      //   name: String("피드백안받은 회사"),
+      //   volume: Number(101),
+      //   type: String("매도"),
+      // },
     ];
   }
 };

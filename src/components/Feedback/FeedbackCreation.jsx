@@ -14,7 +14,7 @@ const FeedbackCreation = () => {
       <F.FeedbackCreationLayout>
         <F.FeedbackCreationContainer>
           <F.Heading>새 피드백 받기</F.Heading>
-          <div>투자 기록을 관리하고 피드백을 받아보세요</div>
+          <div>나의 투자를 기록하고 피드백을 받아보세요</div>
           <F.createFeedbackButton onClick={handleFeedbackCreationButton}>
             이동하기
           </F.createFeedbackButton>
