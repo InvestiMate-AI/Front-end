@@ -150,7 +150,7 @@ export default function SimulationReportList({ simulationReports }) {
       {reportData.length > 0 ? (
         reportData.map((item) => renderContent(item))
       ) : (
-        <Spinner size="32px" />
+        <></>
       )}
     </F.FeedbackReportListContainer>
   );

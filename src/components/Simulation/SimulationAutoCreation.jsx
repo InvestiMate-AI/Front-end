@@ -11,6 +11,7 @@ import CustomSelect from "../CustomSelect";
 
 export default function SimulationAutoCreation({
   handleFetchSimulationReports,
+  setIsLoadingForFetchingSimulationReport,
 }) {
   const [corp, setCorp] = useState(null);
   const [assetAmount, setAssetAmount] = useState(10000);
@@ -141,18 +142,14 @@ export default function SimulationAutoCreation({
       strategy: strategy,
     };
 
-    const response = await createAutoSimulation(data);
-
-    handleFetchSimulationReports(response);
-    // if (response) {
-    //   // 성공적으로 레코드가 생성되었을 때 모든 필드를 초기화
-    //   // setCorp(null);
-    //   // setStartDate(null);
-    //   // setEndDate(null);
-    //   // setSelectedCorp(null);
-    //   // setFilteredCorps([]);
-    //   // setCorpDropdownVisible(false);
-    // }
+    try {
+      setIsLoadingForFetchingSimulationReport(true); // 로딩 상태 활성화
+      const response = await createAutoSimulation(data);
+      handleFetchSimulationReports(response); // 보고서 데이터를 상위 컴포넌트에 전달
+    } catch (error) {
+      console.error("Error creating simulation:", error);
+      setIsLoadingForFetchingSimulationReport(false); // 에러 발생 시 로딩 상태 해제
+    }
   };
 
   useEffect(() => {

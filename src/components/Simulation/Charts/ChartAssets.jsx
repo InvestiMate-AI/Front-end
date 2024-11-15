@@ -62,7 +62,7 @@ export default function ChartAssets({ labels, totalValueValues, cashValues }) {
   }, []);
 
   if (!chartData) {
-    return <Spinner size="32px" />;
+    return <></>;
   }
 
   // 옵션 설정

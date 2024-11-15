@@ -52,7 +52,7 @@ export default function ChartShares({ labels, shareValues }) {
   }, []);
 
   if (!chartData) {
-    return <Spinner size="32px" />;
+    return <></>;
   }
 
   // 옵션 설정

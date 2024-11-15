@@ -67,7 +67,7 @@ export default function ChartReturns({
   }, []);
 
   if (!chartData) {
-    return <Spinner size="32px" />;
+    return <></>;
   }
 
   // 옵션 설정

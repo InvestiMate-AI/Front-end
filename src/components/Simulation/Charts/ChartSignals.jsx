@@ -66,7 +66,7 @@ export default function ChartSignals({ labels, priceValues, patterns }) {
   }, [labels, priceValues, patterns]);
 
   if (!chartData) {
-    return <Spinner size="32px" />;
+    return <></>;
   }
 
   const options = {
