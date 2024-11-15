@@ -11,6 +11,7 @@ import {
   Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import Spinner from "../../../styles/spinner.style";
 
 ChartJS.register(
   CategoryScale,
@@ -65,7 +66,7 @@ export default function ChartSignals({ labels, priceValues, patterns }) {
   }, [labels, priceValues, patterns]);
 
   if (!chartData) {
-    return <div>Loading...</div>;
+    return <Spinner size="32px" />;
   }
 
   const options = {

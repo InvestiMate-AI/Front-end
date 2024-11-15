@@ -22,6 +22,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Redirect from "./components/Auth/RedirectPage";
 import Record from "./pages/RecordPage";
 import Simulation from "./pages/SimulationPage";
+import { ChatProvider } from "./components/Chat/ChatContext";
 
 function App() {
   // const [cookies, setCookie, removeCookie] = useCookies(["refresh"]);
@@ -82,11 +83,12 @@ function App() {
 
   return (
     <>
-      <GlobalStyle />
-      <AuthProvider>
-        <BrowserRouter>
-          {/* <Routes> */}
-          {/* <Route path="/" element={<Home />} />
+      <ChatProvider>
+        <GlobalStyle />
+        <AuthProvider>
+          <BrowserRouter>
+            {/* <Routes> */}
+            {/* <Route path="/" element={<Home />} />
             <Route
               path="/chat"
               element={
@@ -120,21 +122,26 @@ function App() {
               }
             />
           </Routes> */}
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route element={<ProtectedRoute />}>
-              <Route path="/chat" element={<Chat />} />
-              <Route path="/chat/:chatRoomId" element={<ChatRoom />} />
-              <Route path="/feedback" element={<Feedback />} />
-              <Route path="/feedback/:feedbackId" element={<FeedbackRoom />} />
-              <Route path="/record" element={<Record />}></Route>
-              <Route path="/simulation" element={<Simulation />}></Route>
-            </Route>
-            <Route path="/redirect" element={<Redirect />} />
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/chat" element={<Chat />} />
+                <Route path="/chat/:chatRoomId" element={<ChatRoom />} />
+
+                <Route path="/feedback" element={<Feedback />} />
+                <Route
+                  path="/feedback/:feedbackId"
+                  element={<FeedbackRoom />}
+                />
+                <Route path="/record" element={<Record />}></Route>
+                <Route path="/simulation" element={<Simulation />}></Route>
+              </Route>
+              <Route path="/redirect" element={<Redirect />} />
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
+      </ChatProvider>
     </>
   );
 }

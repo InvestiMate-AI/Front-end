@@ -4,6 +4,7 @@ import ChartReturns from "./Charts/ChartReturns";
 import ChartShares from "./Charts/ChartShares";
 import ChartSignals from "./Charts/ChartSignals";
 import * as F from "../../styles/feedback-report.style";
+import Spinner from "../../styles/spinner.style";
 
 export default function SimulationReportList({ simulationReports }) {
   const [reportData, setReportData] = useState([]);
@@ -149,7 +150,7 @@ export default function SimulationReportList({ simulationReports }) {
       {reportData.length > 0 ? (
         reportData.map((item) => renderContent(item))
       ) : (
-        <p>Loading...</p>
+        <Spinner size="32px" />
       )}
     </F.FeedbackReportListContainer>
   );

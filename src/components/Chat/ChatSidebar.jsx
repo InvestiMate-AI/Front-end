@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import * as S from "../../styles/sidebar.style";
 import ChatListItem from "./ChatListItem";
 import { IoChevronForwardOutline, IoChevronBackOutline } from "react-icons/io5";
-import Spinner from "../../styles/spinner.style";
+import { ChatContext } from "../Chat/ChatContext";
 
-const ChatSidebar = ({
-  chatList,
-  onChatItemClick,
-  onCreateNewChat,
-  onDeleteChat,
-}) => {
+const ChatSidebar = ({ onChatItemClick, onCreateNewChat, onDeleteChat }) => {
   const [isOpen, setIsOpen] = useState(true);
+  const { chatList } = useContext(ChatContext); // ChatContext에서 chatList 가져오기
+
+  useEffect(() => {
+    console.log(chatList);
+  }, [chatList]);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);

@@ -12,6 +12,7 @@ import {
   Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import Spinner from "../../../styles/spinner.style";
 
 ChartJS.register(
   CategoryScale,
@@ -51,7 +52,7 @@ export default function ChartShares({ labels, shareValues }) {
   }, []);
 
   if (!chartData) {
-    return <div>Loading...</div>;
+    return <Spinner size="32px" />;
   }
 
   // 옵션 설정
