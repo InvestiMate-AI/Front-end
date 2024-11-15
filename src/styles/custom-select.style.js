@@ -38,6 +38,11 @@ export const CustomSelectOptions = styled.ul`
 `;
 
 export const CustomSelectOption = styled.li`
+  width: 100%;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-contents: center;
   padding: 0.5rem;
   white-space: nowrap;
   cursor: pointer;

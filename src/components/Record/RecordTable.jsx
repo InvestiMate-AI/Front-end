@@ -5,38 +5,7 @@ import { IoMdMore } from "react-icons/io";
 
 export default function RecordTable() {
   // 예시 데이터
-  const [data, setData] = useState([
-    // { stockRecordId: 1, date: 2024-03-42, name: "삼성전자", volume: 100, type: "매수" },
-    // { date: 1729227600000, name: "GOOG", volume: 50, type: "매도" },
-    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-    // { date: 1729227600000, name: "AAPL", volume: 100, type: "Buy" },
-    // { date: 1729227600000, name: "GOOG", volume: 50, type: "Sell" },
-    // { date: 1729227600000, name: "MSFT", volume: 200, type: "Buy" },
-  ]);
+  const [data, setData] = useState([]);
 
   const [sortConfig, setSortConfig] = useState({
     key: "date",
@@ -115,6 +84,7 @@ export default function RecordTable() {
   };
 
   const handleClickDeleteButton = () => {
+    setPopupVisible(false);
     deleteRecord(currentRecordId);
   };
 
