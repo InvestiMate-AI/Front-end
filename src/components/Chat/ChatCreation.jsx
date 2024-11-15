@@ -121,7 +121,7 @@ const ChatCreation = ({ addChatToChatList }) => {
           )}
         </C.SelectionContainer>
         <C.SelectionTypeContainer>
-          <C.SelectionContainer>
+          <C.SelectionContainer style={{ marginRight: "1rem" }}>
             <C.SelectionName>보고서 유형</C.SelectionName>
             <C.SelectionButton
               onClick={() => setReportDropdownVisible(!reportDropdownVisible)}
@@ -143,7 +143,7 @@ const ChatCreation = ({ addChatToChatList }) => {
               </C.OtherList>
             )}
           </C.SelectionContainer>
-          <C.SelectionContainer>
+          <C.SelectionContainer style={{ marginLeft: "1rem" }}>
             <C.SelectionName>사업 연도</C.SelectionName>
             <C.SelectionButton
               onClick={() => setYearDropdownVisible(!yearDropdownVisible)}
